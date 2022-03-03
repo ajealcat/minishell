@@ -6,7 +6,20 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:14 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/02 18:18:41 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/03 14:28:50 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/minishell.h"
+
+int main(int ac, char **av)
+{
+	if (ac || av)
+	{
+		while (1)
+		{
+			readline(PROMPT);
+		}
+		return(0);
+	}
+}

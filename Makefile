@@ -6,7 +6,7 @@
 #    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/03/03 14:44:28 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/03/04 14:01:17 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ OBJS = $(addprefix $(OBJSD), $(SRCS:.c=.o))
 # LIBS_MAKE = make -C
  CC = clang -c -o
  COMPIL = clang
- FLAGS = -Wall -Wextra -Werror
+ FLAGS = -Wall -Wextra -Werror -lreadline
 
 all: $(NAME)
 
@@ -53,13 +53,9 @@ $(OBJSD)%.o: $(SRCSD)%.c
 
 clean:
 	rm -rf $(OBJSD)
-	$(LIBS_MAKE) $(LIBFTD) clean
-	$(LIBS_MAKE) clean
 
 fclean:	clean
-	rm -rf $(NAME) $(BONUS_NAME)
-	$(LIBS_MAKE) $(LIBFTD) fclean
-	$(LIBS_MAKE) clean
+	rm -rf $(NAME)
 
 re: fclean all 
 

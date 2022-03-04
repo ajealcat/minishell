@@ -6,7 +6,7 @@
 #    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/03/04 14:01:17 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/03/04 14:42:24 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,22 +19,22 @@ SRCSD = srcs/
 OBJSD = objs/
 OBJS = $(addprefix $(OBJSD), $(SRCS:.c=.o))
 
-# Libft sources and objs 
+ # Libft sources and objs 
 
-# LIBSD = libs/
-# LIBFTD = $(addprefix $(LIBSD), libft/)
-# LIBFT = $(addprefix $(LIBFTD), libft.a)
+ LIBSD = libs/
+ LIBFTD = $(addprefix $(LIBSD), libft/)
+ LIBFT = $(addprefix $(LIBFTD), libft.a)
 
-# LIBS = $(LIBFT)
-# LIBS_MAKE = make -C
+ LIBS = $(LIBFT)
+ LIBS_MAKE = make -C
  CC = clang -c -o
  COMPIL = clang
- FLAGS = -Wall -Wextra -Werror -lreadline
+ FLAGS = -Wall -Wextra -Werror 
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(COMPIL) $(FLAGS) $(OBJS) -o $@
+$(NAME): $(LIBS) $(OBJS)
+	$(COMPIL) -lreadline $(FLAGS) $(OBJS) $(LIBS) -o $@
 	@echo "\033[0;32m\n          _         "
 	@echo "   ______/ \-.   _  "
 	@echo ".-/     (    o\_//    *~o~o~* OK *~o~o~* "
@@ -45,17 +45,18 @@ $(NAME): $(OBJS)
 
 $(OBJSD)%.o: $(SRCSD)%.c
 	mkdir -p $(OBJSD)
-	$(CC) $@ $(FLAGS) $<
+	$(CC) $@ $(FLAGS) -I $(LIBFTD) $<
 
-# $(LIBS):
-#	$(LIBS_MAKE) all
-#	$(LIBS_MAKE) $(LIBFTD) bonus
+ $(LIBS):
+	$(LIBS_MAKE) $(LIBFTD) all 
 
 clean:
 	rm -rf $(OBJSD)
+	$(LIBS_MAKE) $(LIBFTD) clean
 
 fclean:	clean
 	rm -rf $(NAME)
+	$(LIBS_MAKE) $(LIBFTD) fclean
 
 re: fclean all 
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
+#    By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/03/04 14:42:24 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/03/08 13:00:12 by Fahima42         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,11 @@ NAME = Minishell
 
 # Project sources and objs 
 
-SRCS = main.c
+SRCS = main.c \
+		prompt.c \
+		parse.c \
+		init.c \
+	
 SRCSD = srcs/
 OBJSD = objs/
 OBJS = $(addprefix $(OBJSD), $(SRCS:.c=.o))

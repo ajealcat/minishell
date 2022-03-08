@@ -6,8 +6,15 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:03:52 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/08 13:05:00 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/08 13:27:48 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void init_data(t_data *data)
+{
+    data->count_sep = 0;
+    data->i = 0;
+    data->token = NULL;
+}

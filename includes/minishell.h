@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/08 12:55:55 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/08 13:41:38 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -36,5 +37,12 @@ typedef struct s_data
     /* prompt.c */
 int print_prompt(void);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
+
+    /* init.c */
+void init_data(t_data *data);
+
+/* parse.c */
+int parse(char *buf, t_data *data);
+char	**ft_split(const char *str, char c);
 
 #endif

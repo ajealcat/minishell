@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 14:11:35 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/08 16:11:09 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/08 16:36:08 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,6 @@
 // nombre impair mais derniere c'et une double quote qui est entre single quote
 // single quote idem
 // "'" ou '\'' --> a afficher si echo
-
-int	global_check(char *str)
-{
-	int check;
-
-	check = check_quotes(str);
-	if (check > 0)
-	{
-		if (check == 1)
-			printf("Error simple quote\n");
-		if (check == 2)
-			printf("Error double quote\n");
-	}
-	return (0);
-}
 
 int check_quotes(char *token)
 {
@@ -57,4 +42,24 @@ int check_quotes(char *token)
 		i++;
 	}
     return (quote);
+}
+
+int	check_slash(char *token)
+{
+	int i;
+	int	slash;
+
+	i = 0;
+	slash = 0;
+	while (token[i])
+	{
+		if (token[i] == '/')
+		{
+			if (token[i + 1] == '/' || token[i + 1] == '$'
+				|| token[i + 1] == '"' )
+				slash = 1;
+		}
+		i++;
+	}
+	return (slash);
 }

@@ -6,7 +6,7 @@
 #    By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/03/08 14:12:00 by Fahima42         ###   ########.fr        #
+#    Updated: 2022/03/08 16:23:49 by Fahima42         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS = main.c \
 		parse.c \
 		init.c \
 		protection_quote.c \
+		check_parse.c \
 	
 SRCSD = srcs/
 OBJSD = objs/

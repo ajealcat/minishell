@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   protection_quote.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 14:11:35 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/08 16:36:08 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/08 21:30:41 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 int check_quotes(char *token)
 {
-    size_t i;
-    int quote;
+    size_t	i;
+    int		quote;
 
     i = 0;
 	quote = 0;
@@ -46,7 +46,7 @@ int check_quotes(char *token)
 
 int	check_slash(char *token)
 {
-	int i;
+	int	i;
 	int	slash;
 
 	i = 0;

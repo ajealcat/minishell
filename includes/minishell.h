@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/08 16:35:18 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/08 21:28:10 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,24 @@
 
 typedef struct s_data
 {
-    int count_sep;
-    int i;
-    char **token;
+	int count_sep;
+	int i;
+	char **token;
 } t_data;
 
 
-    /* prompt.c */
+	/* prompt.c */
 int print_prompt(void);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
-    /* init.c */
+	/* init.c */
 void init_data(t_data *data);
 
-/* parse.c */
+	/* parse.c */
 int parse(char *buf, t_data *data);
 char	**ft_split(const char *str, char c);
 
-    /* protection_quote.c */
+	/* protection_quote.c */
 int	global_check(char *str);
 int check_quotes(char *token);
 int	check_slash(char *token);

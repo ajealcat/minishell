@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/08 13:41:38 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/08 16:10:50 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,10 @@ void init_data(t_data *data);
 /* parse.c */
 int parse(char *buf, t_data *data);
 char	**ft_split(const char *str, char c);
+
+    /* protection_quote.c */
+int	global_check(char *str);
+int check_quotes(char *token);
+size_t	ft_strlen(const char *str);
 
 #endif

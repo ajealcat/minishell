@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   protection_quote.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 14:11:35 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/08 21:30:41 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/09 13:17:17 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int check_quotes(char *token)
 	}
     return (quote);
 }
-
+/*
 int	check_slash(char *token)
 {
 	int	i;
@@ -62,4 +62,4 @@ int	check_slash(char *token)
 		i++;
 	}
 	return (slash);
-}
+}*/

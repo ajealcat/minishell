@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:56:39 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/08 13:10:56 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/09 15:43:04 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@
 //returns 
 # define SUCCESS 0
 # define FAILURE -1
+
+// tokens
+# define l_red 1
+# define r_red 2
+# define dl_red 3
+# define dr_red 4
+# define d_quote 5
+# define s_quote 6
+# define word 7
+# define t_pipe 8
+
 
 //colors 
 # define GREEN "\033[0;32m"

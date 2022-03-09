@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/02 18:17:14 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/09 14:39:37 by Fahima42         ###   ########.fr       */
+/*   Created: 2022/03/09 17:14:51 by Fahima42          #+#    #+#             */
+/*   Updated: 2022/03/09 17:15:09 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int main(int ac, char **av, char **env)
+int ft_strlen_space(char *str)
 {
-	(void)ac;
-	(void)av;
-	(void)env;
-	t_data data;
-	t_token token;
-	
-	
-	if (ac || av)
-	{
-		init_token(&token);
-		init_data(&data);
-		print_prompt();	
-	}
-	return(0);
+    int i;
+
+     i = 0;
+
+     while(str[i] != ' ')
+        ++i;
+    return(i);
 }

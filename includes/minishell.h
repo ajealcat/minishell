@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/10 14:26:02 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/10 16:26:41 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,24 @@
 typedef struct s_token
 {
 	char			*str_trimed;
-	char			*data_token;
+	char			*value;
 	int				i;
 	int				type;
 	struct s_token *prev;
 	struct s_token *next;
 } t_token;
 
+typedef struct
+{
+	t_token *head;
+	t_token	*tail;
+} dblist;
+
 typedef struct s_data
 {
 	char *buf;
 	t_token *token;
 } t_data;
-
 
 	/* prompt.c */
 int print_prompt(void);
@@ -64,5 +69,10 @@ size_t	ft_strlen(const char *str);
 	/* category */ 
 int	token_word(t_token *token);
 
+	/* token_list.c */
+void	init_list(dblist *list);
+void	free_list(dblist **list);
+int add_list(t_token *node);
+int create_node(char *str, int category, t_token *token);
 
 #endif

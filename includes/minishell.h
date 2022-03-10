@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/10 16:26:41 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/10 18:47:17 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,11 @@ int parse(t_data *data);
 char	*ft_strtrim(const char *s1, const char *set);
 
 	/* protection_quote.c */
-int	unclose_quote(char *str);
 int check_quotes(char *token);
+
+	/* check_parse.c */
+int	unclose_quote(char *str);
+int	checker_red(t_token *token);
 
 //int	check_slash(char *token);
 size_t	ft_strlen(const char *str);
@@ -74,5 +77,12 @@ void	init_list(dblist *list);
 void	free_list(dblist **list);
 int add_list(t_token *node);
 int create_node(char *str, int category, t_token *token);
+
+	/* is_it_available.c */
+
+int	is_valid_left(t_token *token);
+int	is_valid_right(t_token *token);
+int	is_valid_t_pipe(t_token *token);
+
 
 #endif

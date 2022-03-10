@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/09 16:33:55 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/10 14:26:02 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@
 
 typedef struct s_token
 {
-	char *str_trimed;
-	int	i;
-	int	type;
+	char			*str_trimed;
+	char			*data_token;
+	int				i;
+	int				type;
 	struct s_token *prev;
 	struct s_token *next;
 } t_token;

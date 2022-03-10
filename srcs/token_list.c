@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   token_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/10 13:52:57 by Fahima42         ###   ########.fr       */
+/*   Created: 2022/03/10 13:53:53 by Fahima42          #+#    #+#             */
+/*   Updated: 2022/03/10 14:57:01 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int print_prompt(void)
+int create_node(char *str, int category, t_token *token)
 {
-	t_data data;
-	char *cmd = "exit";
+    t_token *new_node;
 
-	while (1)
-	{
-		data.buf = readline(PROMPT);
-		if (data.buf != NULL)
-			add_history(data.buf);
-		parse(&data);
-		if (ft_strncmp(data.buf, cmd, 5) == 0)
-			exit(0);
-		free(data.buf);
-	}
-	return (0);
+    new_node = malloc(sizeof(t_token));
+    if (!new_node)
+        return (0);
+    new_node->type = category;
+    new_node->data_token = str;
+    new_node->next = NULL;
+    add_list(new_node, list);
+    return (SUCCESS);
+    
 }

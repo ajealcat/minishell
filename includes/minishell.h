@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/11 15:54:16 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/11 17:34:39 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 
 typedef struct s_token
 {
+	char			*buf;
 	char			*str_trimed;
 	char			*value;
 	int				i;
@@ -43,23 +44,24 @@ typedef struct s_list
 	t_token	*tail;
 } dblist;
 
+/*
 typedef struct s_data
 {
-	char *buf;
 	t_token *token;
 } t_data;
+*/
 
 	/* prompt.c */
-int print_prompt(void);
+int print_prompt(t_token *token);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 	/* init.c */
-void init_token(t_token *token);
+int	init_token(t_token *token);
 void	init_list(dblist *list);
-void init_data(t_data *data);
+//void init_data(t_data *data);
 
 	/* parse.c */
-int parse(t_data *data);
+int parse(t_token *token);
 char	*ft_strtrim(const char *s1, const char *set);
 int	check_category(t_token *token);
 
@@ -75,9 +77,9 @@ int ft_strlen_space(char *str);
 int	ft_isalpha(int c);
 
 	/* category */ 
-void r_redirect(t_token *token);
-void l_redirect(t_token *token);
-int	token_word(t_token *token);
+int r_redirect(t_token *token, int i);
+int l_redirect(t_token *token, int i);
+int	token_word(t_token *token, int i);
 
 	/* token_list.c */
 void	init_list(dblist *list);

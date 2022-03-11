@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 13:53:53 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/11 15:50:24 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/11 17:44:40 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,14 @@ int create_node(char *str, int category)
 {
     t_token	*new_node;
 
+	printf("create node\n");
     new_node = malloc(sizeof(t_token));
     if (!new_node)
         return (0);
     new_node->type = category;
     new_node->value = str;
     new_node->next = NULL;
+	printf("create node before add_list?\n");
     add_list(new_node);
     return (SUCCESS);
 }

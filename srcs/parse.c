@@ -6,38 +6,17 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/10 16:10:09 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/11 16:11:44 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-/*
-int parse(char *buf, t_data *data)
-{
-	int i;
-
-	i = 0;
-	data->token = ft_split(buf, ' ');
-	while (data->token[i])
-    {
-       printf("%s\n", data->token[i]);
-       i++;
-    }
-	while (data->token[i])
-	{
-		unclose_quote(data->token[i]);
-		i++;
-	}
-   
-    return (0);
-}*/
 
 int parse(t_data *data)
 {
+	printf("tu rentres?");
 	data->token->str_trimed = ft_strtrim(data->buf, " \t\n\r\f\v");
-//	printf("%s\n", data->token->str_trimed);
-	check_category(data->token->str_trimed);
-	
+	check_category(data->token);
 	return (0);
 }
 
@@ -45,6 +24,7 @@ int	check_category(t_token *token)
 {
 	while (token->str_trimed[token->i])
 	{
+		printf("??");
 		if (token->str_trimed[token->i] == ' ')
 			token->i++;
 		else if (token->str_trimed[token->i] == '<')
@@ -52,14 +32,16 @@ int	check_category(t_token *token)
 		else if (token->str_trimed[token->i] == '>')
 			r_redirect(token);
 		else if (token->str_trimed[token->i] == '"')
-			d_quote(token);
+			create_node("\"", d_quote);
 		else if (token->str_trimed[token->i] == '\'')
-			s_quote(token);
+			create_node("\'", s_quote);
 		else if (ft_isalpha(token->str_trimed[token->i]) == 1)
 			token_word(token);
 		else if (token->str_trimed[token->i] == '|')
-			token_pipe(token);
+			create_node("|", t_pipe);
 		else
 			token->i++;
+		printf("position : |%d| token : |%d|", token->str_trimed[token->i], token->type);
 	}
+	return (SUCCESS);
 }

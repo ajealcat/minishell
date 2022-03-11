@@ -6,25 +6,27 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/10 16:10:22 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/11 15:54:07 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int dl_redirect(t_token *token)
+void r_redirect(t_token *token)
 {
-    
+    if (token->str_trimed[token->i + 1] == '>')
+        create_node(">>", dr_red);
+	else
+		create_node(">", r_red);
 }
-/*
-int l_redirect(t_token *token)
+
+void l_redirect(t_token *token)
 {
     if (token->str_trimed[token->i + 1] == '<')
-        dl_redirect(token->str_trimed[token->i + 1]);
+        create_node("<<", dl_red);
 	else
-		
-	//	token->type = l_red;
-}*/
+		create_node("<", l_red);
+}
 
 int token_word(t_token *token)
 {
@@ -42,6 +44,6 @@ int token_word(t_token *token)
 		j++;
 	}
 	tmp[j] = '\0';
-	create_node(tmp, word, token); 
+	create_node(tmp, word); 
     return (0);
 }

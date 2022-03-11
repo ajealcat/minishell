@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
+#    By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/03/10 18:08:15 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/03/11 15:54:57 by Fahima42         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,10 @@ SRCS = main.c \
 		init.c \
 		protection_quote.c \
 		check_parse.c \
-		check_parse.c \
 		token_list.c \
 		is_it_available.c \
+		category.c \
+		utils.c \
 	
 SRCSD = srcs/
 OBJSD = objs/

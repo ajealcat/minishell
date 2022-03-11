@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 14:11:35 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/09 13:17:17 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/11 15:05:16 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,3 @@ int check_quotes(char *token)
 	}
     return (quote);
 }
-/*
-int	check_slash(char *token)
-{
-	int	i;
-	int	slash;
-
-	i = 0;
-	slash = 0;
-	while (token[i])
-	{
-		if (token[i] == '/')
-		{
-			if (token[i + 1] == '/' || token[i + 1] == '$'
-				|| token[i + 1] == '"' )
-				slash = 1;
-		}
-		i++;
-	}
-	return (slash);
-}*/

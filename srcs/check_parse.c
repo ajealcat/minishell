@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 16:23:20 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/10 18:47:18 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/11 15:02:26 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	unclose_quote(char *str)
 		if (check == 2)
 			printf("Error double quote\n");
 	}
-   // check = check_slash(str);
 	return (0);
 }
 

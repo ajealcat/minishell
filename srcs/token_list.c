@@ -6,22 +6,16 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 13:53:53 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/10 16:57:43 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/11 15:50:24 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	init_list(dblist *list)
-{
-	list->head = NULL;
-	list->tail = NULL;
-}
-
 void	free_list(dblist **list) //double ** car la fontction doit directement effectuer
 {								//des modifications sur les objets de la liste
-	t_token *tmp;
-	t_token *del;
+	t_token	*tmp;
+	t_token	*del;
 	
 	if (*list != NULL)
 	{
@@ -39,8 +33,9 @@ void	free_list(dblist **list) //double ** car la fontction doit directement effe
 
 int add_list(t_token *node)
 {
-	dblist *list;
-    
+	dblist	*list;
+
+	list = NULL;
     if (list->tail == NULL)
     {
         node->prev = NULL;
@@ -56,9 +51,9 @@ int add_list(t_token *node)
     return (SUCCESS);
 }
 
-int create_node(char *str, int category, t_token *token)
+int create_node(char *str, int category)
 {
-    t_token *new_node;
+    t_token	*new_node;
 
     new_node = malloc(sizeof(t_token));
     if (!new_node)

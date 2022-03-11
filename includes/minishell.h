@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/10 18:47:17 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/11 15:54:16 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ typedef struct s_token
 	int				type;
 	struct s_token *prev;
 	struct s_token *next;
+//	struct s_list *list;
 } t_token;
 
-typedef struct
+typedef struct s_list
 {
 	t_token *head;
 	t_token	*tail;
@@ -53,11 +54,14 @@ int print_prompt(void);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 	/* init.c */
+void init_token(t_token *token);
+void	init_list(dblist *list);
 void init_data(t_data *data);
 
 	/* parse.c */
 int parse(t_data *data);
 char	*ft_strtrim(const char *s1, const char *set);
+int	check_category(t_token *token);
 
 	/* protection_quote.c */
 int check_quotes(char *token);
@@ -66,20 +70,22 @@ int check_quotes(char *token);
 int	unclose_quote(char *str);
 int	checker_red(t_token *token);
 
-//int	check_slash(char *token);
-size_t	ft_strlen(const char *str);
+	/* utils.c */
+int ft_strlen_space(char *str);
+int	ft_isalpha(int c);
 
 	/* category */ 
+void r_redirect(t_token *token);
+void l_redirect(t_token *token);
 int	token_word(t_token *token);
 
 	/* token_list.c */
 void	init_list(dblist *list);
 void	free_list(dblist **list);
 int add_list(t_token *node);
-int create_node(char *str, int category, t_token *token);
+int create_node(char *str, int category);
 
 	/* is_it_available.c */
-
 int	is_valid_left(t_token *token);
 int	is_valid_right(t_token *token);
 int	is_valid_t_pipe(t_token *token);

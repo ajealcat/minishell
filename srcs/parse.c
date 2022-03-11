@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/11 18:11:57 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/11 18:38:19 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 int parse(t_token *token)
 {
-	t_token *tmp;
-
 	token->str_trimed = ft_strtrim(token->buf, " \t\n\r\f\v");
-	tmp = check_category(token);
-	
+	token = check_category(token);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/11 17:42:07 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/11 18:40:03 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,17 @@ int token_word(t_token *token, int i)
 	int		size;
 	int		j;
 	char	*tmp;
-//	printf("i dans token word : |%c|\n", token->str_trimed[i]);
+
     size = ft_strlen_space(token->str_trimed);
     tmp = malloc(sizeof(char) * size + 1);
 	j = 0;
 	while (ft_isalpha(token->str_trimed[i]) == 1)
 	{
 		tmp[j] = token->str_trimed[i];
-		printf("i dans token word : |%c|\n", token->str_trimed[i]);
 		i++;
 		j++;
 	}
 	tmp[j] = '\0';
-	create_node(tmp, word); 
+	create_node(token, tmp, word); 
     return (i);
 }

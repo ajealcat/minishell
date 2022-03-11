@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 13:53:53 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/11 17:44:40 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/11 18:44:07 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,12 @@ void	free_list(dblist **list) //double ** car la fontction doit directement effe
 	}
 }
 
-int add_list(t_token *node)
+int add_list(t_token *token)
 {
-	dblist	*list;
-
-	list = NULL;
-    if (list->tail == NULL)
+    if (token == NULL)
     {
-        node->prev = NULL;
-		list->head = node;
-		list->tail = node;
+        token->prev = NULL;
+		token = token;
     }
     else
     {
@@ -51,18 +47,14 @@ int add_list(t_token *node)
     return (SUCCESS);
 }
 
-int create_node(char *str, int category)
+t_token create_node(t_token *token, char *str, int category)
 {
-    t_token	*new_node;
-
-	printf("create node\n");
-    new_node = malloc(sizeof(t_token));
-    if (!new_node)
+    token = malloc(sizeof(t_token));
+    if (!token)
         return (0);
-    new_node->type = category;
-    new_node->value = str;
-    new_node->next = NULL;
-	printf("create node before add_list?\n");
-    add_list(new_node);
-    return (SUCCESS);
+    token->type = category;
+    token->value = str;
+    token->next = NULL;
+    add_list(token);
+    return (token);
 }

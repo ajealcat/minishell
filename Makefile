@@ -6,7 +6,7 @@
 #    By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/03/11 15:54:57 by Fahima42         ###   ########.fr        #
+#    Updated: 2022/03/14 18:01:26 by Fahima42         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS = main.c \
 		is_it_available.c \
 		category.c \
 		utils.c \
+		free.c \
 	
 SRCSD = srcs/
 OBJSD = objs/

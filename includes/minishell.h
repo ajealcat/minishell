@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/14 17:34:56 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/14 18:09:49 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ t_token *l_redirect(t_token *list, t_data *data);
 t_token *token_word(t_token *list, t_data *data);
 
 	/* token_list.c */
-void	free_list(t_token **list);
 t_token *add_list(t_token *list, t_token *new_token);
 t_token *create_node(t_token *list, char *str, int category);
 
@@ -81,6 +80,11 @@ t_token *create_node(t_token *list, char *str, int category);
 int	is_valid_left(t_token *token);
 int	is_valid_right(t_token *token);
 int	is_valid_t_pipe(t_token *token);
+
+	/* free.c */
+void	free_list(t_token **list);
+int message_error(char *str, t_token *list, t_data *data);
+void	ft_putstr_fd(char *str, int fd);
 
 
 #endif

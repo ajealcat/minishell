@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/14 17:50:24 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/14 17:53:56 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ t_token *token_word(t_token *list, t_data *data)
 
     size = ft_strlen_space(data->str_trimed);
     tmp = malloc(sizeof(char) * (size + 1));
+	if (!tmp)
+	{
+		perror("Malloc Failed");
+		return ;
+	}
 	j = 0;
 	while (ft_isalnum(data->str_trimed[data->i]) == 1 && j <= size)
 	{

@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/14 17:47:16 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/14 17:49:41 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,6 @@ t_token *parse(t_token *list, t_data *data)
 {
 	data->str_trimed = ft_strtrim(data->buf, " \t\n\r\f\v");
 	list = check_category(list, data);
-	printf("dans parse : %s\n", list->value);
-	// while (list->next)
-	// 	{
-	// 		printf("token : | %d |\n value : | %s |\n", list->type, list->value);
-	// 		list = list->next;
-	// 	}
-	// 	printf("token : | %d |\n value : | %s |\n",list->type, list->value);
 	return (list);
 }
 
@@ -49,11 +42,5 @@ t_token	*check_category(t_token *list, t_data *data)
 		}
 		data->i++;
 	}
-		// while (list->next)
-		// {
-		// 	printf("position : | %d | token : | %d |\n value : | %s |\n", data->i, list->type, list->value);
-		// 	list = list->next;
-		// }
-		// printf("position : | %d | token : | %d |\n value : | %s |\n", data->i, list->type, list->value);
 	return (list);
 }

@@ -6,46 +6,50 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/11 18:40:03 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/14 17:40:35 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int r_redirect(t_token *token, int i)
+t_token *r_redirect(t_token *list, t_data *data)
 {
-    if (token->str_trimed[i + 1] == '>')
-        create_node(">>", dr_red);
+    if (data->str_trimed[data->i + 1] == '>')
+        list = create_node(list, ">>", dr_red);
 	else
-		create_node(">", r_red);
-	return (i);
+		list = create_node(list, ">", r_red);
+	return (list);
 }
 
-int l_redirect(t_token *token, int i)
+t_token *l_redirect(t_token *list, t_data *data)
 {
-    if (token->str_trimed[i + 1] == '<')
-        create_node("<<", dl_red);
+    if (data->str_trimed[data->i + 1] == '<')
+        list = create_node(list, "<<", dl_red);
 	else
-		create_node("<", l_red);
-	return (i);
+		list = create_node(list, "<", l_red);
+	return (list);
 }
 
-int token_word(t_token *token, int i)
+t_token *token_word(t_token *list, t_data *data)
 {
 	int		size;
 	int		j;
 	char	*tmp;
 
-    size = ft_strlen_space(token->str_trimed);
-    tmp = malloc(sizeof(char) * size + 1);
+    size = ft_strlen_space(data->str_trimed);
+	printf("size in token word : %d\n", size);
+    tmp = malloc(sizeof(char) * (size + 1));
 	j = 0;
-	while (ft_isalpha(token->str_trimed[i]) == 1)
+	while (ft_isalnum(data->str_trimed[data->i]) == 1 && j <= size)
 	{
-		tmp[j] = token->str_trimed[i];
-		i++;
+		tmp[j] = data->str_trimed[data->i];
+		data->i++;
 		j++;
 	}
 	tmp[j] = '\0';
-	create_node(token, tmp, word); 
-    return (i);
+	printf("i et c : %d\n%c\n", data->i, data->str_trimed[data->i]);
+	list = create_node(list, tmp, word);
+	printf("return list dans token_word : %s\n", list->value);
+	printf("list token_word: %d\n", list->type);
+	return (list);
 }

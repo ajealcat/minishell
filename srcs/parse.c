@@ -6,45 +6,54 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/11 18:38:19 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/14 17:47:16 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int parse(t_token *token)
+t_token *parse(t_token *list, t_data *data)
 {
-	token->str_trimed = ft_strtrim(token->buf, " \t\n\r\f\v");
-	token = check_category(token);
-	return (0);
+	data->str_trimed = ft_strtrim(data->buf, " \t\n\r\f\v");
+	list = check_category(list, data);
+	printf("dans parse : %s\n", list->value);
+	// while (list->next)
+	// 	{
+	// 		printf("token : | %d |\n value : | %s |\n", list->type, list->value);
+	// 		list = list->next;
+	// 	}
+	// 	printf("token : | %d |\n value : | %s |\n",list->type, list->value);
+	return (list);
 }
 
-int	check_category(t_token *token)
+t_token	*check_category(t_token *list, t_data *data)
 {
-	//printf("%d\n", token->i);
-	int i;
-	
-	i = 0;
-	while (token->str_trimed[i])
+	while (data->str_trimed[data->i] && data->str_trimed[data->i] != '\0')
 	{
-		printf("str dans check category : |%c|\n", token->str_trimed[i]);
-		if (token->str_trimed[i] == ' ')
-			token->i++;
-		if (token->str_trimed[i] == '<')
-			l_redirect(token, i);
-		if (token->str_trimed[i] == '>')
-			r_redirect(token, i);
-		if (token->str_trimed[i] == '"')
-			create_node("\"", d_quote);
-		if (token->str_trimed[i] == '\'')
-			create_node("\'", s_quote);
-		if (ft_isalpha(token->str_trimed[i]) == 1)
-			token_word(token, i);
-		if (token->str_trimed[i] == '|')
-			create_node("|", t_pipe);
-		i++;
-		printf("str dans check category : |%c|\n", token->str_trimed[i]);
-		printf("position : |%d| token : |%d|", token->str_trimed[i], token->type);
+		if (data->str_trimed[data->i] == ' ')
+			data->i++;
+		if (data->str_trimed[data->i] == '<')
+			list = l_redirect(list, data);
+		if (data->str_trimed[data->i] == '>')
+			list = r_redirect(list, data);
+		if (data->str_trimed[data->i] == '"')
+			list = create_node(list, "\"", d_quote);
+		if (data->str_trimed[data->i] == '\'')
+			list = create_node(list, "\'", s_quote);
+		if (data->str_trimed[data->i] == '|')
+			list = create_node(list, "|", t_pipe);
+		if (ft_isalpha(data->str_trimed[data->i]) == 1)
+		{
+			list = token_word(list, data);
+			data->i--;
+		}
+		data->i++;
 	}
-	return (SUCCESS);
+		// while (list->next)
+		// {
+		// 	printf("position : | %d | token : | %d |\n value : | %s |\n", data->i, list->type, list->value);
+		// 	list = list->next;
+		// }
+		// printf("position : | %d | token : | %d |\n value : | %s |\n", data->i, list->type, list->value);
+	return (list);
 }

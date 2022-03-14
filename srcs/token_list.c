@@ -6,20 +6,20 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 13:53:53 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/11 18:44:07 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/14 16:41:37 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	free_list(dblist **list) //double ** car la fontction doit directement effectuer
+void	free_list(t_token **list) //double ** car la fontction doit directement effectuer
 {								//des modifications sur les objets de la liste
 	t_token	*tmp;
 	t_token	*del;
 	
 	if (*list != NULL)
 	{
-		tmp = (*list)->head;
+		tmp = (*list);
 		while (tmp != NULL)
 		{
 			del = tmp;
@@ -31,30 +31,39 @@ void	free_list(dblist **list) //double ** car la fontction doit directement effe
 	}
 }
 
-int add_list(t_token *token)
+t_token *add_list(t_token *list, t_token *new_token)
 {
-    if (token == NULL)
+	t_token *tmp;
+	
+    if (list == NULL)
     {
-        token->prev = NULL;
-		token = token;
+        new_token->prev = NULL;
+		list = new_token;
     }
     else
     {
-		list->tail->next = node; //on relie le dernier element de la liste vers le nouvel element
-		node->prev = list->tail; //on fait pointer prev vers le dernier element de la liste
-		list->tail = node; //on fait pointer la fin de la liste vers le nouvel element
+		tmp = list;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new_token;
+		new_token->prev = tmp;
     }
-    return (SUCCESS);
+    return (list);
 }
 
-t_token create_node(t_token *token, char *str, int category)
+t_token *create_node(t_token *list, char *str, int category)
 {
-    token = malloc(sizeof(t_token));
-    if (!token)
+   t_token *new_token;
+   
+	new_token = malloc(sizeof(t_token));
+    if (!new_token)
+	{
+		perror("Malloc Failure");
         return (0);
-    token->type = category;
-    token->value = str;
-    token->next = NULL;
-    add_list(token);
-    return (token);
+	}
+    new_token->type = category;
+    new_token->value = str;
+    new_token->next = NULL;
+    list = add_list(list, new_token);
+    return (list);
 }

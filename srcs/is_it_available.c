@@ -1,52 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_it_avalaible.c                                  :+:      :+:    :+:   */
+/*   is_it_available.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 18:07:03 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/10 18:45:51 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/15 13:11:43 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	is_valid_left(t_token *token)
+int	is_valid_left(t_token *list)
 {
-	if (token->type == l_red || token->type == dl_red)
+	if (list->type == l_red || list->type == dl_red)
 	{
-		if (token->prev != NULL && token->prev->type != word)
+		if (list->prev != NULL && list->prev->type != word)
 			return (FAILURE);
-		if (token->next == NULL || token->next->type != word)
+		if (list->next == NULL || list->next->type != word)
 			return (FAILURE);
-		return (SUCCESS);
+		// return (SUCCESS);
 	}
-	return (FAILURE); // securite si jamais on envoi un truc qui n'a rien a voir
+	return (SUCCESS); // securite si jamais on envoi un truc qui n'a rien a voir
 }
 
-int	is_valid_right(t_token *token)
+int	is_valid_right(t_token *list)
 {
-	if (token->type == r_red || token->type == dr_red)
+	if (list->type == r_red || list->type == dr_red)
 	{
-		if (token->prev != NULL && token->prev->type != word)
+		if (list->prev != NULL && list->prev->type != word)
 			return (FAILURE);
-		if (token->next == NULL || token->next->type != word)
+		if (list->next == NULL || list->next->type != word)
 			return (FAILURE);
-		return (SUCCESS);
+		// return (SUCCESS);
 	}
-	return (FAILURE);
+	return (SUCCESS);
 }
 
-int	is_valid_t_pipe(t_token *token)
+int	is_valid_t_pipe(t_token *list)
 {
-	if (token->type == t_pipe)
+	if (list->type == t_pipe)
 	{
-		if (token->prev == NULL || token->prev->type != word)
+		if (list->prev == NULL || list->prev->type != word)
 			return (FAILURE);
-		if (token->next == NULL || token->next->type != word)
+		if (list->next == NULL || list->next->type != word)
 			return (FAILURE);
-		return (SUCCESS);
+		else
+			return (SUCCESS);
 	}
 	return (FAILURE);
 }

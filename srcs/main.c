@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:14 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/15 14:24:16 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/15 15:48:13 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ int main(int ac, char **av, char **env)
 		return(0);
 	if (ac || av)
 	{
-		init_data(data);
+		// init_data(data);
 		print_prompt(list, data);
-		
 	}
 	return(0);
 }

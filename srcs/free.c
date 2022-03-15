@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:00:34 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/15 13:04:12 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/15 14:23:36 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	free_list(t_token **list) //double ** car la fontction doit directement eff
 			tmp = tmp->next;
 			free(del);
 		}
-		free(*list);
 		(*list) = NULL;
 	}
 }

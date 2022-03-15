@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/14 18:15:51 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/15 15:33:18 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ t_token *token_word(t_token *list, t_data *data)
 	int		j;
 	char	*tmp;
 
-    size = ft_strlen_space(data->str_trimed);
+	tmp = NULL;
+    size = ft_strlen_space(data->str_trimed + data->i);
     tmp = malloc(sizeof(char) * (size + 1));
 	if (!tmp)
 		message_error("Malloc Failed", list, data);
@@ -49,5 +50,6 @@ t_token *token_word(t_token *list, t_data *data)
 	}
 	tmp[j] = '\0';
 	list = create_node(list, tmp, word);
+	free(tmp);
 	return (list);
 }

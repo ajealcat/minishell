@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:14 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/15 15:48:13 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/16 16:30:00 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(int ac, char **av, char **env)
 	list = NULL;
 	data = malloc(sizeof(t_data));
 	if (!data)
-		message_error("Malloc Failed\n", list, data);
+		message_error(list, data);
 	if (data == NULL)
 		return(0);
 	if (ac || av)

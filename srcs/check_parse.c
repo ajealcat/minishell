@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 16:23:20 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/15 14:37:29 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/16 17:20:01 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,24 +70,19 @@ int	checker_red(t_token *list)
 	{
 		if (tmp->type == l_red || tmp->type == dl_red)
 		{
-			if (list->prev != NULL && list->prev->type != word)
-				return(message_error("Syntax error red_l\n", list, NULL));
-			if (list->next == NULL || list->next->type != word)
-				return(message_error("Syntax error red_l\n", list, NULL));
+			if (is_valid_left(tmp) == FAILURE)
+				return (FAILURE);
 		}
-		if (tmp->type == r_red || tmp->type == dr_red)
+		else if (tmp->type == r_red || tmp->type == dr_red)
 		{
-			if (list->prev != NULL && list->prev->type != word)
-				return(message_error("Syntax error red_r\n", list, NULL));
-			if (list->next == NULL || list->next->type != word)
-				return(message_error("Syntax error red_r\n", list, NULL));
+			if (is_valid_right(tmp) == FAILURE)
+				return (FAILURE);
 		}
-		if (tmp->type == t_pipe)
+		else if (tmp->type == t_pipe)
 		{
-			if (list->prev == NULL || list->prev->type != word)
-				return(message_error("Syntax error pipe\n", list, NULL));
-			if (list->next == NULL || list->next->type != word)
-				return(message_error("Syntax error pipe\n", list, NULL));
+			if (is_valid_t_pipe(tmp) == FAILURE)
+				return (FAILURE);
+			return (SUCCESS);
 		}
 		tmp = tmp->next;
 	}

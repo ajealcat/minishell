@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/15 12:44:10 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/16 17:19:45 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	is_valid_t_pipe(t_token *list);
 
 	/* free.c */
 void	free_list(t_token **list);
-int message_error(char *str, t_token *list, t_data *data);
+int message_error(t_token *list, t_data *data);
 void	ft_putstr_fd(char *str, int fd);
 
 

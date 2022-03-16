@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/16 14:42:34 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/16 16:02:32 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 t_token *r_redirect(t_token *list, t_data *data)
 {
-    if (data->str_trimed[data->i + 1] == '>')
+    if (ft_strncmp(data->str_trimed + data->i, ">>", 2) == 0)
+	{
         list = create_node(list, ">>", dr_red);
+		data->i++;
+	}
 	else
 		list = create_node(list, ">", r_red);
 	return (list);
@@ -23,10 +26,13 @@ t_token *r_redirect(t_token *list, t_data *data)
 
 t_token *l_redirect(t_token *list, t_data *data)
 {
-    if (data->str_trimed[data->i + 1] == '<')
+	if (ft_strncmp(data->str_trimed + data->i, "<<", 2) == 0)
+	{
         list = create_node(list, "<<", dl_red);
-	else
-		list = create_node(list, "<", l_red);
+		data->i++;
+	}
+	 else
+	 	list = create_node(list, "<", l_red);
 	return (list);
 }
 
@@ -36,7 +42,6 @@ t_token *token_word(t_token *list, t_data *data)
 	int		j;
 	char	*tmp;
 
-	// tmp = NULL;
     size = ft_strlen_space(data->str_trimed + data->i);
     tmp = malloc(sizeof(char) * (size + 1));
 	if (!tmp)

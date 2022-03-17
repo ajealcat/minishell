@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/17 18:30:46 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/17 23:59:39 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ t_token	*check_category(t_token *list, t_data *data)
 		if  (data->str_trimed[data->i] == '$')
 			list = token_dollar(list, data);
 		//printf(" i apres $ = %d\n", data->i);
-		if (check_sep_for_word(data->str_trimed[data->i]) == SUCCESS)
+		else if (check_sep_for_word(data->str_trimed[data->i]) == SUCCESS)
 		{
-			printf("char dans check  = %c\n", data->str_trimed[data->i]);
+			//printf("char dans check  = %c\n", data->str_trimed[data->i]);
 			// printf("valeur  dans checki = %d\n", data->i);
 			list = token_word(list, data);
 			data->i--;

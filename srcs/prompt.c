@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/17 16:25:08 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/17 16:55:49 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void 	print_test(t_token *list)
 			printf("DQUOTE: |%s|\n",  tmp->value);
 		else if (tmp->type == s_quote)
 			printf("SQUOTE: |%s|\n",  tmp->value);
+		else if (tmp->type == var)
+			printf("var: |%s|\n",  tmp->value);
 		tmp = tmp->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/17 16:05:24 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/17 16:58:36 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ t_token	*check_category(t_token *list, t_data *data)
 			list = create_node(list, "\'", s_quote);
 		if (data->str_trimed[data->i] == '|')
 			list = create_node(list, "|", t_pipe);
-		if (ft_isalpha(data->str_trimed[data->i]) == 1)
+		if (data->str_trimed[data->i] == '$')
+			list = token_dollar(list, data);
+		if (check_sep_for_word(data->str_trimed[data->i]) == SUCCESS)
 		{
 			list = token_word(list, data);
 			data->i--;
 		}
-		if (data->str_trimed[data->i] == '$')
-			list = token_dollar(list, data);
 		data->i++;
 	}
 	return (list);

@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/17 16:58:36 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/17 17:26:26 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_token	*check_category(t_token *list, t_data *data)
 			list = token_dollar(list, data);
 		if (check_sep_for_word(data->str_trimed[data->i]) == SUCCESS)
 		{
+			printf("char dans check  = %c\n", data->str_trimed[data->i]);
+			printf("valeur  dans checki = %d\n", data->i);
 			list = token_word(list, data);
 			data->i--;
 		}

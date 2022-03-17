@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:14:51 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/17 17:04:03 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/17 17:24:30 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int ft_strlen_space(char *str)
 
 int check_sep_for_word(int c)
 {
-	
 	if (c == '<' || c == '>' || c == '|' || c == '\'' || c == '\"')
 		return (FAILURE);
 	return (SUCCESS);

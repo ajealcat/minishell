@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/17 17:10:11 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/17 17:19:39 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,5 @@ t_token	*token_dollar(t_token *list, t_data *data)
 	}
 	tmp[j] = '\0';
 	list = create_node(list, tmp, var);
-//	data->i--;
 	return (list);
 }

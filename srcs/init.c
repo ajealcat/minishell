@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:03:52 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/14 16:25:30 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/17 14:50:46 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void init_token(t_token *list)
     list->value = NULL;
     list->next = NULL;
     list->prev = NULL;
-   // return (list);
 }
 
 void  init_data(t_data *data)

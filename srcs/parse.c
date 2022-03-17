@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/16 14:46:27 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/17 14:51:50 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,6 @@ t_token *parse(t_token *list, t_data *data)
 {
 	data->str_trimed = ft_strtrim(data->buf, " \t\n\r\f\v");
 	list = check_category(list, data);
-	// message_error("test error\n", list, data);
-	// while (list->next)
-	// 	{
-	// 		printf("token : | %d |\n value : | %s |\n", list->type, list->value);
-	// 		list = list->next;
-	// 	}
-	// 	printf("token : | %d |\n value : | %s |\n", list->type, list->value);
 	return (list);
 }
 

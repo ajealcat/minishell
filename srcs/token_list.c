@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 13:53:53 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/14 18:15:17 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/17 14:52:47 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ t_token *add_list(t_token *list, t_token *new_token)
 
 t_token *create_node(t_token *list, char *str, int category)
 {
-   t_token *new_token;
+  t_token *new_token;
    
 	new_token = malloc(sizeof(t_token));
-    if (!new_token)
-		message_error("Malloc Failed", list, NULL);
+  if (!new_token)
+	  return (NULL);
     new_token->type = category;
     new_token->value = str;
     new_token->next = NULL;

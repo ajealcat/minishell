@@ -6,65 +6,59 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/16 17:31:55 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/17 14:49:48 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int print_prompt(t_token *list, t_data *data)
+void 	print_test(t_token *list)
+{
+	t_token *tmp = list;
+	while (tmp != NULL)	
+	{
+		if (tmp->type == word)
+			printf("word: |%s|\n",  tmp->value);
+		else if (tmp->type == t_pipe)
+			printf("PIPE: |%s|\n",  tmp->value);
+		else if (tmp->type == l_red)
+			printf("LESS: |%s|\n",  tmp->value);
+		else if (tmp->type == r_red)
+			printf("GREAT: |%s|\n",  tmp->value);
+		else if (tmp->type == dl_red)
+			printf("DLESS: |%s|\n",  tmp->value);
+		else if (tmp->type == dr_red)
+			printf("DGREAT: |%s|\n",  tmp->value);
+		else if (tmp->type == d_quote)
+			printf("DQUOTE: |%s|\n",  tmp->value);
+		else if (tmp->type == s_quote)
+			printf("SQUOTE: |%s|\n",  tmp->value);
+		tmp = tmp->next;
+}
+
+int print_prompt(t_data *data)
 {
 	char *cmd;
+	t_token *list;
 	
 	cmd = "exit";
 	while (1)
 	{
+		list = NULL;
 		init_data(data);
 		data->buf = readline(PROMPT);
-		if (data->buf != NULL)
+		if (data->buf != NULL && ft_strlen(data->buf) != 0)
 			add_history(data->buf);
 		if (ft_strncmp(data->buf, cmd, 5) == 0)
 			exit(0);
 		list = parse(list, data);
-		t_token *tmp = list;
-		while (tmp != NULL)
+		checker_red(list);
+		if (data != NULL)
 		{
-	if (tmp->type == word)
-		printf("word: |%s|\n",  tmp->value);
-	else if (tmp->type == t_pipe)
-		printf("PIPE: |%s|\n",  tmp->value);
-	else if (tmp->type == l_red)
-		printf("LESS: |%s|\n",  tmp->value);
-	else if (tmp->type == r_red)
-		printf("GREAT: |%s|\n",  tmp->value);
-	else if (tmp->type == dl_red)
-		printf("DLESS: |%s|\n",  tmp->value);
-	else if (tmp->type == dr_red)
-		printf("DGREAT: |%s|\n",  tmp->value);
-	// else if (tmp->type == VAR)
-	// 	printf("VAR: |%s|\n",  tmp->value);
-	else if (tmp->type == d_quote)
-		printf("DQUOTE: |%s|\n",  tmp->value);
-	else if (tmp->type == s_quote)
-		printf("SQUOTE: |%s|\n",  tmp->value);
-	tmp = tmp->next;
-}
-		if (checker_red(list) == FAILURE)
-			message_error(list, data);
-		// t_token *tmp;
-		// tmp = list;
-		// while (list->next)
-		// {
-		// 	printf("token : | %d |\n value : | %s |\n", list->type, list->value);
-		// 	list = list->next;
-		// }
-		// printf("token : | %d |\n value : | %s |\n", list->type, list->value);
-		// if (list != NULL || data != NULL)
-		// {
-		// 	free(data->buf);
-		// 	free(data->str_trimed);
-		// 	free_list(&list);
-		// }
+			free(data->buf);
+			free(data->str_trimed);
+		}
+		free_list(&list);
 	}
 	return (SUCCESS);
 }

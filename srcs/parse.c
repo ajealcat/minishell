@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/17 17:26:26 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/17 18:30:46 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,27 @@ t_token *parse(t_token *list, t_data *data)
 
 t_token	*check_category(t_token *list, t_data *data)
 {
-	while (data->str_trimed[data->i] && data->str_trimed[data->i] != '\0')
+	while (data->str_trimed[data->i] /*&& data->str_trimed[data->i] != '\0'*/)
 	{
 		if (data->str_trimed[data->i] == ' ')
 			data->i++;
 		if (data->str_trimed[data->i] == '<')
 			list = l_redirect(list, data);
-		if (data->str_trimed[data->i] == '>')
+		if  (data->str_trimed[data->i] == '>')
 			list = r_redirect(list, data);
-		if (data->str_trimed[data->i] == '"')
+		if  (data->str_trimed[data->i] == '"')
 			list = create_node(list, "\"", d_quote);
-		if (data->str_trimed[data->i] == '\'')
+		if  (data->str_trimed[data->i] == '\'')
 			list = create_node(list, "\'", s_quote);
 		if (data->str_trimed[data->i] == '|')
 			list = create_node(list, "|", t_pipe);
-		if (data->str_trimed[data->i] == '$')
+		if  (data->str_trimed[data->i] == '$')
 			list = token_dollar(list, data);
+		//printf(" i apres $ = %d\n", data->i);
 		if (check_sep_for_word(data->str_trimed[data->i]) == SUCCESS)
 		{
 			printf("char dans check  = %c\n", data->str_trimed[data->i]);
-			printf("valeur  dans checki = %d\n", data->i);
+			// printf("valeur  dans checki = %d\n", data->i);
 			list = token_word(list, data);
 			data->i--;
 		}

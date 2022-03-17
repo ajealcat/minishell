@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/17 14:42:00 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/17 16:43:59 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,30 @@ t_token *token_word(t_token *list, t_data *data)
 	if (!tmp)
 		return(NULL);
 	j = 0;
+	while (check_sep_for_word(data->str_trimed[data->i]) == 0 && j <= size)
+	{
+		tmp[j] = data->str_trimed[data->i];
+		printf("tmp[j] = %c\n", tmp[j]);
+		printf("valeur i = %d\n", data->i);
+		data->i++;
+		j++;
+	}
+	tmp[j] = '\0';
+	list = create_node(list, tmp, word);
+	return (list);
+}
+
+t_token	*token_dollar(t_token *list, t_data *data)
+{
+	int		size;
+	int		j;
+	char	*tmp;
+
+    size = ft_strlen_dollar(data->str_trimed + data->i);
+    tmp = malloc(sizeof(char) * (size + 1));
+	if (!tmp)
+		return (NULL);
+	j = 0;
 	while (ft_isalnum(data->str_trimed[data->i]) == 1 && j <= size)
 	{
 		tmp[j] = data->str_trimed[data->i];
@@ -55,5 +79,6 @@ t_token *token_word(t_token *list, t_data *data)
 	}
 	tmp[j] = '\0';
 	list = create_node(list, tmp, word);
+	data->i--;
 	return (list);
 }

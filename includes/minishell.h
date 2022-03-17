@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/17 14:56:22 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/17 16:40:08 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ int	checker_red(t_token *token);
 
 	/* utils.c */
 int ft_strlen_space(char *str);
+int ft_strlen_dollar(char *str);
+int check_sep_for_word(int c);
+
 int	ft_isalpha(int c);
 int	ft_isalnum(int c);
 size_t	ft_strlen(const char *str);
@@ -72,6 +75,7 @@ size_t	ft_strlen(const char *str);
 t_token *r_redirect(t_token *list, t_data *data);
 t_token *l_redirect(t_token *list, t_data *data);
 t_token *token_word(t_token *list, t_data *data);
+t_token	*token_dollar(t_token *list, t_data *data);
 
 	/* token_list.c */
 t_token *add_list(t_token *list, t_token *new_token);

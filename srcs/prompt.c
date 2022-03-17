@@ -6,7 +6,7 @@
 /*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/17 14:49:48 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/17 16:25:08 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void 	print_test(t_token *list)
 		else if (tmp->type == s_quote)
 			printf("SQUOTE: |%s|\n",  tmp->value);
 		tmp = tmp->next;
+	}
 }
 
 int print_prompt(t_data *data)
@@ -52,6 +53,7 @@ int print_prompt(t_data *data)
 		if (ft_strncmp(data->buf, cmd, 5) == 0)
 			exit(0);
 		list = parse(list, data);
+		print_test(list);
 		checker_red(list);
 		if (data != NULL)
 		{

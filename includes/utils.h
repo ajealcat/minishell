@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:56:39 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/10 18:15:25 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/17 15:54:17 by Fahima42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define s_quote 6
 # define word 7
 # define t_pipe 8
+# define var 9
 
 
 //colors 

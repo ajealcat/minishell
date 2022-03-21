@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/21 09:50:55 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/21 11:07:29 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ t_token	*token_dollar(t_token *list, t_data *data)
 		j++;
 	}
 	tmp[j] = '\0';
+	printf("dans token word i = %d\n", data->i);
 	list = create_node(list, tmp, var);
 	return (list);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/17 18:05:01 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/21 10:44:59 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,28 @@ typedef struct s_token
 {
 	char			*value;
 	int				type;
-	struct s_token *prev;
-	struct s_token *next;
-} t_token;
+	struct s_token	*prev;
+	struct s_token	*next;
+}	t_token;
 
 typedef struct s_data
 {
 	char			*buf;
 	char			*str_trimed;
 	int				i;
-} t_data;
-
+}	t_data;
 
 	/* prompt.c */
-int print_prompt(t_data *data);
+int	print_prompt(t_data *data);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 	/* init.c */
-void init_token(t_token *token);
-void  init_data(t_data *data);
+void	init_token(t_token *token);
+void	init_data(t_data *data);
 
 	/* parse.c */
-t_token *parse(t_token *list, t_data *data);
-char	*ft_strtrim(const char *s1, const char *set);
+t_token	*parse(t_token *list, t_data *data);
+char* ft_strtrim(const char *s1, const char *set);
 t_token	*check_category(t_token *list, t_data *data);
 
 	/* protection_quote.c */
@@ -91,6 +90,5 @@ int	is_valid_t_pipe(t_token *list);
 	/* free.c */
 void	free_list(t_token **list);
 void	ft_putstr_fd(char *str, int fd);
-
 
 #endif

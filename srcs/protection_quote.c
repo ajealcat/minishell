@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   protection_quote.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 14:11:35 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/11 15:05:16 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/21 09:43:58 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 // single quote idem
 // "'" ou '\'' --> a afficher si echo
 
-int check_quotes(char *token)
+int	check_quotes(char *token)
 {
-    size_t	i;
-    int		quote;
+	size_t	i;
+	int		quote;
 
-    i = 0;
+	i = 0;
 	quote = 0;
-    while (token[i])
-    {
+	while (token[i])
+	{
 		if (token[i] == '\'')
 		{
 			if (quote == 0)
@@ -41,5 +41,5 @@ int check_quotes(char *token)
 		}
 		i++;
 	}
-    return (quote);
+	return (quote);
 }

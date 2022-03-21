@@ -3,47 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/17 16:55:49 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/21 09:42:47 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void 	print_test(t_token *list)
+void	print_test(t_token *list)
 {
-	t_token *tmp = list;
-	while (tmp != NULL)	
+	t_token	*tmp;
+
+	tmp = list;
+	while (tmp != NULL)
 	{
 		if (tmp->type == word)
-			printf("word: |%s|\n",  tmp->value);
+			printf("word: |%s|\n", tmp->value);
 		else if (tmp->type == t_pipe)
-			printf("PIPE: |%s|\n",  tmp->value);
+			printf("PIPE: |%s|\n", tmp->value);
 		else if (tmp->type == l_red)
-			printf("LESS: |%s|\n",  tmp->value);
+			printf("LESS: |%s|\n", tmp->value);
 		else if (tmp->type == r_red)
-			printf("GREAT: |%s|\n",  tmp->value);
+			printf("GREAT: |%s|\n", tmp->value);
 		else if (tmp->type == dl_red)
-			printf("DLESS: |%s|\n",  tmp->value);
+			printf("DLESS: |%s|\n", tmp->value);
 		else if (tmp->type == dr_red)
-			printf("DGREAT: |%s|\n",  tmp->value);
+			printf("DGREAT: |%s|\n", tmp->value);
 		else if (tmp->type == d_quote)
-			printf("DQUOTE: |%s|\n",  tmp->value);
+			printf("DQUOTE: |%s|\n", tmp->value);
 		else if (tmp->type == s_quote)
-			printf("SQUOTE: |%s|\n",  tmp->value);
+			printf("SQUOTE: |%s|\n", tmp->value);
 		else if (tmp->type == var)
-			printf("var: |%s|\n",  tmp->value);
+			printf("var: |%s|\n", tmp->value);
 		tmp = tmp->next;
 	}
 }
 
-int print_prompt(t_data *data)
+int	print_prompt(t_data *data)
 {
-	char *cmd;
-	t_token *list;
-	
+	char	*cmd;
+	t_token	*list;
+
 	cmd = "exit";
 	while (1)
 	{

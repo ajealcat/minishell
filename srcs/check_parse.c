@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 16:23:20 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/17 14:53:54 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/21 09:30:30 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	unclose_quote(char *str)
 {
-	int check;
+	int	check;
 
 	check = check_quotes(str);
 	if (check > 0)
@@ -29,7 +29,7 @@ int	unclose_quote(char *str)
 
 int	checker_red(t_token *list)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	tmp = list;
 	while (tmp)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_it_available.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Fahima42 <Fahima42@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 18:07:03 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/17 14:54:33 by Fahima42         ###   ########.fr       */
+/*   Updated: 2022/03/21 09:36:51 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	is_valid_left(t_token *list)
 		}
 		return (SUCCESS);
 	}
-	return (FAILURE); // securite si jamais on envoi un truc qui n'a rien a voir
+	return (FAILURE);
 }
 
 int	is_valid_right(t_token *list)

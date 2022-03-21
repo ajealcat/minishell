@@ -6,13 +6,15 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:14:51 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/21 11:17:47 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/21 12:32:48 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_strlen_space(char *str)
+/* Pour la longueur des mots sans quotes */ 
+
+int	ft_strlen_word(char *str)
 {
 	int	i;
 
@@ -20,6 +22,27 @@ int	ft_strlen_space(char *str)
 	while (str[i] && str[i] != ' '
 		&& check_sep_for_word(str[i]) == SUCCESS)
 		++i;
+	return (i);
+}
+
+/* Pour la longueur des mots avec quotes*/
+
+int	ft_strlen_between_quotes(char *str)
+{
+	int	i;
+
+	i = 1;
+	while (str[i])
+	{
+		if (str[i] == '\"')
+		{
+			if (str[i - 1] == '\\')
+				i++;
+			else
+				return (i);
+		}
+		i++;
+	}
 	return (i);
 }
 

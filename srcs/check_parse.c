@@ -6,26 +6,12 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 16:23:20 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/21 09:30:30 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/21 11:26:24 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	unclose_quote(char *str)
-{
-	int	check;
-
-	check = check_quotes(str);
-	if (check > 0)
-	{
-		if (check == 1)
-			printf("Error simple quote\n");
-		if (check == 2)
-			printf("Error double quote\n");
-	}
-	return (0);
-}
 
 int	checker_red(t_token *list)
 {

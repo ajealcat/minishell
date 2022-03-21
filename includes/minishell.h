@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/21 10:44:59 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/21 12:33:04 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,15 @@ t_token	*check_category(t_token *list, t_data *data);
 
 	/* protection_quote.c */
 int check_quotes(char *token);
+int	unclose_quote(char *str);
 
 	/* check_parse.c */
-int	unclose_quote(char *str);
 int	checker_red(t_token *token);
 
 	/* utils.c */
-int ft_strlen_space(char *str);
+int ft_strlen_word(char *str);
 int ft_strlen_dollar(char *str);
+int	ft_strlen_between_quotes(char *str);
 int check_sep_for_word(int c);
 int go_for_word(int c);
 
@@ -77,6 +78,10 @@ t_token *r_redirect(t_token *list, t_data *data);
 t_token *l_redirect(t_token *list, t_data *data);
 t_token *token_word(t_token *list, t_data *data);
 t_token	*token_dollar(t_token *list, t_data *data);
+
+/* check-_spaces */
+
+t_token *token_between_dquote(t_token *list, t_data *data);
 
 	/* token_list.c */
 t_token *add_list(t_token *list, t_token *new_token);

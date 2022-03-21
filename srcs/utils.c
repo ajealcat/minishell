@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:14:51 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/21 12:32:48 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:42:57 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,25 @@ int	ft_strlen_word(char *str)
 
 /* Pour la longueur des mots avec quotes*/
 
-int	ft_strlen_between_quotes(char *str)
+int	ft_strlen_between_quotes(char *str, char quote, int nbr)
 {
 	int	i;
 
 	i = 1;
 	while (str[i])
 	{
-		if (str[i] == '\"')
+		if (str[i] == quote)
 		{
 			if (str[i - 1] == '\\')
 				i++;
 			else
-				return (i);
+				nbr--;
 		}
 		i++;
 	}
 	return (i);
 }
+
 
 /* Pour savoir si le caractere spe est a ecrire et 
 qu'il ne compte pas comme un token */

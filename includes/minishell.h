@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/21 14:02:34 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:33:09 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	checker_red(t_token *token);
 	/* utils.c */
 int ft_strlen_word(char *str);
 int ft_strlen_dollar(char *str);
-int	ft_strlen_between_quotes(char *str);
+int	ft_strlen_between_quotes(char *str, char quote, int nbr);
 int check_sep_for_word(int c);
 int go_for_word(int c);
 
@@ -82,7 +82,9 @@ t_token	*token_dollar(t_token *list, t_data *data);
 /* check-_spaces */
 
 int	is_quote_odd(t_token *list, t_data *data);
+int	count_quote(char *str, char quote);
 t_token *token_between_dquote(t_token *list, t_data *data);
+t_token	*token_between_squote(t_token *list, t_data *data);
 
 	/* token_list.c */
 t_token *add_list(t_token *list, t_token *new_token);

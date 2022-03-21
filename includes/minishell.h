@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/21 12:33:04 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/21 14:02:34 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ t_token	*token_dollar(t_token *list, t_data *data);
 
 /* check-_spaces */
 
+int	is_quote_odd(t_token *list, t_data *data);
 t_token *token_between_dquote(t_token *list, t_data *data);
 
 	/* token_list.c */

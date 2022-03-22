@@ -6,7 +6,7 @@
 #    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/03/21 14:53:03 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/03/22 11:42:47 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRCS = main.c \
 		category.c \
 		utils.c \
 		free.c \
-		check_spaces.c \
+		token_quote.c \
 	
 SRCSD = srcs/
 OBJSD = objs/

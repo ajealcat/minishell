@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_spaces.c                                     :+:      :+:    :+:   */
+/*   token_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:40:58 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/22 11:24:53 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/22 11:58:45 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,17 @@ t_token	*token_between_dquote(t_token *list, t_data *data)
 	int		j;
 	char	*tmp;
 	int		count;
+	int		plop;
 
+	plop = 7;
 	count = count_quote(data->str_trimed + data->i, '\"');
 	size = ft_strlen_between_quotes(data->str_trimed + data->i);
-	tmp = malloc(sizeof(char) * (size + 1));
+	tmp = malloc(sizeof(char) * ((size - count) + 1));
 	if (!tmp)
 		return (NULL);
 	j = 0;
+	if (data->str_trimed[data->i + 1] == '$')
+		plop = 9;
 	while (data->str_trimed[data->i] && j < size)
 	{
 		if (data->str_trimed[data->i] == '\"')
@@ -34,8 +38,7 @@ t_token	*token_between_dquote(t_token *list, t_data *data)
 			tmp[j++] = data->str_trimed[data->i++];
 	}
 	tmp[j] = '\0';
-	list = create_node(list, tmp, word);
-	data->i--;
+	list = create_node(list, tmp, plop);
 	return (list);
 }
 

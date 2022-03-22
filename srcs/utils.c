@@ -6,13 +6,13 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:14:51 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/22 15:21:53 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/22 16:11:36 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/* Pour la longueur des mots sans quotes */ 
+/* Pour la longueur des mots sans quotes */
 
 int	ft_strlen_word(char *str)
 {

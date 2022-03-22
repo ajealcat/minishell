@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:40:58 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/22 15:18:31 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/22 16:43:41 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,24 @@ t_token	*token_between_dquote(t_token *list, t_data *data)
 	char	*tmp;
 	int		count;
 
-	if (data->str_trimed[data->i + 1] == '$')
-		list = spe_quote_dollar(list, data);
 	count = count_quote(data->str_trimed + data->i, '\"');
-	printf("count : %d\n", count);
+	//printf("count : %d\n", count);
 	size = ft_strlen_between_quotes(data->str_trimed + data->i, count, '\"');
 	tmp = malloc(sizeof(char) * ((size - count) + 1));
-	printf("size : %d\n", size);
+//	printf("size : %d\n", size);
 	if (!tmp)
 		return (NULL);
 	j = 0;
-	while (data->str_trimed[data->i] && j < size)
+	while (data->str_trimed[data->i] && count != 0)
 	{
 		if (data->str_trimed[data->i] == '\"')
+		{
+			count--;
 			data->i++;
+		}
 		else
 			tmp[j++] = data->str_trimed[data->i++];
+		//printf("j : %d\n", j);
 	}
 	tmp[j] = '\0';
 	list = create_node(list, tmp, d_quote);

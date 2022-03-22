@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/21 17:43:31 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/22 11:25:30 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 t_token	*parse(t_token *list, t_data *data)
 {
 	data->str_trimed = ft_strtrim(data->buf, " \t\n\r\f\v");
-/*	if (unclose_quote(data->str_trimed) == FAILURE)
-		return (NULL);*/
+	if (unclose_quote(data->str_trimed) == FAILURE)
+		return (NULL);
 	list = check_category(list, data);
 	return (list);
 }

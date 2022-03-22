@@ -6,34 +6,38 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:40:58 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/22 16:43:41 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/22 17:44:20 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_token	*spe_quote_dollar(t_token *list, t_data *data)
+t_token	*reparse_dquote(t_token *list, char *str)
 {
-	int		size;
-	int		j;
+	int		i;
+	int j;
 	char	*tmp;
 
-	size = ft_strlen_word(data->str_trimed + data->i + 1);
-	printf("size quote dol : %d\n", size);
-	tmp = malloc(sizeof(char) * (size + 1));
-	if (!tmp)
-		return (NULL);
+	i = 0;
+	printf("str : [%s]\n", str);
 	j = 0;
-	while (data->str_trimed[data->i] && j < size)
+	tmp = malloc(sizeof(char) * (ft_strlen_encore(str) + 1));
+	while (str[i]) && str[i] != '$')
 	{
-		if (data->str_trimed[data->i] == '\"')
-			data->i++;
-		else
-			tmp[j++] = data->str_trimed[data->i++];
+		printf("str[i] : [%c]\n", str[i]);
+		printf("tmp[j] : [%c]\n", tmp[j]);
+		tmp[j] = str[i];
+		j++;
+		i++;
 	}
 	tmp[j] = '\0';
-	list = create_node(list, tmp, d_quote);
-	data->i++;
+	list = create_node(list, tmp, word);
+	if (str[i] == '$')
+	{
+		tmp = ft_substr(str, i, ft_strlen_dollar(str + i));
+		list = create_node(list, tmp, var);
+		i++;
+	}
 	return (list);
 }
 
@@ -64,7 +68,8 @@ t_token	*token_between_dquote(t_token *list, t_data *data)
 		//printf("j : %d\n", j);
 	}
 	tmp[j] = '\0';
-	list = create_node(list, tmp, d_quote);
+	list = reparse_dquote(list, tmp);
+//	list = create_node(list, tmp, d_quote);
 	return (list);
 }
 

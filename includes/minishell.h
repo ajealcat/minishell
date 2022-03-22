@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/22 13:49:20 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/22 17:06:12 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,13 @@ int		ft_strlen_dollar(char *str);
 int		ft_strlen_between_quotes(char *str, int count, char quote);
 int		check_sep_for_word(int c);
 int		go_for_word(int c);
+int		ft_strlen_encore(char *str);
 
 int		ft_isalpha(int c);
 int		ft_isalnum(int c);
 int		ft_isprint(int c);
 size_t	ft_strlen(const char *str);
+char	*ft_substr(char const *str, unsigned int start, size_t len);
 
 	/* token_others.c */
 t_token	*r_redirect(t_token *list, t_data *data);

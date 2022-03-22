@@ -6,7 +6,7 @@
 #    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/03/22 11:42:47 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/03/22 12:03:41 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,9 @@ SRCS = main.c \
 		parse.c \
 		init.c \
 		protection_quote.c \
-		check_parse.c \
 		token_list.c \
 		is_it_available.c \
-		category.c \
+		token_others.c \
 		utils.c \
 		free.c \
 		token_quote.c \

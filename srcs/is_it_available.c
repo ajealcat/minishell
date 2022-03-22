@@ -6,11 +6,38 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 18:07:03 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/21 09:36:51 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/22 12:03:18 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	checker_red(t_token *list)
+{
+	t_token	*tmp;
+
+	tmp = list;
+	while (tmp)
+	{
+		if (tmp->type == l_red || tmp->type == dl_red)
+		{
+			if (is_valid_left(tmp) == FAILURE)
+				return (FAILURE);
+		}
+		else if (tmp->type == r_red || tmp->type == dr_red)
+		{
+			if (is_valid_right(tmp) == FAILURE)
+				return (FAILURE);
+		}
+		else if (tmp->type == t_pipe)
+		{
+			if (is_valid_t_pipe(tmp) == FAILURE)
+				return (FAILURE);
+		}
+		tmp = tmp->next;
+	}
+	return (SUCCESS);
+}
 
 int	is_valid_left(t_token *list)
 {

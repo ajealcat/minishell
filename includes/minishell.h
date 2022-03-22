@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/22 12:15:15 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/22 13:49:20 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		unclose_quote(char *str);
 	/* utils.c */
 int		ft_strlen_word(char *str);
 int		ft_strlen_dollar(char *str);
-int		ft_strlen_between_quotes(char *str);
+int		ft_strlen_between_quotes(char *str, int count, char quote);
 int		check_sep_for_word(int c);
 int		go_for_word(int c);
 

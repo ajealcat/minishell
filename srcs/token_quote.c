@@ -6,37 +6,52 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:40:58 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/22 17:44:20 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/23 13:01:32 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+// printf pour test 
+
+//			printf("i : %d\n", i);
+//	printf("str : [%s]\n", str);
+//		printf("j = i : %d\n", j);
+//			printf("i quand il trouve un $ : %d\n", i);
+//			printf("tmp apres $ : [%s]\n", tmp);
+
+
+// Marche pas  vaiment mais ca segfault pas 
+
 t_token	*reparse_dquote(t_token *list, char *str)
 {
 	int		i;
-	int j;
+	int		j;
 	char	*tmp;
 
 	i = 0;
-	printf("str : [%s]\n", str);
 	j = 0;
-	tmp = malloc(sizeof(char) * (ft_strlen_encore(str) + 1));
-	while (str[i]) && str[i] != '$')
+	while (str[i])
 	{
-		printf("str[i] : [%c]\n", str[i]);
-		printf("tmp[j] : [%c]\n", tmp[j]);
-		tmp[j] = str[i];
-		j++;
-		i++;
-	}
-	tmp[j] = '\0';
-	list = create_node(list, tmp, word);
-	if (str[i] == '$')
-	{
-		tmp = ft_substr(str, i, ft_strlen_dollar(str + i));
-		list = create_node(list, tmp, var);
-		i++;
+		while (str[i] && str[i] != '$')
+		{
+			i++;
+			if (str[i] == '$')
+			{
+				tmp = ft_substr(str, j, i);
+				list = create_node(list, tmp, word);
+			}
+		}
+		if (str[i] && str[i] == '$')
+		{
+			tmp = ft_substr(str, i, ft_strlen_dollar(str + i));
+			list = create_node(list, tmp, var);
+		}
+		while (str[i] != ' ')
+		{
+			i++;
+			j = i;
+		}
 	}
 	return (list);
 }
@@ -49,10 +64,8 @@ t_token	*token_between_dquote(t_token *list, t_data *data)
 	int		count;
 
 	count = count_quote(data->str_trimed + data->i, '\"');
-	//printf("count : %d\n", count);
 	size = ft_strlen_between_quotes(data->str_trimed + data->i, count, '\"');
 	tmp = malloc(sizeof(char) * ((size - count) + 1));
-//	printf("size : %d\n", size);
 	if (!tmp)
 		return (NULL);
 	j = 0;
@@ -65,7 +78,6 @@ t_token	*token_between_dquote(t_token *list, t_data *data)
 		}
 		else
 			tmp[j++] = data->str_trimed[data->i++];
-		//printf("j : %d\n", j);
 	}
 	tmp[j] = '\0';
 	list = reparse_dquote(list, tmp);

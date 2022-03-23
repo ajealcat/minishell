@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:40:58 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/23 13:01:32 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:27:18 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_token	*reparse_dquote(t_token *list, char *str)
 			i++;
 			if (str[i] == '$')
 			{
-				tmp = ft_substr(str, j, i);
+				tmp = ft_substr(str, j, i - j);
 				list = create_node(list, tmp, word);
 			}
 		}
@@ -47,7 +47,7 @@ t_token	*reparse_dquote(t_token *list, char *str)
 			tmp = ft_substr(str, i, ft_strlen_dollar(str + i));
 			list = create_node(list, tmp, var);
 		}
-		while (str[i] != ' ')
+		while (str[i] && str[i] != ' ')
 		{
 			i++;
 			j = i;

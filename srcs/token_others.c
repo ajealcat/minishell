@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   category.c                                         :+:      :+:    :+:   */
+/*   token_others.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/21 11:44:06 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/23 15:52:33 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,3 +81,26 @@ t_token	*token_dollar(t_token *list, t_data *data)
 	data->i--;
 	return (list);
 }
+/*
+t_token	*token_dollar2(t_token *list, t_dquote *d_struct)
+{
+	int		size;
+	int		j;
+	char	*tmp;
+
+	size = ft_strlen_dollar(d_struct->tmp + d_struct->i);
+	tmp = malloc(sizeof(char) * (size + 1));
+	if (!tmp)
+		return (NULL);
+	j = 0;
+	while (check_sep_for_word(d_struct->tmp[d_struct->i]) == SUCCESS && j < size)
+	{
+		tmp[j] = d_struct->tmp[d_struct->i];
+		d_struct->i++;
+		j++;
+	}
+	tmp[j] = '\0';
+	list = create_node(list, tmp, var);
+	d_struct->i--;
+	return (list);
+}*/

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/22 12:04:03 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:08:55 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_test(t_token *list)
 	}
 }
 
-int	print_prompt(t_data *data)
+int	print_prompt(t_data *data, char **env)
 {
 	char	*cmd;
 	t_token	*list;
@@ -59,6 +59,7 @@ int	print_prompt(t_data *data)
 		list = parse(list, data);
 		print_test(list);
 		checker_red(list);
+		gojo_expand(list, env);
 		if (data != NULL)
 		{
 			free(data->buf);

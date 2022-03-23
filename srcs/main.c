@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:14 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/21 09:37:29 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:04:50 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	(void)env;
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (FAILURE);
@@ -26,7 +25,7 @@ int	main(int ac, char **av, char **env)
 		return (FAILURE);
 	if (ac || av)
 	{
-		print_prompt(data);
+		print_prompt(data, env);
 	}
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/21 09:34:06 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:06:04 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ void	init_token(t_token *list)
 	list->prev = NULL;
 }
 
-void	init_data(t_data *data)
+void	init_data(t_data *data, char **env)
 {
 	data->buf = NULL;
 	data->str_trimed = NULL;
+	data->our_env = env;
 	data->i = 0;
 }

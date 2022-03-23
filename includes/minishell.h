@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/22 17:06:12 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:07:29 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct s_dquote
+{
+	char	*tmp;
+	int		j;
+	int		i;
+}	t_dquote;
+
 typedef struct s_data
 {
 	char			*buf;
@@ -48,6 +55,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 	/* init.c */
 void	init_token(t_token *token);
 void	init_data(t_data *data);
+void	init_s_dquote(t_dquote *d_struct);
 
 	/* parse.c */
 t_token	*parse(t_token *list, t_data *data);
@@ -96,5 +104,8 @@ int		is_valid_t_pipe(t_token *list);
 	/* free.c */
 void	free_list(t_token **list);
 void	ft_putstr_fd(char *str, int fd);
+
+
+//t_token	*token_dollar2(t_token *list, t_dquote *d_struct);
 
 #endif

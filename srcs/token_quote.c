@@ -6,22 +6,11 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:40:58 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/23 14:27:18 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:42:29 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-// printf pour test 
-
-//			printf("i : %d\n", i);
-//	printf("str : [%s]\n", str);
-//		printf("j = i : %d\n", j);
-//			printf("i quand il trouve un $ : %d\n", i);
-//			printf("tmp apres $ : [%s]\n", tmp);
-
-
-// Marche pas  vaiment mais ca segfault pas 
 
 t_token	*reparse_dquote(t_token *list, char *str)
 {
@@ -48,7 +37,7 @@ t_token	*reparse_dquote(t_token *list, char *str)
 			list = create_node(list, tmp, var);
 		}
 		while (str[i] && str[i] != ' ')
-		{
+		{	
 			i++;
 			j = i;
 		}
@@ -81,7 +70,6 @@ t_token	*token_between_dquote(t_token *list, t_data *data)
 	}
 	tmp[j] = '\0';
 	list = reparse_dquote(list, tmp);
-//	list = create_node(list, tmp, d_quote);
 	return (list);
 }
 

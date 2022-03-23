@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:14:51 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/22 17:04:20 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:43:19 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,6 @@ int	ft_strlen_word(char *str)
 	return (i);
 }
 
-// Pour reparse dquote 
-
-int	ft_strlen_encore(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != '$')
-		++i;
-	return (i);
-}
 /* Pour la longueur des mots avec quotes*/
 
 int	ft_strlen_between_quotes(char *str, int count, char quote)

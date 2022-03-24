@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/24 12:35:07 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:54:00 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ t_token	*check_category(t_token *list, t_data *data)
 		if (data->str_trimed[data->i] == '>')
 			list = r_redirect(list, data);
 		if (data->str_trimed[data->i] == '"')
-		{
 			list = token_between_dquote(list, data);
-			data->i--;
-		}
 		if (data->str_trimed[data->i] == '\'')
 			list = token_between_squote(list, data);
 		if (data->str_trimed[data->i] == '|')

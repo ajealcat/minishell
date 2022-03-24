@@ -6,71 +6,27 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:40:58 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/24 14:53:06 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/24 16:17:01 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-/*
-t_token	*reparse_dquote(t_token *list, char *str)
-{
-	t_data	*d_struct;
 
-	d_struct = NULL;
-	init_data(d_struct);
-	d_struct->str_trimed = str;
-	while (d_struct->str_trimed[d_struct->i])
-	{
-		if (d_struct->str_trimed[d_struct->i] == '$')
-			list = token_dollar(list, d_struct);
-		else if (go_for_word(d_struct->str_trimed[d_struct->i]) == SUCCESS)
-			list = token_word(list, d_struct);
-		d_struct->i++;
-	}
+t_token	*reduce_fonction(char *str, char *tmp, int i, t_token *list)
+{
+	char	*env;
+
+	tmp = ft_substr(str, (i + 1), (ft_strlen_dollar(str + i) - 1));
+	env = gojo_expand(tmp);
+	list = create_node(list, env, var);
 	return (list);
 }
-*/
-
-/*
-t_token	*reparse_dquote(t_token *list, char *str)
-{
-	int		i;
-	int		j;
-	char	*tmp;
-	char	*env;
-
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		if (str[i] && str[i] == '$')
-		{
-			tmp = ft_substr(str, (i + 1), (ft_strlen_dollar(str + i) - 1));
-			printf("tmp dans reparse : |%s|\n", tmp);
-			env = gojo_expand(tmp);
-			list = create_node(list, env, var);
-		}
-		else
-		{
-			tmp = ft_substr(str, j, i - j);
-			list = create_node(list, tmp, word);
-		}
-		while (str[i] && str[i] != ' ')
-		{	
-			i++;
-			j = i;
-		}
-		printf("i dans reparse : |%d|\n", i);
-	}
-	return (list);
-}*/
 
 t_token	*reparse_dquote(t_token *list, char *str)
 {
 	int		i;
 	int		j;
 	char	*tmp;
-	char	*env;
 
 	i = 0;
 	j = 0;
@@ -79,7 +35,7 @@ t_token	*reparse_dquote(t_token *list, char *str)
 		while (str[i] && str[i] != '$')
 		{
 			i++;
-			if (str[i] == '$' || str[i] =='\0')
+			if (str[i] == '$' || str[i] == '\0')
 			{
 				tmp = ft_substr(str, j, i - j);
 				list = create_node(list, tmp, word);
@@ -87,14 +43,10 @@ t_token	*reparse_dquote(t_token *list, char *str)
 		}
 		if (str[i] && str[i] == '$')
 		{
-			tmp = ft_substr(str, (i + 1), (ft_strlen_dollar(str + i) - 1));
-			printf("tmp dans reparse : |%s|\n", tmp);
-			env = gojo_expand(tmp);
-			list = create_node(list, env, var);
+			list = reduce_fonction(str, tmp, i, list);
 			i += ft_strlen_dollar(str + i);
 			j = i;
 		}
-		printf("i : %d\n", i);
 	}
 	return (list);
 }
@@ -116,10 +68,7 @@ t_token	*token_between_dquote(t_token *list, t_data *data)
 	while (data->str_trimed[data->i] && j < (size - count))
 	{
 		if (data->str_trimed[data->i] == '\"')
-		{
-			count--;
 			data->i++;
-		}
 		else
 			tmp[j++] = data->str_trimed[data->i++];
 	}

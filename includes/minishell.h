@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/24 12:20:04 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/24 16:17:43 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_token
 typedef struct s_dquote
 {
 	char	*tmp;
+	char	*env;
 	int		j;
 	int		i;
 }	t_dquote;
@@ -55,7 +56,6 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 	/* init.c */
 void	init_token(t_token *token);
 void	init_data(t_data *data);
-void	init_s_dquote(t_dquote *d_struct);
 
 	/* parse.c */
 t_token	*parse(t_token *list, t_data *data);
@@ -88,6 +88,8 @@ t_token	*token_dollar(t_token *list, t_data *data);
 
 
 	/* token_quote.c */
+t_token	*reduce_fonction(char *str, char *tmp, int i, t_token *list);
+t_token	*reparse_dquote(t_token *list, char *str);
 int		count_quote(char *str, char quote);
 t_token	*token_between_dquote(t_token *list, t_data *data);
 t_token	*token_between_squote(t_token *list, t_data *data);

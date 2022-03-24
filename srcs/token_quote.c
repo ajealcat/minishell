@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:40:58 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/24 12:42:50 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/24 14:53:06 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,46 @@ t_token	*reparse_dquote(t_token *list, char *str)
 }
 */
 
+/*
+t_token	*reparse_dquote(t_token *list, char *str)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+	char	*env;
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] && str[i] == '$')
+		{
+			tmp = ft_substr(str, (i + 1), (ft_strlen_dollar(str + i) - 1));
+			printf("tmp dans reparse : |%s|\n", tmp);
+			env = gojo_expand(tmp);
+			list = create_node(list, env, var);
+		}
+		else
+		{
+			tmp = ft_substr(str, j, i - j);
+			list = create_node(list, tmp, word);
+		}
+		while (str[i] && str[i] != ' ')
+		{	
+			i++;
+			j = i;
+		}
+		printf("i dans reparse : |%d|\n", i);
+	}
+	return (list);
+}*/
 
 t_token	*reparse_dquote(t_token *list, char *str)
 {
 	int		i;
 	int		j;
 	char	*tmp;
+	char	*env;
 
 	i = 0;
 	j = 0;
@@ -45,7 +79,7 @@ t_token	*reparse_dquote(t_token *list, char *str)
 		while (str[i] && str[i] != '$')
 		{
 			i++;
-			if (str[i] == '$')
+			if (str[i] == '$' || str[i] =='\0')
 			{
 				tmp = ft_substr(str, j, i - j);
 				list = create_node(list, tmp, word);
@@ -53,18 +87,18 @@ t_token	*reparse_dquote(t_token *list, char *str)
 		}
 		if (str[i] && str[i] == '$')
 		{
-			tmp = ft_substr(str, i, ft_strlen_dollar(str + i));
-			list = create_node(list, tmp, var);
-		}
-		printf("i : %d\n", i);
-		while (str[i] && str[i] != ' ')
-		{	
-			i++;
+			tmp = ft_substr(str, (i + 1), (ft_strlen_dollar(str + i) - 1));
+			printf("tmp dans reparse : |%s|\n", tmp);
+			env = gojo_expand(tmp);
+			list = create_node(list, env, var);
+			i += ft_strlen_dollar(str + i);
 			j = i;
 		}
+		printf("i : %d\n", i);
 	}
 	return (list);
 }
+
 
 t_token	*token_between_dquote(t_token *list, t_data *data)
 {
@@ -79,7 +113,7 @@ t_token	*token_between_dquote(t_token *list, t_data *data)
 	if (!tmp)
 		return (NULL);
 	j = 0;
-	while (data->str_trimed[data->i] && count != 0)
+	while (data->str_trimed[data->i] && j < (size - count))
 	{
 		if (data->str_trimed[data->i] == '\"')
 		{

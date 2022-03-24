@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/24 11:40:07 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/24 12:25:27 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,18 @@ t_token	*token_dollar(t_token *list, t_data *data)
 	if (!tmp)
 		return (NULL);
 	j = 0;
-	while (check_sep_for_word(data->str_trimed[data->i]) == SUCCESS && j < size)
+	while (check_sep_for_word(data->str_trimed[data->i]) == SUCCESS
+		&& j < (size - 1))
 	{
 		tmp[j] = data->str_trimed[data->i + 1];
 		data->i++;
 		j++;
+
 	}
 	tmp[j] = '\0';
 	env = gojo_expand(tmp);
 	list = create_node(list, env, var);
-	data->i--;
+	//data->i--;
 	free(tmp);
 	return (list);
 }

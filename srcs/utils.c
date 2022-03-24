@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:14:51 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/24 11:38:38 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/24 11:57:50 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_strlen_word(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] && str[i] != ' '
+	while (str[i] && str[i] != ' ' && str[i] != '$'
 		&& check_sep_for_word(str[i]) == SUCCESS)
 		++i;
 	return (i);
@@ -67,7 +67,8 @@ int	ft_strlen_dollar(char *str)
 	int	i;
 
 	i = 1;
-	while (str[i] && (ft_isalnum(str[i]) == 1 || str[i] == '_'))
+	while (str[i] && str[i] != '$'
+		&& (ft_isalnum(str[i]) == 1 || str[i] == '_'))
 		++i;
 	return (i);
 }

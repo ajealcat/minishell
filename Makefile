@@ -6,7 +6,7 @@
 #    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/03/22 12:03:41 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/03/24 11:34:59 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS = main.c \
 		utils.c \
 		free.c \
 		token_quote.c \
+		gojo_expand.c \
 	
 SRCSD = srcs/
 OBJSD = objs/

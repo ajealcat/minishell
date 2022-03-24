@@ -6,21 +6,25 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:32:36 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/23 16:09:39 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/24 11:33:28 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int env()
-{
-    const char * path = getenv( "PATH" );
-    printf( "PATH environment variable == %s\n", path );
-    return 
-}
+/*
+1. parcours la liste pour trouver les var
+2. envoyer les var dans getenv pour voir si ils existent
+3. malloc la chaine a la taille du resultat de getenv ??
+4. remplacer la value du var par le resultat de get env
+5. Si getenv return nul on relance un prompt sans rien faire */
 
-int gojo_expand(t_token *list, char **env)
+char	*gojo_expand(char *tmp)
 {
-    
-    return (SUCCESS);
+	char	*env;
+
+	env = getenv(tmp);
+	if (env == NULL)
+		return (NULL);
+	return (env);
 }

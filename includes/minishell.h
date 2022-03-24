@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/23 16:07:29 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/24 11:40:13 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,11 @@ int		is_valid_left(t_token *list);
 int		is_valid_right(t_token *list);
 int		is_valid_t_pipe(t_token *list);
 
+	/* gojo_expand.c */
+char	*gojo_expand(char *tmp);
+
 	/* free.c */
 void	free_list(t_token **list);
 void	ft_putstr_fd(char *str, int fd);
-
-
-//t_token	*token_dollar2(t_token *list, t_dquote *d_struct);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:56:39 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/22 16:15:32 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/24 11:06:33 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@
 # define RESET "\033[0m"
 
 //prompt 
-# define PROMPT "\033[0;35mMinishell\033[0m 🌌 > "
+# define PROMPT "Minishell🌌 > "
 
 #endif

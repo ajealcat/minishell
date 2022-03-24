@@ -6,13 +6,13 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:14 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/23 16:04:50 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/24 11:19:55 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	main(int ac, char **av, char **env)
+int	main(int ac, char **av)
 {
 	t_data	*data;
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av, char **env)
 		return (FAILURE);
 	if (ac || av)
 	{
-		print_prompt(data, env);
+		print_prompt(data);
 	}
 	return (SUCCESS);
 }

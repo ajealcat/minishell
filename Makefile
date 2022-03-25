@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
+#    By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/03/25 15:22:11 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/03/25 17:38:08 by fboumell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ SRCS = main.c \
 		gojo_expand.c \
 		signaux.c \
 		exec_access.c \
+		create_child.c \
+		security.c \
 	
 SRCSD = srcs/
 OBJSD = objs/

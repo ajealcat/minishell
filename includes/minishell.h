@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/25 16:03:50 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/03/25 17:36:26 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,6 @@ int		is_valid_t_pipe(t_token *list);
 	/* gojo_expand.c */
 char	*gojo_expand(char *tmp);
 
-	/* free.c */
-void	free_list(t_token **list);
-void	ft_putstr_fd(char *str, int fd);
 
 	/* signaux.c */
 void	gestion_signaux(int sig);
@@ -111,5 +108,15 @@ void	gestion_signaux(int sig);
 	/* exec_access.c */
 char	**get_option_cmd(t_token *list);
 char	*find_path(t_token *list);
+
+	/* free.c */
+void	free_list(t_token **list);
+void	ft_putstr_fd(char *str, int fd);
+
+/*  security.c */
+int		secure_child(pid_t child_cmd);
+
+/* crete_child */
+int		child_one_cmd(t_token *list);
 
 #endif

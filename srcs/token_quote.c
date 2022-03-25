@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:40:58 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/24 16:17:01 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/25 15:17:03 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,19 @@ t_token	*token_between_squote(t_token *list, t_data *data)
 	if (!tmp)
 		return (NULL);
 	j = 0;
-	while (data->str_trimed[data->i] && j < (size - count))
+	if (ft_strlen(data->str_trimed) == (size_t)count)
+		return(NULL);
+	else
 	{
-		if (data->str_trimed[data->i] == '\'')
-			data->i++;
-		else
-			tmp[j++] = data->str_trimed[data->i++];
+		while (data->str_trimed[data->i] && j < (size - count))
+		{
+			if (data->str_trimed[data->i] == '\'')
+				data->i++;
+			else
+				tmp[j++] = data->str_trimed[data->i++];
+		}
+		tmp[j] = '\0';
+		list = create_node(list, tmp, word);
 	}
-	tmp[j] = '\0';
-	list = create_node(list, tmp, word);
 	return (list);
 }

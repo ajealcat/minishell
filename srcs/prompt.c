@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/25 12:44:52 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/03/25 12:59:24 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	print_prompt(t_data *data)
 		list = NULL;
 		init_data(data);
 		signal(SIGINT, gestion_signaux);
+		signal(SIGQUIT, gestion_signaux);
 		data->buf = readline(PROMPT);
 		if (!data->buf)
 		{

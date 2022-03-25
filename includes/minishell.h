@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/25 11:58:07 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/03/25 16:03:50 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINISHELL_H
 
 # include "utils.h"
-//# include "../libs/libft.h"
+# include "libft.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -74,12 +74,6 @@ int		check_sep_for_word(int c);
 int		go_for_word(int c);
 int		ft_strlen_encore(char *str);
 
-int		ft_isalpha(int c);
-int		ft_isalnum(int c);
-int		ft_isprint(int c);
-size_t	ft_strlen(const char *str);
-char	*ft_substr(char const *str, unsigned int start, size_t len);
-
 	/* token_others.c */
 t_token	*r_redirect(t_token *list, t_data *data);
 t_token	*l_redirect(t_token *list, t_data *data);
@@ -113,5 +107,9 @@ void	ft_putstr_fd(char *str, int fd);
 
 	/* signaux.c */
 void	gestion_signaux(int sig);
+
+	/* exec_access.c */
+char	**get_option_cmd(t_token *list);
+char	*find_path(t_token *list);
 
 #endif

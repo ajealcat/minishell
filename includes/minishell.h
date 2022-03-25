@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/24 16:17:43 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/25 11:58:07 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,8 @@ char	*gojo_expand(char *tmp);
 	/* free.c */
 void	free_list(t_token **list);
 void	ft_putstr_fd(char *str, int fd);
+
+	/* signaux.c */
+void	gestion_signaux(int sig);
 
 #endif

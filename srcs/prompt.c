@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/24 11:34:04 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/25 12:44:52 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,13 @@ int	print_prompt(t_data *data)
 	{
 		list = NULL;
 		init_data(data);
+		signal(SIGINT, gestion_signaux);
 		data->buf = readline(PROMPT);
+		if (!data->buf)
+		{
+			ft_putstr_fd("exit\n", 1);
+			exit(0);
+		}
 		if (data->buf != NULL && ft_strlen(data->buf) != 0)
 			add_history(data->buf);
 		if (ft_strncmp(data->buf, cmd, 5) == 0)

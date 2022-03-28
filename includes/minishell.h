@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/25 17:36:26 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/03/28 14:31:49 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_data
 }	t_data;
 
 	/* prompt.c */
-int		print_prompt(t_data *data);
+int		print_prompt(t_data *data, char **envp);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 	/* init.c */
@@ -107,7 +107,7 @@ void	gestion_signaux(int sig);
 
 	/* exec_access.c */
 char	**get_option_cmd(t_token *list);
-char	*find_path(t_token *list);
+char	*find_path(t_token *list, char **envp);
 
 	/* free.c */
 void	free_list(t_token **list);
@@ -117,6 +117,6 @@ void	ft_putstr_fd(char *str, int fd);
 int		secure_child(pid_t child_cmd);
 
 /* crete_child */
-int		child_one_cmd(t_token *list);
+int		child_one_cmd(t_token *list, char **envp);
 
 #endif

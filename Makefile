@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+         #
+#    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/03/25 17:38:08 by fboumell         ###   ########.fr        #
+#    Updated: 2022/03/28 12:05:11 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,5 +75,8 @@ fclean:	clean
 	$(LIBS_MAKE) $(LIBFTD) fclean
 
 re: fclean all 
+
+#leak:
+#	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=ignorereadline ./${NAME}
 
 .PHONY: all bonus clean fclean re

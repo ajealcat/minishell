@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/25 17:37:30 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/03/28 14:30:25 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
+/*
 void	print_test(t_token *list)
 {
 	t_token	*tmp;
@@ -40,13 +40,15 @@ void	print_test(t_token *list)
 		tmp = tmp->next;
 	}
 }
-
-int	print_prompt(t_data *data)
+*/
+int	print_prompt(t_data *data, char **envp)
 {
 	char	*cmd;
 	t_token	*list;
+//	int		stat;
 
 	cmd = "exit";
+	//stat = 0;
 	while (1)
 	{
 		list = NULL;
@@ -64,14 +66,16 @@ int	print_prompt(t_data *data)
 		if (ft_strncmp(data->buf, cmd, 5) == 0)
 			exit(0);
 		list = parse(list, data);
-		print_test(list);
-		checker_red(list);
-		child_one_cmd(list);
+	//	print_test(list);
 		if (data != NULL)
 		{
 			free(data->buf);
 			free(data->str_trimed);
 		}
+		checker_red(list);
+		/*stat = */child_one_cmd(list, envp);
+		// if (WIFEXITED(stat))
+		// 	return (WEXITSTATUS(stat));
 		free_list(&list);
 	}
 	return (SUCCESS);

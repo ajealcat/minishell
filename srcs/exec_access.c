@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_access.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 15:21:45 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/25 18:01:07 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/03/28 14:34:06 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,12 @@ char	**get_option_cmd(t_token *list)
 			tmp = tmp->next;
 			i++;
 		}
-		printf("i = %d\n", i);
 		option_cmd[i] = NULL;
 	}
 	return (option_cmd);
 }
 
-char	*find_path(t_token *list)
+char	*find_path(t_token *list, char **envp)
 {
 	char	*find_path;
 	char	**my_path;
@@ -86,9 +85,8 @@ char	*find_path(t_token *list)
 		my_path[i] = ft_strjoin(my_path[i], list->value);
 		if (access(my_path[i], X_OK) == 0)
 		{
-			if (execve(my_path[i], option_cmd, &find_path) == -1)
+			if (execve(my_path[i], option_cmd, envp) == -1)
 				perror("Execve");
-			free(find_path);
 			free_split(option_cmd);
 			return (my_path[i]);
 		}
@@ -96,6 +94,5 @@ char	*find_path(t_token *list)
 	}
 	free_split(my_path);
 	free_split(option_cmd);
-	free(find_path);
 	return (0);
 }

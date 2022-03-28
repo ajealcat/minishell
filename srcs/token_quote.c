@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:40:58 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/25 15:17:03 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/28 14:35:08 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ t_token	*token_between_squote(t_token *list, t_data *data)
 		return (NULL);
 	j = 0;
 	if (ft_strlen(data->str_trimed) == (size_t)count)
-		return(NULL);
+		return (NULL);
 	else
 	{
 		while (data->str_trimed[data->i] && j < (size - count))

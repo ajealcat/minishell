@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/28 14:31:49 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/28 15:16:14 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,12 @@ void	gestion_signaux(int sig);
 	/* exec_access.c */
 char	**get_option_cmd(t_token *list);
 char	*find_path(t_token *list, char **envp);
+char	*parse_path(char **envp);
 
 	/* free.c */
 void	free_list(t_token **list);
 void	ft_putstr_fd(char *str, int fd);
+void	free_split(char **cmd);
 
 /*  security.c */
 int		secure_child(pid_t child_cmd);

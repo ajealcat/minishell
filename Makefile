@@ -6,7 +6,7 @@
 #    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/03/28 12:05:11 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/03/28 15:48:08 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ OBJS = $(addprefix $(OBJSD), $(SRCS:.c=.o))
  LIBS_MAKE = make -C
  CC = clang -c -o
  COMPIL = clang
- FLAGS = -Wall -Wextra -Werror 
+ FLAGS = -Wall -Wextra -Werror -g
 
 all: $(NAME)
 
@@ -76,7 +76,7 @@ fclean:	clean
 
 re: fclean all 
 
-#leak:
-#	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=ignorereadline ./${NAME}
+leak:
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=ignorereadline ./${NAME}
 
 .PHONY: all bonus clean fclean re

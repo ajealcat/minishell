@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/28 14:30:25 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/28 14:56:54 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,9 @@ int	print_prompt(t_data *data, char **envp)
 {
 	char	*cmd;
 	t_token	*list;
-//	int		stat;
+	t_token *tmp;
 
 	cmd = "exit";
-	//stat = 0;
 	while (1)
 	{
 		list = NULL;
@@ -66,6 +65,7 @@ int	print_prompt(t_data *data, char **envp)
 		if (ft_strncmp(data->buf, cmd, 5) == 0)
 			exit(0);
 		list = parse(list, data);
+		tmp = list;
 	//	print_test(list);
 		if (data != NULL)
 		{
@@ -73,9 +73,8 @@ int	print_prompt(t_data *data, char **envp)
 			free(data->str_trimed);
 		}
 		checker_red(list);
-		/*stat = */child_one_cmd(list, envp);
-		// if (WIFEXITED(stat))
-		// 	return (WEXITSTATUS(stat));
+		if (tmp->type == word)
+			child_one_cmd(list, envp);
 		free_list(&list);
 	}
 	return (SUCCESS);

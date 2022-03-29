@@ -6,12 +6,12 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/29 12:35:56 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/29 15:06:32 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
+/*
 void	print_test(t_token *list)
 {
 	t_token	*tmp;
@@ -40,7 +40,7 @@ void	print_test(t_token *list)
 		tmp = tmp->next;
 	}
 }
-
+*/
 int	print_prompt(t_data *data, char **envp)
 {
 	char	*cmd;
@@ -57,14 +57,16 @@ int	print_prompt(t_data *data, char **envp)
 		if (!data->buf)
 		{
 			ft_putstr_fd("exit\n", 1);
-			exit(0);
+			builtin_exit(list, NULL);
 		}
 		if (data->buf != NULL && ft_strlen(data->buf) != 0)
 			add_history(data->buf);
 		if (ft_strncmp(data->buf, cmd, 5) == 0)
-			exit(0);
+		{
+			ft_putstr_fd("exit\n", 1);
+			builtin_exit(list, NULL);
+		}
 		list = parse(list, data);
-		print_test(list);
 		checker_red(list);
 		parsing_for_exec(list, envp);
 		if (data != NULL)
@@ -73,6 +75,7 @@ int	print_prompt(t_data *data, char **envp)
 			free(data->str_trimed);
 		}
 		free_list(&list);
+		clear_history();
 	}
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/29 12:48:19 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/29 15:11:06 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init_data(t_data *data)
 t_path	*init_path(char **envp, t_token *list)
 {
 	t_path	*our_path;
+	char	*tmp;
 	int		i;
 
 	i = 0;
@@ -42,8 +43,12 @@ t_path	*init_path(char **envp, t_token *list)
 	our_path->my_path = ft_split((const char *)our_path->find_path, ':');
 	while (our_path->my_path[i])
 	{
+		tmp = our_path->my_path[i];
 		our_path->my_path[i] = ft_strjoin(our_path->my_path[i], "/");
+		free(tmp);
+		tmp = our_path->my_path[i];
 		our_path->my_path[i] = ft_strjoin(our_path->my_path[i], list->value);
+		free(tmp);
 		i++;
 	}
 	return (our_path);

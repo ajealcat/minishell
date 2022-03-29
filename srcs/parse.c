@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/29 12:49:40 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/29 15:54:21 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ int	does_list_contain_pipe(t_token *list)
 	t_token	*tmp;
 
 	tmp = list;
-	printf("dans list contain pipe\n");
 	while (tmp)
 	{
 		if (tmp->type == t_pipe)
 			return (SUCCESS);
 		tmp = tmp->next;
 	}
+	free(tmp);
 	return (FAILURE);
 }
 
@@ -69,6 +69,24 @@ int	parsing_for_exec(t_token *list, char **envp)
 	(void)envp;
 	if (does_list_contain_pipe(list) == FAILURE)
 		make_exec_word(list, envp);
-//		printf("dans parsing for exec\n");
 	return (0);
+}
+
+int	parse_builtin(t_token *list, char *value)
+{
+	if (ft_strncmp(value, "exit", 5) == 0)
+		return (builtin_exit(list, ));
+	else if (ft_strncmp(value, "echo", 5) == 0)
+		return (builtin_echo());
+	else if (ft_strncmp(value, "pwd", 4) == 0)
+		return (builtin_pwd());
+	else if (ft_strncmp(value, "cd", 3) == 0)
+		return (builtin_cd());
+	else if (ft_strncmp(value, "export", 7) == 0)
+		return (builtin_export());
+	else if (ft_strncmp(value, "unset", 6) == 0)
+		return (builtin_unset());
+	else if (ft_strncmp(value, "env", 4) == 0)
+		return (builtin_env());
+	return (FAILURE);
 }

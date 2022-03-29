@@ -6,7 +6,7 @@
 #    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/03/28 15:48:08 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/03/29 14:49:10 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS = main.c \
 		exec_access.c \
 		create_child.c \
 		security.c \
+		builtin_exit.c \
 	
 SRCSD = srcs/
 OBJSD = objs/

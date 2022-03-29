@@ -6,13 +6,31 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/29 17:44:27 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/29 18:35:01 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	make_exec_pipe(t_token *list, char **envp)
+int	make_exec_pipe(t_oneforall *ofa, char **envp)
+{
+	// t_oneforall	*tmp;
+	// int			count;
+
+	// tmp = ofa->list;
+	// count = 0;
+	// while (tmp)
+	// {
+	// 	if (tmp->next == t_pipe)
+	// 		count++;
+	// 	tmp = tmp->next;
+		
+	// }
+	ofa->str_ofa = ft_split(str_trimed, '|');
+	
+}
+
+int	make_pipe(t_token *list, char **envp)
 {
 	pid_t	child_cmd;
 	int		pipefd[2];

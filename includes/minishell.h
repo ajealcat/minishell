@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/29 17:33:34 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/29 18:31:56 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ typedef struct s_path
 	char			**my_path;
 }	t_path;
 
-typedef struct s_dquote
+typedef struct s_oneforall
 {
-	char	*tmp;
-	char	*env;
-	int		j;
+	char	**str_ofa;
 	int		i;
-}	t_dquote;
+	t_token	*list;
+	t_data	*data;
+}	t_oneforall;
 
 typedef struct s_data
 {

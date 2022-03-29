@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:00:34 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/29 17:50:09 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/29 18:02:34 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ void	free_our_path(t_path *our_path)
 		free_split(our_path->option_cmd);
 		free_split(our_path->my_path);
 	}
-	printf("coucou\n");
+	printf("Je free :D \n");
 	free(our_path);
 }

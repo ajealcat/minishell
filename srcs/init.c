@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/29 15:11:06 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/29 18:32:49 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ void	init_data(t_data *data)
 	data->buf = NULL;
 	data->str_trimed = NULL;
 	data->i = 0;
+}
+
+void	init_ofa(t_oneforall *ofa, t_token *list, t_data *data)
+{
+	ofa->str_ofa = NULL;
+	ofa->list = list;
+	ofa->data = data;
+	ofa->i = 0;
 }
 
 t_path	*init_path(char **envp, t_token *list)

@@ -6,7 +6,7 @@
 #    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/03/29 14:49:10 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/03/29 17:36:04 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SRCS = main.c \
 		gojo_expand.c \
 		signaux.c \
 		exec_access.c \
-		create_child.c \
+		exc_onecmd.c \
+		exc_multipipe.c \
 		security.c \
 		builtin_exit.c \
 	

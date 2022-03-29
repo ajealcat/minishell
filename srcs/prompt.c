@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/29 15:06:32 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/29 17:59:07 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,16 @@ int	print_prompt(t_data *data, char **envp)
 		if (!data->buf)
 		{
 			ft_putstr_fd("exit\n", 1);
-			builtin_exit(list, NULL);
+			free(data);
+			exit(0);
 		}
 		if (data->buf != NULL && ft_strlen(data->buf) != 0)
 			add_history(data->buf);
 		if (ft_strncmp(data->buf, cmd, 5) == 0)
 		{
 			ft_putstr_fd("exit\n", 1);
-			builtin_exit(list, NULL);
+			free(data);
+			exit(0);
 		}
 		list = parse(list, data);
 		checker_red(list);

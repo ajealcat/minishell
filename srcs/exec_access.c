@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 15:21:45 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/29 14:47:17 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/29 17:48:15 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	**get_option_cmd(t_token *list)
 		}
 		option_cmd[i] = NULL;
 	}
-	free(tmp);
+	//free(tmp);
 	return (option_cmd);
 }
 

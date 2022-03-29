@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/29 12:39:15 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/29 17:33:34 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,9 @@ int		secure_child(pid_t child_cmd);
 int		make_exec_word(t_token *list, char **envp);
 int		check_path(t_path *our_path);
 void	cmd_execute(t_path *our_path);
+
+/* exc_mutipipe */
+
+int		make_exec_pipe(t_token *list, char **envp);
 
 #endif

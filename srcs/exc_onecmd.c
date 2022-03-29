@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_child.c                                     :+:      :+:    :+:   */
+/*   exc_onecmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/03/29 15:54:12 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/29 17:54:03 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	make_exec_word(t_token *list, char **envp)
 	t_path	*our_path;
 
 	our_path = init_path(envp, list);
-	if (parse_builtin(list, list->value) == SUCCESS)
-		return (SUCCESS);
+//	if (parse_builtin(list, list->value) == SUCCESS)
+//		return (SUCCESS);
 	if (check_path(our_path) == FAILURE)
 	{
 		free_our_path(our_path);
@@ -35,6 +35,7 @@ int	make_exec_word(t_token *list, char **envp)
 	if (child_cmd == 0)
 		cmd_execute(our_path);
 	waitpid(child_cmd, &status, 0);
+	free_our_path(our_path);
 	return (0);
 }
 
@@ -45,7 +46,8 @@ int	check_path(t_path *our_path)
 	i = 0;
 	while (our_path->my_path[i])
 	{
-		if (access(our_path->my_path[i], X_OK) == 0)
+		if (access(our_path->my_path[i], F_OK) == 0
+			&& access(our_path->my_path[i], X_OK) == 0)
 			return (SUCCESS);
 		++i;
 	}

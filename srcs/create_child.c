@@ -6,21 +6,64 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/03/28 14:32:14 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/29 12:53:57 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	child_one_cmd(t_token *list, char **envp)
+int	make_exec_word(t_token *list, char **envp)
 {
 	int		status;
 	pid_t	child_cmd;
+	t_path	*our_path;
 
+	our_path = init_path(envp, list);
+	if (check_path(our_path) == FAILURE)
+	{
+		printf("dans exec\n");
+		free_our_path(our_path);
+		return (FAILURE);
+	}
 	child_cmd = fork();
-	secure_child(child_cmd);
+	if (child_cmd < 0)
+	{
+		perror("Fork");
+		return (FAILURE);
+	}
 	if (child_cmd == 0)
-		find_path(list, envp);
+		cmd_execute(our_path);
 	waitpid(child_cmd, &status, 0);
-	return (status);
+	return (0);
 }
+
+int	check_path(t_path *our_path)
+{
+	int	i;
+
+	i = 0;
+	while (our_path->my_path[i])
+	{
+		if (access(our_path->my_path[i], X_OK) == 0)
+			return (SUCCESS);
+		++i;
+	}
+	return (FAILURE);
+}
+
+void	cmd_execute(t_path *our_path)
+{
+	int	i;
+
+	i = 0;
+	while (our_path->my_path[i])
+	{
+		if (access(our_path->my_path[i], X_OK) == 0)
+		{
+			if (execve(our_path->my_path[i], our_path->option_cmd, our_path->envp) == -1)
+				perror("Execve");
+		}
+		++i;
+	}
+}
+	

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/28 14:54:12 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/29 12:49:40 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,31 @@ t_token	*check_category(t_token *list, t_data *data)
 		data->i++;
 	}
 	return (list);
+}
+
+int	does_list_contain_pipe(t_token *list)
+{
+	t_token	*tmp;
+
+	tmp = list;
+	printf("dans list contain pipe\n");
+	while (tmp)
+	{
+		if (tmp->type == t_pipe)
+			return (SUCCESS);
+		tmp = tmp->next;
+	}
+	return (FAILURE);
+}
+
+int	parsing_for_exec(t_token *list, char **envp)
+{
+/*	if (does_list_contain_pipe(list) == SUCCESS)
+		make_exec_pipe(list, envp);
+	else*/ 
+	(void)envp;
+	if (does_list_contain_pipe(list) == FAILURE)
+		make_exec_word(list, envp);
+//		printf("dans parsing for exec\n");
+	return (0);
 }

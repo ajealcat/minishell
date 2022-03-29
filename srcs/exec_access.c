@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 15:21:45 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/28 20:47:53 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/29 12:20:25 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	**get_option_cmd(t_token *list)
 	}
 	return (option_cmd);
 }
-
+/*
 char	*find_path(t_token *list, char **envp)
 {
 	char	*find_path;
@@ -75,7 +75,7 @@ char	*find_path(t_token *list, char **envp)
 			if (execve(my_path[i], option_cmd, envp) == -1)
 				perror("Execve");
 			free_split(my_path);
-		 	free_split(option_cmd);
+			free_split(option_cmd);
 			exit(0);
 		}
 		free(my_path[i]);
@@ -87,20 +87,4 @@ char	*find_path(t_token *list, char **envp)
 	ft_putstr_fd("Command not found\n", 2);
 	exit(0);
 }
-
-char	*parse_path(char **envp)
-{
-	char	*find_path;
-
-	find_path = NULL;
-	while (*envp)
-	{
-		if (ft_strncmp(*envp, "PATH=", 5) == 0)
-		{
-			find_path = ft_substr(*envp, 5, ft_strlen(*envp));
-			break ;
-		}
-		++envp;
-	}
-	return (find_path);
-}
+*/

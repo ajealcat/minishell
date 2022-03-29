@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:00:34 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/28 15:14:17 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/29 12:52:22 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,14 @@ void	free_split(char **cmd)
 		++i;
 	}
 	free(cmd);
+}
+
+void	free_our_path(t_path *our_path)
+{
+	if (our_path != NULL)
+	{
+		free_split(our_path->option_cmd);
+		free_split(our_path->my_path);
+	}
+	free(our_path);
 }

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:40:58 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/28 14:35:08 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/29 11:07:33 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ t_token	*reparse_dquote(t_token *list, char *str)
 	}
 	return (list);
 }
-
 
 t_token	*token_between_dquote(t_token *list, t_data *data)
 {

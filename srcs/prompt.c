@@ -6,12 +6,12 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/28 14:56:54 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/29 12:35:56 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-/*
+
 void	print_test(t_token *list)
 {
 	t_token	*tmp;
@@ -40,12 +40,11 @@ void	print_test(t_token *list)
 		tmp = tmp->next;
 	}
 }
-*/
+
 int	print_prompt(t_data *data, char **envp)
 {
 	char	*cmd;
 	t_token	*list;
-	t_token *tmp;
 
 	cmd = "exit";
 	while (1)
@@ -65,16 +64,14 @@ int	print_prompt(t_data *data, char **envp)
 		if (ft_strncmp(data->buf, cmd, 5) == 0)
 			exit(0);
 		list = parse(list, data);
-		tmp = list;
-	//	print_test(list);
+		print_test(list);
+		checker_red(list);
+		parsing_for_exec(list, envp);
 		if (data != NULL)
 		{
 			free(data->buf);
 			free(data->str_trimed);
 		}
-		checker_red(list);
-		if (tmp->type == word)
-			child_one_cmd(list, envp);
 		free_list(&list);
 	}
 	return (SUCCESS);

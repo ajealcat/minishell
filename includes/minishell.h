@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/28 15:16:14 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/29 12:39:15 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct s_path
+{
+	char			**envp;
+	char			*find_path; /* no need to free this one */
+	char			**option_cmd;
+	char			**my_path;
+}	t_path;
+
 typedef struct s_dquote
 {
 	char	*tmp;
@@ -56,11 +64,13 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 	/* init.c */
 void	init_token(t_token *token);
 void	init_data(t_data *data);
+t_path	*init_path(char **envp, t_token *list);
 
 	/* parse.c */
 t_token	*parse(t_token *list, t_data *data);
-char	*ft_strtrim(const char *s1, const char *set);
 t_token	*check_category(t_token *list, t_data *data);
+int		does_list_contain_pipe(t_token *list);
+int		parsing_for_exec(t_token *list, char **envp);
 
 	/* protection_quote.c */
 int		check_quotes(char *token);
@@ -108,17 +118,18 @@ void	gestion_signaux(int sig);
 	/* exec_access.c */
 char	**get_option_cmd(t_token *list);
 char	*find_path(t_token *list, char **envp);
-char	*parse_path(char **envp);
 
 	/* free.c */
 void	free_list(t_token **list);
-void	ft_putstr_fd(char *str, int fd);
 void	free_split(char **cmd);
+void	free_our_path(t_path *our_path);
 
 /*  security.c */
 int		secure_child(pid_t child_cmd);
 
 /* crete_child */
-int		child_one_cmd(t_token *list, char **envp);
+int		make_exec_word(t_token *list, char **envp);
+int		check_path(t_path *our_path);
+void	cmd_execute(t_path *our_path);
 
 #endif

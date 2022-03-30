@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/30 14:49:51 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/30 16:05:16 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void	init_data(t_data *data)
 	data->str_trimed = NULL;
 	data->i = 0;
 }
-
+/*
 void	init_ofa(t_oneforall *ofa, t_token *list, t_data *data)
 {
 	ofa->str_ofa = NULL;
 	ofa->list = list;
 	ofa->data = data;
 	ofa->i = 0;
-}
+}*/
 
 t_path	*init_path(char **envp, t_token *list)
 {
@@ -62,4 +62,28 @@ t_path	*init_path(char **envp, t_token *list)
 		i++;
 	}
 	return (our_path);
+}
+
+t_forpipe	*init_forpipe(void)
+{
+	t_forpipe	*forpipe;
+	pid_t		child_cmd;
+
+	forpipe = malloc(sizeof(t_forpipe));
+	if (!forpipe)
+		return (NULL);
+	// if (pipe(pipefd) == -1)
+	// {
+	// 	perror("Pipe");
+	// 	return (FAILURE);
+	// }
+	child_cmd = fork();
+	// if (child_cmd < 0)
+	// {
+	// 	perror("Fork");
+	// 	return (FAILURE);
+	// }
+	pipe(forpipe->pipefd);
+	forpipe->child_cmd = child_cmd;
+	return (forpipe);
 }

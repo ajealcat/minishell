@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/30 15:39:16 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/30 16:46:05 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	init_token(t_token *token);
 void	init_data(t_data *data);
 t_path	*init_path(char **envp, t_token *list);
+t_forpipe	*init_forpipe(void);
 
 	/* parse.c */
 t_token	*parse(t_token *list, t_data *data);

@@ -6,36 +6,107 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/30 16:54:00 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/30 18:33:52 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+int	how_much_pipe(t_token *list);
+
 int	make_exec_pipe(t_token *list, char **envp)
 {
-	int			i;
+	int		status;
+	pid_t	child_cmd;
+	t_path	*our_path;
+	// int		pipefd[2];
+	int		count;
+	int		i;
+
+	i = 0;
+	our_path = init_path(envp, list);
+//	if (parse_builtin(list, list->value) == SUCCESS)
+//		return (SUCCESS);
+	if (check_path(our_path) == FAILURE)
+	{
+		free_our_path(our_path);
+		return (FAILURE);
+	}
+	// if (pipe(pipefd) == -1)
+	// {
+	// 	perror("Pipe");
+	// 	return (FAILURE);
+	// }
+	count = how_much_pipe(list);
+	while (i <= count)
+	{
+		our_path = init_path(envp, list);
+		if (check_path(our_path) == FAILURE)
+		{
+			free_our_path(our_path);
+			return (FAILURE);
+		}
+		child_cmd = fork();
+		if (child_cmd < 0)
+		{
+			perror("Fork");
+			return (FAILURE);
+		}
+		if (child_cmd == 0)
+		{
+			close(our_path->pipefd[0]);
+			if (dup2(our_path->pipefd[1], 0) == -1)
+				return (FAILURE);
+			cmd_execute(our_path);
+			while (list && list->type != t_pipe)
+				list = list->next;
+			list = list->next;
+		}
+		i++;
+	}
+	close(our_path->pipefd[1]);
+	waitpid(child_cmd, &status, 0);
+	// if (dup2(pipefd[0], 1) == -1)
+	// 	return (FAILURE);
+	free_our_path(our_path);
+	return (0);
+}
+
+/* mettre les path dans un tableau de structures pour pouvoir acceder au fd precedent
+a chaque creation de child */
+
+int	how_much_pipe(t_token *list)
+{
 	int			count;
 	t_token		*tmp;
-	// int 		pipefd[2];
-	//  t_forpipe	*forpipe;
 
-	i = 1;
 	count = 0;
 	tmp = list;
-	//  forpipe = init_forpipe();
 	while (tmp)
 	{
 		if (tmp->type == t_pipe)
 			count++;
 		tmp = tmp->next;
 	}
-	//  if (dup2(pipefd[1], 0) == -1)
-	//  {
-	// 	printf("ici\n");
-	//  	perror("Dup");
-	//  	return (FAILURE);
-	//  }
+	return (count);
+}
+
+/*
+int	make_exec_pipe(t_token *list, char **envp)
+{
+	int			i;
+	int			count;
+	t_token		*tmp;
+
+	i = 1;
+	count = 0;
+	tmp = list;
+	while (tmp)
+	{
+		if (tmp->type == t_pipe)
+			count++;
+		tmp = tmp->next;
+	}
 	while (i <= count)
 	{
 		make_pipe(list, envp);
@@ -44,22 +115,7 @@ int	make_exec_pipe(t_token *list, char **envp)
 		list = list->next;
 		i++;
 	}
-	// if (dup2(pipefd[1], 1) == -1)
-	// {
-	// 	printf("la\n");
-	// 	perror("Dup");
-	// 	return (FAILURE);
-	// }
 	make_last_child(list, envp);
-	//  while (count >= 0)
-	//  {
-	// 	close(forpipe->pipefd[1]);
-	// 	waitpid(forpipe->child_cmd, 0, 0);
-	// 	if (dup2(forpipe->pipefd[0], 0) == -1)
-	// 		return (FAILURE);
-	//  	count--;
-	//  }
-
 	return (SUCCESS);
 }
 
@@ -142,3 +198,5 @@ int	make_last_child(t_token *list, char **envp)
 	}
 	return (SUCCESS);
 }
+
+*/

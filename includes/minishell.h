@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/30 16:46:05 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/30 18:30:22 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_path
 	char			*find_path; /* no need to free this one */
 	char			**option_cmd;
 	char			**my_path;
+	int				pipefd[2];
 }	t_path;
 
 typedef struct s_data
@@ -49,11 +50,12 @@ typedef struct s_data
 	int				i;
 }	t_data;
 
+/*
 typedef struct s_forpipe
 {
 	int				pipefd[2];
 	pid_t			child_cmd;
-}	t_forpipe;
+}	t_forpipe; */
 
 
 	/* prompt.c */

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/29 17:32:42 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/30 14:45:48 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	parsing_for_exec(t_token *list, char **envp)
 		make_exec_word(list, envp);
 	return (0);
 }
+
 /*
 int	parse_builtin(t_token *list, char *value)
 {

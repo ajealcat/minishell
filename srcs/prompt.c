@@ -6,12 +6,12 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/29 17:59:07 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/30 15:06:30 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-/*
+
 void	print_test(t_token *list)
 {
 	t_token	*tmp;
@@ -40,7 +40,7 @@ void	print_test(t_token *list)
 		tmp = tmp->next;
 	}
 }
-*/
+
 int	print_prompt(t_data *data, char **envp)
 {
 	char	*cmd;
@@ -69,6 +69,7 @@ int	print_prompt(t_data *data, char **envp)
 			exit(0);
 		}
 		list = parse(list, data);
+//		print_test(list);
 		checker_red(list);
 		parsing_for_exec(list, envp);
 		if (data != NULL)
@@ -77,7 +78,7 @@ int	print_prompt(t_data *data, char **envp)
 			free(data->str_trimed);
 		}
 		free_list(&list);
-		clear_history();
+		// clear_history();
 	}
 	return (SUCCESS);
 }

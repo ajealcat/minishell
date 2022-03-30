@@ -6,28 +6,38 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/29 18:35:01 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/30 15:41:25 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	make_exec_pipe(t_oneforall *ofa, char **envp)
+int	make_exec_pipe(t_token *list, char **envp)
 {
-	// t_oneforall	*tmp;
-	// int			count;
+	int			i;
+	int			count;
+	t_token		*tmp;
+	t_forpipe	*forpipe;
 
-	// tmp = ofa->list;
-	// count = 0;
-	// while (tmp)
-	// {
-	// 	if (tmp->next == t_pipe)
-	// 		count++;
-	// 	tmp = tmp->next;
-		
-	// }
-	ofa->str_ofa = ft_split(str_trimed, '|');
-	
+	i = 1;
+	count = 0;
+	tmp = list;
+	while (tmp)
+	{
+		if (tmp->type == t_pipe)
+			count++;
+		tmp = tmp->next;
+	}
+	while (i <= count)
+	{
+		make_pipe(list, envp);
+		while (list && list->type != t_pipe)
+			list = list->next;
+		list = list->next;
+		i++;
+	}
+	make_last_child(list, envp);
+	return (SUCCESS);
 }
 
 int	make_pipe(t_token *list, char **envp)
@@ -64,8 +74,8 @@ int	make_pipe(t_token *list, char **envp)
 	}
 	else
 	{
-		waitpid(child_cmd, 0, 0);
 		close(pipefd[1]);
+		waitpid(child_cmd, 0, 0);
 		if (dup2(pipefd[0], 0) == -1)
 			return (FAILURE);
 	}
@@ -74,7 +84,7 @@ int	make_pipe(t_token *list, char **envp)
 
 int	make_last_child(t_token *list, char **envp)
 {
-	pid_t	child_cmd;
+	pid_t	last_child;
 	int		pipefd[2];
 	t_path	*our_path;
 
@@ -91,25 +101,21 @@ int	make_last_child(t_token *list, char **envp)
 		perror("Pipe");
 		return (FAILURE);
 	}
-	child_cmd = fork();
-	if (child_cmd < 0)
+	last_child = fork();
+	if (last_child < 0)
 	{
 		perror("Fork");
 		return (FAILURE);
 	}
-	if (child_cmd == 0)
+	if (last_child == 0)
 	{
 		close(pipefd[0]);
-		if (dup2(pipefd[1], 1) == -1)
-			return (FAILURE);
 		cmd_execute(our_path);
 	}
 	else
 	{
-		waitpid(child_cmd, 0, 0);
+		waitpid(last_child, 0, 0);
 		close(pipefd[1]);
-		if (dup2(pipefd[0], 0) == -1)
-			return (FAILURE);
 	}
 	return (SUCCESS);
 }

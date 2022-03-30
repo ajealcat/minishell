@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/29 18:31:56 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/30 15:39:16 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,19 @@ typedef struct s_path
 	char			**my_path;
 }	t_path;
 
-typedef struct s_oneforall
-{
-	char	**str_ofa;
-	int		i;
-	t_token	*list;
-	t_data	*data;
-}	t_oneforall;
-
 typedef struct s_data
 {
 	char			*buf;
 	char			*str_trimed;
 	int				i;
 }	t_data;
+
+typedef struct s_forpipe
+{
+	int				pipefd[2];
+	pid_t			child_cmd;
+}	t_forpipe;
+
 
 	/* prompt.c */
 int		print_prompt(t_data *data, char **envp);
@@ -135,5 +134,7 @@ void	cmd_execute(t_path *our_path);
 /* exc_mutipipe */
 
 int		make_exec_pipe(t_token *list, char **envp);
+int		make_pipe(t_token *list, char **envp);
+int		make_last_child(t_token *list, char **envp);
 
 #endif

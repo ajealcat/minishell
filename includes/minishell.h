@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/30 18:30:22 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/31 13:26:23 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_token
 {
 	char			*value;
 	int				type;
+//	int				pipefd[2];
 	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;
@@ -66,7 +67,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	init_token(t_token *token);
 void	init_data(t_data *data);
 t_path	*init_path(char **envp, t_token *list);
-t_forpipe	*init_forpipe(void);
+// t_forpipe	*init_forpipe(void);
 
 	/* parse.c */
 t_token	*parse(t_token *list, t_data *data);
@@ -137,6 +138,7 @@ void	cmd_execute(t_path *our_path);
 /* exc_mutipipe */
 
 int		make_exec_pipe(t_token *list, char **envp);
+int		how_much_pipe(t_token *list);
 int		make_pipe(t_token *list, char **envp);
 int		make_last_child(t_token *list, char **envp);
 

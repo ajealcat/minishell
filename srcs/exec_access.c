@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 15:21:45 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/29 17:48:15 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/31 16:10:12 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**get_option_cmd(t_token *list)
 
 	tmp = list;
 	i = 0;
-	if (tmp->next == NULL)
+	if (tmp == NULL || tmp->next == NULL)
 	{
 		option_cmd = malloc(sizeof(char *) * 2);
 		if (!option_cmd)

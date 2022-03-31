@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/31 13:22:45 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/31 17:15:03 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ int	make_exec_pipe(t_token *list, char **envp)
 	t_path	*our_path;
 	int		count;
 	int		i;
-
+	int 	j;
+	int		fd[2];
 	i = 0;
+	j = 0;
 	tmp_list = list;
 //	our_path = init_path(envp, tmp_list);
 //	if (parse_builtin(list, list->value) == SUCCESS)
@@ -32,10 +34,12 @@ int	make_exec_pipe(t_token *list, char **envp)
 	// 	return (FAILURE);
 	// }
 	count = how_much_pipe(list);
+	pipe(fd);
+	if (pipe(fd) == -1)
+		perror("Pipe");
 	while (i <= count)
 	{
-		our_path = init_path(envp, tmp_list);
-		printf(" ds exec pipe valeur tmp->list : [%s]\n", tmp_list->value);
+		our_path = init_path2(envp, &tmp_list);
 		if (check_path(our_path) == FAILURE)
 		{
 			free_our_path(our_path);
@@ -49,18 +53,34 @@ int	make_exec_pipe(t_token *list, char **envp)
 		}
 		if (child_cmd == 0)
 		{
-			close(tmp_list->pipefd[0]);
-			if (dup2(tmp_list->pipefd[1], 0) == -1)
-				return (FAILURE);
+			if (i == count)
+			{
+				if (dup2(fd[0], 0) == -1)
+				{
+					printf("ERROR\n");
+					return (FAILURE);
+				}
+			}
+			else if (i == 0)
+				dup2(fd[1], 1);
+			else
+			{
+				dup2(fd[0], 0);
+				dup2(fd[1], 1);
+			}
+			close(fd[1]);
+			close(fd[0]);
 			cmd_execute(our_path);
-			while (tmp_list && tmp_list->type != t_pipe)
-				tmp_list = tmp_list->next;
-			tmp_list = tmp_list->next;
 		}
 		i++;
 	}
-	close(tmp_list->pipefd[1]);
-	waitpid(child_cmd, 0, 0);
+	close(fd[0]);
+	close(fd[1]);
+	while (j <= count)
+	{
+ 		waitpid(child_cmd, 0, 0);
+		j++;
+	}
 	free_our_path(our_path);
 	return (0);
 }

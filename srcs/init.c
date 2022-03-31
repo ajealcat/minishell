@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/31 13:26:15 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/03/31 17:12:50 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,37 @@ void	init_ofa(t_oneforall *ofa, t_token *list, t_data *data)
 	ofa->i = 0;
 }*/
 
-t_path	*init_path(char **envp, t_token *tmp_list)
+t_path    *init_path(char **envp, t_token *list)
+{
+	t_path	*our_path;
+	char	*tmp;
+	int		i;
+
+//    printf("Im in init path\n");
+	i = 0;
+	our_path = malloc(sizeof(t_path));
+	if (!our_path)
+		return (NULL);
+	our_path->envp = envp;
+	our_path->find_path = getenv("PATH");
+	our_path->option_cmd = get_option_cmd(list);
+	our_path->my_path = ft_split((const char *)our_path->find_path, ':');
+	pipe(our_path->pipefd);
+//    printf("Value before boucle %s\n", list->value);
+	while (our_path->my_path[i])
+	{
+		tmp = our_path->my_path[i];
+		our_path->my_path[i] = ft_strjoin(our_path->my_path[i], "/");
+		free(tmp);
+		tmp = our_path->my_path[i];
+		our_path->my_path[i] = ft_strjoin(our_path->my_path[i], list->value);
+		free(tmp);
+		i++;
+	}
+	return (our_path);
+}
+
+t_path	*init_path2(char **envp, t_token **tmp_list)
 {
 	t_path	*our_path;
 	char	*tmp;
@@ -47,36 +77,26 @@ t_path	*init_path(char **envp, t_token *tmp_list)
 		return (NULL);
 	our_path->envp = envp;
 	our_path->find_path = getenv("PATH");
-	our_path->option_cmd = get_option_cmd(tmp_list);
+	our_path->option_cmd = get_option_cmd(*tmp_list);
 	our_path->my_path = ft_split((const char *)our_path->find_path, ':');
-	while (tmp_list && tmp_list->type != t_pipe && our_path->my_path[i])
+	while (*tmp_list && (*tmp_list)->type != t_pipe && our_path->my_path[i])
 	{
-		printf(" valeur tmp->list : [%s]\n", tmp_list->value);
-		printf("Dans init path dans la boucle\n");
 		tmp = our_path->my_path[i];
 		our_path->my_path[i] = ft_strjoin(our_path->my_path[i], "/");
 		free(tmp);
 		tmp = our_path->my_path[i];
-		our_path->my_path[i] = ft_strjoin(our_path->my_path[i], tmp_list->value);
+		our_path->my_path[i] = ft_strjoin(our_path->my_path[i], \
+			(*tmp_list)->value);
 		free(tmp);
-		tmp_list = tmp_list->next;
 		i++;
-		// printf(" valeur tmp->list : [%d]\n", tmp_list->type);
-		// printf("Dans init path fin de la boucle\n");
 	}
-	// if (tmp_list && tmp_list->type == t_pipe)
-	// {
-	// 	printf("Dans init path dans list = pipe\n");
-	pipe(our_path->pipefd);
-	if (pipe(our_path->pipefd) == -1)
-	{
-		perror("Pipe");
-		return (NULL);
-	}
-	printf("Dans init path dans list fin = pipe\n");
-	printf("Dans init path avant de return\n");
+	while (*tmp_list && (*tmp_list)->type != t_pipe)
+		*tmp_list = (*tmp_list)->next;
+	if (*tmp_list && (*tmp_list)->type == t_pipe)
+		*tmp_list = (*tmp_list)->next;
 	return (our_path);
 }
+
 /*
 t_forpipe	*init_forpipe(void)
 {

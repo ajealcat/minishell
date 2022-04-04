@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/04 15:02:08 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/04 16:29:22 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_token
 {
 	char			*value;
 	int				type;
-//	int				(*fd)[2];
 	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;
@@ -41,7 +40,6 @@ typedef struct s_path
 	char			*find_path; /* no need to free this one */
 	char			**option_cmd;
 	char			**my_path;
-//	int				pipefd[2];
 }	t_path;
 
 typedef struct s_data
@@ -130,6 +128,7 @@ void	free_our_path(t_path *our_path);
 
 /*  security.c */
 int		secure_child(pid_t child_cmd);
+int		path_not_found(t_path *our_path);
 
 /* crete_child */
 int		make_exec_word(t_token *list, char **envp);
@@ -140,7 +139,9 @@ void	cmd_execute(t_path *our_path);
 
 int		make_exec_pipe(t_token *list, char **envp);
 int		how_much_pipe(t_token *list);
-int		make_pipe(t_token *list, char **envp);
-int		make_last_child(t_token *list, char **envp);
+void	close_fd(int i, int count, int **fd);
+
+// int		make_pipe(t_token *list, char **envp);
+// int		make_last_child(t_token *list, char **envp);
 
 #endif

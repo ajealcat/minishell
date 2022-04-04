@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/04 15:04:20 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/04 16:20:28 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,12 @@ void	init_ofa(t_oneforall *ofa, t_token *list, t_data *data)
 	ofa->i = 0;
 }*/
 
-t_path    *init_path(char **envp, t_token *list)
+t_path	*init_path(char **envp, t_token *list)
 {
 	t_path	*our_path;
 	char	*tmp;
 	int		i;
 
-//    printf("Im in init path\n");
 	i = 0;
 	our_path = malloc(sizeof(t_path));
 	if (!our_path)
@@ -50,8 +49,6 @@ t_path    *init_path(char **envp, t_token *list)
 	our_path->find_path = getenv("PATH");
 	our_path->option_cmd = get_option_cmd(list);
 	our_path->my_path = ft_split((const char *)our_path->find_path, ':');
-//	pipe(our_path->pipefd);
-//    printf("Value before boucle %s\n", list->value);
 	while (our_path->my_path[i])
 	{
 		tmp = our_path->my_path[i];

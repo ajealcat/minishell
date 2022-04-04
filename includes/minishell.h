@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/04 16:29:22 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/04 17:03:22 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,14 @@ typedef struct s_data
 	int				i;
 }	t_data;
 
-/*
-typedef struct s_forpipe
-{
-	int				pipefd[2];
-	pid_t			child_cmd;
-}	t_forpipe; */
 
+typedef struct s_pipex
+{
+	int				**fd;
+	int				count;
+	int				i;
+	int				j;
+}	t_pipex;
 
 	/* prompt.c */
 int		print_prompt(t_data *data, char **envp);
@@ -64,9 +65,10 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 	/* init.c */
 void	init_token(t_token *token);
 void	init_data(t_data *data);
+t_pipex	*init_pipex(t_token *list);
 t_path	*init_path(char **envp, t_token *list);
 t_path	*init_path2(char **envp, t_token **tmp_list);
-// t_forpipe	*init_forpipe(void);
+t_token	*increase_tmp_list(t_token **tmp_list);
 
 	/* parse.c */
 t_token	*parse(t_token *list, t_data *data);
@@ -140,8 +142,7 @@ void	cmd_execute(t_path *our_path);
 int		make_exec_pipe(t_token *list, char **envp);
 int		how_much_pipe(t_token *list);
 void	close_fd(int i, int count, int **fd);
+void	make_child(pid_t child_cmd, t_pipex *multi, t_path *our_path);
 
-// int		make_pipe(t_token *list, char **envp);
-// int		make_last_child(t_token *list, char **envp);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/04 16:20:28 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/04 17:03:39 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,6 @@ void	init_data(t_data *data)
 	data->str_trimed = NULL;
 	data->i = 0;
 }
-/*
-void	init_ofa(t_oneforall *ofa, t_token *list, t_data *data)
-{
-	ofa->str_ofa = NULL;
-	ofa->list = list;
-	ofa->data = data;
-	ofa->i = 0;
-}*/
 
 t_path	*init_path(char **envp, t_token *list)
 {
@@ -87,35 +79,43 @@ t_path	*init_path2(char **envp, t_token **tmp_list)
 		free(tmp);
 		i++;
 	}
+	increase_tmp_list(tmp_list);
+	return (our_path);
+}
+
+t_token	*increase_tmp_list(t_token **tmp_list)
+{
 	while (*tmp_list && (*tmp_list)->type != t_pipe)
 		*tmp_list = (*tmp_list)->next;
 	if (*tmp_list && (*tmp_list)->type == t_pipe)
 		*tmp_list = (*tmp_list)->next;
-	return (our_path);
+	return (*tmp_list);
 }
 
-/*
-t_forpipe	*init_forpipe(void)
+t_pipex	*init_pipex(t_token *list)
 {
-	t_forpipe	*forpipe;
-	pid_t		child_cmd;
+	t_pipex	*multi;
 
-	forpipe = malloc(sizeof(t_forpipe));
-	if (!forpipe)
+	multi = malloc(sizeof(t_pipex));
+	if (!multi)
 		return (NULL);
-	// if (pipe(pipefd) == -1)
-	// {
-	// 	perror("Pipe");
-	// 	return (FAILURE);
-	// }
-	child_cmd = fork();
-	// if (child_cmd < 0)
-	// {
-	// 	perror("Fork");
-	// 	return (FAILURE);
-	// }
-	pipe(forpipe->pipefd);
-	forpipe->child_cmd = child_cmd;
-	return (forpipe);
+	multi->i = 0;
+	multi->j = 0;
+	multi->count = how_much_pipe(list);
+	multi->fd = malloc(sizeof(int *) * (multi->count + 2));
+	if (multi->fd == 0)
+		return (NULL);
+	multi->i = -1;
+	while (++multi->i < (multi->count + 2))
+		multi->fd[multi->i] = malloc(sizeof(int) * 2);
+	multi->i = 0;
+	while (multi->i < (multi->count + 2))
+	{
+		pipe(multi->fd[multi->i]);
+		if (pipe(multi->fd[multi->i]) == -1)
+			perror("Pipe");
+		++multi->i;
+	}
+	multi->i = 0;
+	return (multi);
 }
-*/

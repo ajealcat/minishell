@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/04 16:30:06 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/04 16:57:58 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,73 +15,28 @@
 
 int	make_exec_pipe(t_token *list, char **envp)
 {
-	t_token *tmp_list;
-	pid_t	child_cmd;
-	t_path	*our_path;
-	int		**fd;
-	int		count;
-	int		i;
-	int 	j;
-	int		k;
+	t_token		*tmp_list;
+	pid_t		child_cmd;
+	t_path		*our_path;
+	t_pipex		*multi;
 
 	tmp_list = list;
-	count = how_much_pipe(list);
-	fd = malloc(sizeof(int *) * (count + 2));
-	if (fd == 0)
-		return (FAILURE);
-	i = -1;
-	while (++i < (count + 2))
-		fd[i] = malloc(sizeof(int) * 2);
-	i = 0;
-	while (i < (count + 2))
-	{
-		pipe(fd[i]);
-		if (pipe(fd[i]) == -1)
-			perror("Pipe");
-		++i;
-	}
-	i = 0;
-	k = 0;
-	j = 0;
-	while (i <= count)
+	multi = init_pipex(list);
+	while (multi->i <= multi->count)
 	{
 		our_path = init_path2(envp, &tmp_list);
 		if (check_path(our_path) == FAILURE)
 			path_not_found(our_path);
 		child_cmd = fork();
 		secure_child(child_cmd);
-		if (child_cmd == 0)
-		{
-			if (i == 0)
-			{
-				close_fd(i, count, fd);
-				dup2(fd[i + 1][1], 1);
-			}
-			else if (i == count)
-			{
-				close_fd(i, count, fd);
-				if (dup2(fd[i][0], 0) == -1)
-				{
-					printf("ERROR\n");
-					return (FAILURE);
-				}
-			}
-			else
-			{
-				close_fd(i, count, fd);
-				dup2(fd[i][0], 0);
-				dup2(fd[i + 1][1], 1);
-			}
-			cmd_execute(our_path);
-		}
-		i++;
+		make_child(child_cmd, multi, our_path);
+		multi->i++;
 	}
-	close_fd(i, count, fd);
-	j = 0;
-	while (j <= count)
+	close_fd(multi->i, multi->count, multi->fd);
+	while (multi->j <= multi->count)
 	{
 		waitpid(child_cmd, 0, 0);
-		j++;
+		multi->j++;
 	}
 	free_our_path(our_path);
 	return (0);
@@ -116,5 +71,29 @@ void	close_fd(int i, int count, int **fd)
 		if (i + 1 != j)
 			close(fd[j][1]);
 		j++;
+	}
+}
+
+void	make_child(pid_t child_cmd, t_pipex *multi, t_path *our_path)
+{
+	if (child_cmd == 0)
+	{
+		if (multi->i == 0)
+		{
+			close_fd(multi->i, multi->count, multi->fd);
+			dup2(multi->fd[multi->i + 1][1], 1);
+		}
+		else if (multi->i == multi->count)
+		{
+			close_fd(multi->i, multi->count, multi->fd);
+			dup2(multi->fd[multi->i][0], 0);
+		}
+		else
+		{
+			close_fd(multi->i, multi->count, multi->fd);
+			dup2(multi->fd[multi->i][0], 0);
+			dup2(multi->fd[multi->i + 1][1], 1);
+		}
+		cmd_execute(our_path);
 	}
 }

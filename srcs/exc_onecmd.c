@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/04 14:34:54 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/04 17:34:37 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	make_exec_word(t_token *list, char **envp)
 	if (check_path(our_path) == FAILURE)
 	{
 		free_our_path(our_path);
-		ft_putstr_fd("Command not found\n", 2);
+		perror("Path");
 		return (FAILURE);
 	}
 	child_cmd = fork();

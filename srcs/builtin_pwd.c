@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   security.c                                         :+:      :+:    :+:   */
+/*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 17:26:00 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/04 18:08:26 by ajearuth         ###   ########.fr       */
+/*   Created: 2022/04/04 18:02:33 by ajearuth          #+#    #+#             */
+/*   Updated: 2022/04/04 18:05:44 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	secure_child(pid_t child_cmd)
+void	builtin_pwd(void)
 {
-	if (child_cmd < 0)
-	{
-		perror("Fork");
-		return (1);
-	}
-	return (0);
-}
+	char	*pwd;
 
-int	path_not_found(t_path *our_path)
-{
-	free_our_path(our_path);
-	ft_putstr_fd("Error : Command not found\n", 2);
-//	exit(127); quand on aura le builtin
-	return (FAILURE);
+	pwd = getcwd(NULL, 0);
+	printf("%s\n", pwd);
+	free(pwd);
 }

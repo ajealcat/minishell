@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/04 17:10:43 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/04 18:04:09 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,9 @@ int		how_much_pipe(t_token *list);
 void	close_fd(int i, int count, int **fd);
 void	make_child(pid_t child_cmd, t_pipex *multi, t_path *our_path);
 t_token	*increase_tmp_list(t_token **tmp_list);
+
+/* builtin_pwd.c */
+void	builtin_pwd(void);
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/04 12:45:10 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/04 12:59:38 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,14 @@ int	make_exec_pipe(t_token *list, char **envp)
 			{
 				dup2(fd[k][0], 0);
 				dup2(fd[k][1], 1);
-				k++;
 			}
 			close(fd[k][1]);
 			close(fd[k][0]);
 			cmd_execute(our_path);
 		}
+		printf("k = %d\n", k);
+		if (i != count && i != 0)
+			k++;
 		i++;
 	}
 	close(fd[k][0]);

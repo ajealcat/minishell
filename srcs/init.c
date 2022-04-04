@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/31 17:12:50 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/04 12:23:45 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_path    *init_path(char **envp, t_token *list)
 	our_path->find_path = getenv("PATH");
 	our_path->option_cmd = get_option_cmd(list);
 	our_path->my_path = ft_split((const char *)our_path->find_path, ':');
-	pipe(our_path->pipefd);
+//	pipe(our_path->pipefd);
 //    printf("Value before boucle %s\n", list->value);
 	while (our_path->my_path[i])
 	{

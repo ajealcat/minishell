@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/31 15:25:52 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/04 12:20:45 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_token
 {
 	char			*value;
 	int				type;
-//	int				pipefd[2];
+//	int				*pipefd;
 	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;
@@ -41,7 +41,7 @@ typedef struct s_path
 	char			*find_path; /* no need to free this one */
 	char			**option_cmd;
 	char			**my_path;
-	int				pipefd[2];
+//	int				pipefd[2];
 }	t_path;
 
 typedef struct s_data

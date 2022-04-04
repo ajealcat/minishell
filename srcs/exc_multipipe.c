@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/04 16:57:58 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/04 17:10:57 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,13 @@ void	make_child(pid_t child_cmd, t_pipex *multi, t_path *our_path)
 		}
 		cmd_execute(our_path);
 	}
+}
+
+t_token	*increase_tmp_list(t_token **tmp_list)
+{
+	while (*tmp_list && (*tmp_list)->type != t_pipe)
+		*tmp_list = (*tmp_list)->next;
+	if (*tmp_list && (*tmp_list)->type == t_pipe)
+		*tmp_list = (*tmp_list)->next;
+	return (*tmp_list);
 }

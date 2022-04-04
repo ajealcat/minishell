@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/04 17:03:39 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/04 17:10:24 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,6 @@ t_path	*init_path2(char **envp, t_token **tmp_list)
 	}
 	increase_tmp_list(tmp_list);
 	return (our_path);
-}
-
-t_token	*increase_tmp_list(t_token **tmp_list)
-{
-	while (*tmp_list && (*tmp_list)->type != t_pipe)
-		*tmp_list = (*tmp_list)->next;
-	if (*tmp_list && (*tmp_list)->type == t_pipe)
-		*tmp_list = (*tmp_list)->next;
-	return (*tmp_list);
 }
 
 t_pipex	*init_pipex(t_token *list)

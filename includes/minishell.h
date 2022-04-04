@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/04 12:20:45 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/04 15:02:08 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_token
 {
 	char			*value;
 	int				type;
-//	int				*pipefd;
+//	int				(*fd)[2];
 	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;

@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/05 15:41:53 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/05 16:02:43 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	print_prompt(t_data *data, char **envp)
 	char	*cmd;
 	t_token	*list;
 
+	(void)envp;
 	cmd = "exit";
 	while (1)
 	{

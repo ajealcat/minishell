@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exc_multipipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/04 17:34:10 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/05 16:54:25 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
 
 int	make_exec_pipe(t_token *list, char **envp)
 {
@@ -30,6 +29,7 @@ int	make_exec_pipe(t_token *list, char **envp)
 		child_cmd = fork();
 		secure_child(child_cmd);
 		make_child(child_cmd, multi, our_path);
+		free_our_path(our_path);
 		multi->i++;
 	}
 	close_fd(multi->i, multi->count, multi->fd);
@@ -38,7 +38,7 @@ int	make_exec_pipe(t_token *list, char **envp)
 		waitpid(child_cmd, 0, 0);
 		multi->j++;
 	}
-	free_our_path(our_path);
+	free_multi(multi);
 	return (0);
 }
 

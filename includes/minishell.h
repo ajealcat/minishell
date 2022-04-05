@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/05 15:21:37 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/05 16:25:13 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,12 +121,14 @@ void	gestion_signaux(int sig);
 
 	/* exec_access.c */
 char	**get_option_cmd(t_token *list);
-char	*find_path(t_token *list, char **envp);
+char	**get_option_cmd2(t_token *list);
+// char	*find_path(t_token *list, char **envp);
 
 	/* free.c */
 void	free_list(t_token **list);
 void	free_split(char **cmd);
 void	free_our_path(t_path *our_path);
+void	free_multi(t_pipex *multi);
 
 	/*  security.c */
 int		secure_child(pid_t child_cmd);

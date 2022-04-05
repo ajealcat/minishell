@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/04 17:10:24 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/05 16:54:32 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_path	*init_path2(char **envp, t_token **tmp_list)
 		return (NULL);
 	our_path->envp = envp;
 	our_path->find_path = getenv("PATH");
-	our_path->option_cmd = get_option_cmd(*tmp_list);
+	our_path->option_cmd = get_option_cmd2(*tmp_list);
 	our_path->my_path = ft_split((const char *)our_path->find_path, ':');
 	while (*tmp_list && (*tmp_list)->type != t_pipe && our_path->my_path[i])
 	{

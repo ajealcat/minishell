@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:00:34 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/04 18:07:19 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/05 16:54:37 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,18 @@ void	free_our_path(t_path *our_path)
 		free_split(our_path->my_path);
 	}
 	free(our_path);
+}
+
+void	free_multi(t_pipex *multi)
+{
+	int	i;
+
+	i = 0;
+	while (i < multi->count + 2)
+	{
+		free(multi->fd[i]);
+		i++;
+	}
+	free(multi->fd);
+	free(multi);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
+#    By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/03/29 17:36:04 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/04/05 13:41:22 by fboumell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ SRCS = main.c \
 		exc_multipipe.c \
 		security.c \
 		builtin_exit.c \
+		builtin_pwd.c \
+		builtin_echo.c \
 	
 SRCSD = srcs/
 OBJSD = objs/

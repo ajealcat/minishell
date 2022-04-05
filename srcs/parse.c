@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/30 14:45:48 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/05 15:30:45 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 t_token	*parse(t_token *list, t_data *data)
 {
 	data->str_trimed = ft_strtrim(data->buf, " \t\n\r\f\v");
-	if (unclose_quote(data->str_trimed) == FAILURE)
-		return (NULL);
+	// if (unclose_quote(data->str_trimed) == FAILURE)
+	// 	return (NULL);
 	list = check_category(list, data);
 	return (list);
 }
@@ -70,23 +70,22 @@ int	parsing_for_exec(t_token *list, char **envp)
 	return (0);
 }
 
-/*
-int	parse_builtin(t_token *list, char *value)
+
+int	parse_builtin(/*t_token *list, */char *value)
 {
-	if (ft_strncmp(value, "exit", 5) == 0)
+/*	if (ft_strncmp(value, "exit", 5) == 0)
 		return (builtin_exit(list, ));
 	else if (ft_strncmp(value, "echo", 5) == 0)
 		return (builtin_echo());
-	else if (ft_strncmp(value, "pwd", 4) == 0)
+	else */if (ft_strncmp(value, "pwd", 4) == 0)
 		return (builtin_pwd());
 	else if (ft_strncmp(value, "cd", 3) == 0)
 		return (builtin_cd());
-	else if (ft_strncmp(value, "export", 7) == 0)
+/*	else if (ft_strncmp(value, "export", 7) == 0)
 		return (builtin_export());
 	else if (ft_strncmp(value, "unset", 6) == 0)
 		return (builtin_unset());
 	else if (ft_strncmp(value, "env", 4) == 0)
-		return (builtin_env());
+		return (builtin_env());*/
 	return (FAILURE);
 }
-*/

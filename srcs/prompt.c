@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/30 15:06:30 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/05 15:41:53 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,9 @@ int	print_prompt(t_data *data, char **envp)
 		}
 		list = parse(list, data);
 //		print_test(list);
-		checker_red(list);
-		parsing_for_exec(list, envp);
+		if (checker_red(list) != FAILURE
+			&& unclose_quote(data->str_trimed) != FAILURE)
+			parsing_for_exec(list, envp);
 		if (data != NULL)
 		{
 			free(data->buf);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/04 18:04:09 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/05 15:21:37 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ t_token	*parse(t_token *list, t_data *data);
 t_token	*check_category(t_token *list, t_data *data);
 int		does_list_contain_pipe(t_token *list);
 int		parsing_for_exec(t_token *list, char **envp);
+int		parse_builtin(/*t_token *list, */char *value);
 
 	/* protection_quote.c */
 int		check_quotes(char *token);
@@ -127,16 +128,16 @@ void	free_list(t_token **list);
 void	free_split(char **cmd);
 void	free_our_path(t_path *our_path);
 
-/*  security.c */
+	/*  security.c */
 int		secure_child(pid_t child_cmd);
 int		path_not_found(t_path *our_path);
 
-/* crete_child */
+	/* crete_child.c */
 int		make_exec_word(t_token *list, char **envp);
 int		check_path(t_path *our_path);
 void	cmd_execute(t_path *our_path);
 
-/* exc_mutipipe */
+	/* exc_mutipipe.c */
 
 int		make_exec_pipe(t_token *list, char **envp);
 int		how_much_pipe(t_token *list);
@@ -144,8 +145,11 @@ void	close_fd(int i, int count, int **fd);
 void	make_child(pid_t child_cmd, t_pipex *multi, t_path *our_path);
 t_token	*increase_tmp_list(t_token **tmp_list);
 
-/* builtin_pwd.c */
-void	builtin_pwd(void);
+	/* builtin_pwd.c */
+int		builtin_pwd(void);
+int		builtin_cd(void);
 
+	/* builtin_echo.c */
+int		printf_echo(char **av);
 
 #endif

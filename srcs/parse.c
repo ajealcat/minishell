@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/05 15:46:46 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/08 12:27:24 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	parse_builtin(/*t_token *list, */char *value)
 /*	if (ft_strncmp(value, "exit", 5) == 0)
 		return (builtin_exit(list, ));
 	else if (ft_strncmp(value, "echo", 5) == 0)
-		return (builtin_echo());
+		return (builtin_echo(list));
 	else */if (ft_strncmp(value, "pwd", 4) == 0)
 		return (builtin_pwd());
 	else if (ft_strncmp(value, "cd", 3) == 0)

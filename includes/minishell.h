@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/08 13:03:49 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/08 15:38:33 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_token	*parse(t_token *list, t_data *data);
 t_token	*check_category(t_token *list, t_data *data);
 int		does_list_contain_pipe(t_token *list);
 int		parsing_for_exec(t_token *list, char **envp);
-int		parse_builtin(/*t_token *list, */char *value);
+int		parse_builtin(t_token *list, char *value);
 
 	/* protection_quote.c */
 int		check_quotes(char *token);
@@ -152,8 +152,9 @@ int		builtin_pwd(void);
 int		builtin_cd(void);
 
 	/* builtin_echo.c */
-int		printf_echo(char **av);
-int		check_flagn(char **av);
+int		printf_echo(char **av, int n);
+int		builtin_echo(t_token *list);
+int		check_flagn(char *av);
 char	**create_arg(t_token *list);
 
 #endif

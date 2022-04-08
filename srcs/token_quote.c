@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:40:58 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/29 11:07:33 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/08 15:51:37 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_token	*reduce_fonction(char *str, char *tmp, int i, t_token *list)
 
 	tmp = ft_substr(str, (i + 1), (ft_strlen_dollar(str + i) - 1));
 	env = gojo_expand(tmp);
-	list = create_node(list, env, var);
+	list = create_node(list, env, var_word); // word a la place de var pour test
 	return (list);
 }
 

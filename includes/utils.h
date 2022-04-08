@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:56:39 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/24 11:06:33 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/08 15:51:00 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define word 7
 # define t_pipe 8
 # define var 9
+# define var_word 10
 
 
 //colors 

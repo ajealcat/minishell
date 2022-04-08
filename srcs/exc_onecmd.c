@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exc_onecmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/05 12:43:33 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/08 16:05:07 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	make_exec_word(t_token *list, char **envp)
 	pid_t	child_cmd;
 	t_path	*our_path;
 
-	our_path = init_path(envp, list);
-	if (parse_builtin(/*list, */list->value) == SUCCESS)
+	if (parse_builtin(list, list->value) == SUCCESS)
 		return (SUCCESS);
+	our_path = init_path(envp, list);
 	if (check_path(our_path) == FAILURE)
 	{
 		free_our_path(our_path);

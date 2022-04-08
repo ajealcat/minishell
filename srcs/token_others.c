@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/28 15:01:26 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/08 15:51:29 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_token	*token_dollar(t_token *list, t_data *data)
 	}
 	tmp[j] = '\0';
 	env = gojo_expand(tmp);
-	list = create_node(list, env, var);
+	list = create_node(list, env, var_word);
 	free(tmp);
 	return (list);
 }

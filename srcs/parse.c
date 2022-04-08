@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/08 12:27:24 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/08 14:47:26 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,21 +63,21 @@ int	does_list_contain_pipe(t_token *list)
 
 int	parsing_for_exec(t_token *list, char **envp)
 {
-	if (does_list_contain_pipe(list) == SUCCESS)
+	if (list && does_list_contain_pipe(list) == SUCCESS)
 		make_exec_pipe(list, envp);
-	else if (does_list_contain_pipe(list) == FAILURE)
+	else if (list && does_list_contain_pipe(list) == FAILURE)
 		make_exec_word(list, envp);
 	return (0);
 }
 
 
-int	parse_builtin(/*t_token *list, */char *value)
+int	parse_builtin(t_token *list, char *value)
 {
 /*	if (ft_strncmp(value, "exit", 5) == 0)
 		return (builtin_exit(list, ));
-	else if (ft_strncmp(value, "echo", 5) == 0)
+	else */if (ft_strncmp(value, "echo", 5) == 0)
 		return (builtin_echo(list));
-	else */if (ft_strncmp(value, "pwd", 4) == 0)
+	else if (ft_strncmp(value, "pwd", 4) == 0)
 		return (builtin_pwd());
 	else if (ft_strncmp(value, "cd", 3) == 0)
 		return (builtin_cd());

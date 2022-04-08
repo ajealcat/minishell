@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/08 15:38:33 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/08 17:33:46 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,9 @@ t_token	*increase_tmp_list(t_token **tmp_list);
 
 	/* builtin_pwd.c */
 int		builtin_pwd(void);
-int		builtin_cd(void);
+int		builtin_cd(t_token *list);
+char	*move_pwd(char **av, char *pwd);
+int		count_av(char **av);
 
 	/* builtin_echo.c */
 int		printf_echo(char **av, int n);

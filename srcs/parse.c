@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/08 14:47:26 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/08 17:21:27 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	parse_builtin(t_token *list, char *value)
 	else if (ft_strncmp(value, "pwd", 4) == 0)
 		return (builtin_pwd());
 	else if (ft_strncmp(value, "cd", 3) == 0)
-		return (builtin_cd());
+		return (builtin_cd(list));
 /*	else if (ft_strncmp(value, "export", 7) == 0)
 		return (builtin_export());
 	else if (ft_strncmp(value, "unset", 6) == 0)

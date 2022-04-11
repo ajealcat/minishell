@@ -6,7 +6,7 @@
 #    By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/04/11 14:34:12 by fboumell         ###   ########.fr        #
+#    Updated: 2022/04/11 15:46:09 by fboumell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRCS = main.c \
 		exc_multipipe.c \
 		security.c \
 		builtin_exit.c \
-		builtin_pwd.c \
+		builtin_cdpwd.c \
 		builtin_echo.c \
 		utils_builtins.c \
 		other_cmd.c \

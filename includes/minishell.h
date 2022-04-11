@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/11 14:42:21 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/11 15:46:31 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ int		is_valid_t_pipe(t_token *list);
 	/* gojo_expand.c */
 char	*gojo_expand(char *tmp);
 
-
 	/* signaux.c */
 void	gestion_signaux(int sig);
 
@@ -146,7 +145,7 @@ void	close_fd(int i, int count, int **fd);
 void	make_child(pid_t child_cmd, t_pipex *multi, t_path *our_path);
 t_token	*increase_tmp_list(t_token **tmp_list);
 
-	/* builtin_pwd.c */
+	/* builtin_cdpwd.c */
 int		builtin_pwd(void);
 int		builtin_cd(t_token *list);
 char	*move_pwd(char **av, char *pwd);
@@ -166,7 +165,7 @@ int		free_exit(t_token *list, t_data *data, int code, char **av);
 int		builtin_exit(t_token *list, t_data *data);
 
 	/* builtin_env.c */
-int	builtin_env(char **env);
+int		builtin_env(char **env);
 
 	/* other_cmd.c */
 

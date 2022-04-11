@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/11 12:15:19 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/11 14:41:54 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,12 @@ int	parsing_for_exec(t_token *list, char **envp, t_data *data)
 }
 
 
-int	parse_builtin(t_token *list, char *value, t_data *data)
+int	parse_builtin(t_token *list, char *value, t_data *data, char **envp)
 {
 	if (ft_strncmp(value, "exit", 5) == 0)
 		return (builtin_exit(list, data));
+/*	else if (ft_strncmp(value, "$?", 3) == 0)
+		return (other_cmd(list));*/
 	else if (ft_strncmp(value, "echo", 5) == 0)
 		return (builtin_echo(list));
 	else if (ft_strncmp(value, "pwd", 4) == 0)
@@ -84,8 +86,8 @@ int	parse_builtin(t_token *list, char *value, t_data *data)
 /*	else if (ft_strncmp(value, "export", 7) == 0)
 		return (builtin_export());
 	else if (ft_strncmp(value, "unset", 6) == 0)
-		return (builtin_unset());
+		return (builtin_unset());*/
 	else if (ft_strncmp(value, "env", 4) == 0)
-		return (builtin_env());*/
+		return (builtin_env(envp));
 	return (FAILURE);
 }

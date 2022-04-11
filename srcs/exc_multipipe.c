@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/11 13:00:53 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/11 14:50:39 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	make_exec_pipe(t_token *list, char **envp, t_data *data)
 	t_pipex		*multi;
 
 	tmp_list = list;
-	if (parse_builtin(list, list->value, data) == SUCCESS)
-		return (SUCCESS);
 	multi = init_pipex(list);
+	if (parse_builtin(list, list->value, data, envp) == SUCCESS)
+		return (SUCCESS);
 	while (multi->i <= multi->count)
 	{
 		our_path = init_path2(envp, &tmp_list);

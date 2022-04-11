@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/11 12:59:55 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/11 14:50:34 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	make_exec_word(t_token *list, char **envp, t_data *data)
 	pid_t	child_cmd;
 	t_path	*our_path;
 
-	if (parse_builtin(list, list->value, data) == SUCCESS)
+	if (parse_builtin(list, list->value, data, envp) == SUCCESS)
 		return (SUCCESS);
 	our_path = init_path(envp, list);
 	if (check_path(our_path) == FAILURE)

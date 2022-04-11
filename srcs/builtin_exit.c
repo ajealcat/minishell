@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:48:27 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/11 13:22:44 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/11 14:20:14 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	free_exit(t_token *list, t_data *data, int code, char **av)
 
 int	builtin_exit(t_token *list, t_data *data)
 {
-	char **av;
+	char	**av;
 
 	av = create_arg(list);
 	if (count_av(av) == 1)

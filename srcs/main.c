@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:14 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/03/28 14:29:54 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/11 15:43:36 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 // gerer le "$?" --> doit afficher le dernier code d'erreur
 // revoir les dquote et squote vides ou avec juste un espace
+// heredoc + signaux + redirections
 
 int	main(int ac, char **av, char **envp)
 {

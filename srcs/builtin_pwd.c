@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 18:02:33 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/11 12:09:00 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/11 15:40:20 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,42 +22,33 @@ int	builtin_pwd(void)
 	return (SUCCESS);
 }
 
-char	*move_pwd(char **av, char *pwd)
-{
-	char	*new_path;
-//	char	*pwd;
-
-	new_path = NULL;
-	if (av[1])
-	{
-//		pwd = getenv("PWD");
-		new_path = ft_strjoin(pwd, "/");
-		new_path = ft_strjoin(new_path, av[1]);
-		printf("new_path = %s\n", new_path);
-		if (open(new_path, O_DIRECTORY) == -1)
-			perror("cd");
-		return (new_path);
-	}
-	return (new_path);
-}
-
-
 int	builtin_cd(t_token *list)
 {
-	char	*new_path;
-	char	**av;
+	char	*oldpwd;
 	char	*pwd;
+	char	*pwd_ptr;
+	char	**av;
 
-	new_path = NULL;
+	oldpwd = NULL;
+	pwd = NULL;
+	pwd_ptr = NULL;
 	av = create_arg(list);
-	pwd = getenv("PWD");
-	if (count_av(av) > 2)
-		perror("cd");
-	else
+	if (chdir(av[1]) == 0)
 	{
-		new_path = move_pwd(av, pwd);
-		if (chdir(new_path) == FAILURE)
-			perror("chdir()");
+		pwd = getenv("PWD");
+		oldpwd = getenv("OLDPWD");
+		if (oldpwd != NULL && pwd != NULL)
+			ft_strlcpy(oldpwd, pwd, ft_strlen(oldpwd));
+		if (pwd != NULL)
+		{
+			pwd_ptr = getcwd(NULL, 0);
+			ft_strlcpy(pwd, pwd_ptr, ft_strlen(pwd));
+			free(pwd_ptr);
+			pwd_ptr = NULL;
+		}
 	}
+	else
+		perror("chdir");
+	free_split(av);
 	return (SUCCESS);
 }

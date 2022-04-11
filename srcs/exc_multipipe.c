@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exc_multipipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/08 12:33:27 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/11 13:00:53 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	make_exec_pipe(t_token *list, char **envp)
+int	make_exec_pipe(t_token *list, char **envp, t_data *data)
 {
 	t_token		*tmp_list;
 	pid_t		child_cmd;
@@ -20,6 +20,8 @@ int	make_exec_pipe(t_token *list, char **envp)
 	t_pipex		*multi;
 
 	tmp_list = list;
+	if (parse_builtin(list, list->value, data) == SUCCESS)
+		return (SUCCESS);
 	multi = init_pipex(list);
 	while (multi->i <= multi->count)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/08 15:35:12 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/11 13:37:04 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,17 @@ int	print_prompt(t_data *data, char **envp)
 		}
 		if (data->buf != NULL && ft_strlen(data->buf) != 0)
 			add_history(data->buf);
-		if (ft_strncmp(data->buf, cmd, 5) == 0)
-		{
-			ft_putstr_fd("exit\n", 1);
-			free(data);
-			exit(0);
-		}
 		list = parse(list, data);
 	//	print_test(list);
 		if (checker_red(list) != FAILURE
 			&& unclose_quote(data->str_trimed) != FAILURE)
-			parsing_for_exec(list, envp);
+			parsing_for_exec(list, envp, data);
 		if (data != NULL)
 		{
 			free(data->buf);
 			free(data->str_trimed);
 		}
 		free_list(&list);
-		// clear_history();
 	}
 	return (SUCCESS);
 }

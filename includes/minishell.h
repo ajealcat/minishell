@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/08 17:33:46 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/11 13:16:55 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct s_data
 	int				i;
 }	t_data;
 
-
 typedef struct s_pipex
 {
 	int				**fd;
@@ -73,8 +72,8 @@ t_path	*init_path2(char **envp, t_token **tmp_list);
 t_token	*parse(t_token *list, t_data *data);
 t_token	*check_category(t_token *list, t_data *data);
 int		does_list_contain_pipe(t_token *list);
-int		parsing_for_exec(t_token *list, char **envp);
-int		parse_builtin(t_token *list, char *value);
+int		parsing_for_exec(t_token *list, char **envp, t_data *data);
+int		parse_builtin(t_token *list, char *value, t_data *data);
 
 	/* protection_quote.c */
 int		check_quotes(char *token);
@@ -135,13 +134,13 @@ int		secure_child(pid_t child_cmd);
 int		path_not_found(t_path *our_path);
 
 	/* crete_child.c */
-int		make_exec_word(t_token *list, char **envp);
+int		make_exec_word(t_token *list, char **envp, t_data *data);
 int		check_path(t_path *our_path);
 void	cmd_execute(t_path *our_path);
 
 	/* exc_mutipipe.c */
 
-int		make_exec_pipe(t_token *list, char **envp);
+int		make_exec_pipe(t_token *list, char **envp, t_data *data);
 int		how_much_pipe(t_token *list);
 void	close_fd(int i, int count, int **fd);
 void	make_child(pid_t child_cmd, t_pipex *multi, t_path *our_path);
@@ -151,12 +150,19 @@ t_token	*increase_tmp_list(t_token **tmp_list);
 int		builtin_pwd(void);
 int		builtin_cd(t_token *list);
 char	*move_pwd(char **av, char *pwd);
-int		count_av(char **av);
 
 	/* builtin_echo.c */
 int		printf_echo(char **av, int n);
 int		builtin_echo(t_token *list);
 int		check_flagn(char *av);
+
+	/* utils_builtins.c */
+int		count_av(char **av);
 char	**create_arg(t_token *list);
+
+	/* builtin_exit.c */
+int		only_digit(char *av);
+int		free_exit(t_token *list, t_data *data, int code, char **av);
+int		builtin_exit(t_token *list, t_data *data);
 
 #endif

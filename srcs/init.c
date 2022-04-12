@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/05 16:54:32 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/12 10:52:13 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ t_pipex	*init_pipex(t_token *list)
 	multi->i = 0;
 	multi->j = 0;
 	multi->count = how_much_pipe(list);
+	multi->list = list;
 	multi->fd = malloc(sizeof(int *) * (multi->count + 2));
 	if (multi->fd == 0)
 		return (NULL);

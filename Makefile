@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+         #
+#    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/04/11 15:46:09 by fboumell         ###   ########.fr        #
+#    Updated: 2022/04/12 10:28:42 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS = main.c \
 		utils_builtins.c \
 		other_cmd.c \
 		builtin_env.c \
+		builtin_export.c \
 	
 SRCSD = srcs/
 OBJSD = objs/

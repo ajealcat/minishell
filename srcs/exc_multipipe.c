@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exc_multipipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/11 14:50:39 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/12 12:14:32 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	make_exec_pipe(t_token *list, char **envp, t_data *data)
 
 	tmp_list = list;
 	multi = init_pipex(list);
-	if (parse_builtin(list, list->value, data, envp) == SUCCESS)
-		return (SUCCESS);
+	if (parse_builtin(list, list->value, \
+		data, envp) != SUCCESS)
 	while (multi->i <= multi->count)
 	{
 		our_path = init_path2(envp, &tmp_list);
@@ -76,9 +76,9 @@ void	close_fd(int i, int count, int **fd)
 	}
 }
 
-void	make_child(pid_t child_cmd, t_pipex *multi, t_path *our_path)
+void	make_child(pid_t child, t_pipex *multi, t_path *our_path)
 {
-	if (child_cmd == 0)
+	if (child == 0)
 	{
 		if (multi->i == 0)
 		{

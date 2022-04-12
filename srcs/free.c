@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:00:34 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/05 16:54:37 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/12 10:56:51 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ void	free_multi(t_pipex *multi)
 		i++;
 	}
 	free(multi->fd);
+//	free_list(&multi->list);
 	free(multi);
 }

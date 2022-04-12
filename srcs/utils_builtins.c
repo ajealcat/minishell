@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:08:36 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/11 12:09:28 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/12 13:55:32 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,23 @@ char	**create_arg(t_token *list)
 	av[i] = NULL;
 	free(tmp);
 	return (av);
+}
+
+void	print_env(char **env)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (env[i])
+	{
+		j = 0;
+		while (env[i][j])
+		{
+			ft_putchar_fd(env[i][j], 1);
+			j++;
+		}
+		ft_putchar_fd('\n', 1);
+		i++;
+	}
 }

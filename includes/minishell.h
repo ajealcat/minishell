@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/12 12:16:12 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/12 16:37:13 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ typedef struct s_pipex
 	t_token			*list;
 }	t_pipex;
 
+typedef struct s_benv
+{
+	char	**envp;
+}	t_benv;
+
+
 	/* prompt.c */
 int		print_prompt(t_data *data, char **envp);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -68,6 +74,9 @@ void	init_data(t_data *data);
 t_pipex	*init_pipex(t_token *list);
 t_path	*init_path(char **envp, t_token *list);
 t_path	*init_path2(char **envp, t_token **tmp_list);
+
+	/* init_bis.c */
+t_benv	*init_env(char **envp);
 
 	/* parse.c */
 t_token	*parse(t_token *list, t_data *data);
@@ -128,6 +137,7 @@ void	free_list(t_token **list);
 void	free_split(char **cmd);
 void	free_our_path(t_path *our_path);
 void	free_multi(t_pipex *multi);
+void	free_our_env(t_benv *our_env);
 
 	/*  security.c */
 int		secure_child(pid_t child_cmd);
@@ -166,14 +176,16 @@ int		free_exit(t_token *list, t_data *data, int code, char **av);
 int		builtin_exit(t_token *list, t_data *data);
 
 	/* builtin_env.c */
-int		builtin_env(char **env);
+int		builtin_env(/*t_token *list,*/ t_benv *env);
 
 	/* builtin_export.c */
 
-int		is_var(char **env, char *tmp);
-void		replace_value(char **env, char **tmp);
-void	print_env(char **env);
-int		builtin_export(t_token *list, char **env);
+int		is_var(t_benv *env, char *tmp);
+void	replace_value(t_benv *env, char **tmp);
+char	**create_value(t_benv *env, char **av);
+void	print_env(t_benv *env);
+int		builtin_export(t_token *list, t_benv *env);
+void	norm_export(char **tmp, t_benv *env, int i);
 
 	/* other_cmd.c */
 

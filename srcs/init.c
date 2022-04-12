@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/12 10:52:13 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/12 16:05:52 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,3 +111,4 @@ t_pipex	*init_pipex(t_token *list)
 	multi->i = 0;
 	return (multi);
 }
+

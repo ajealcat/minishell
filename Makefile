@@ -6,7 +6,7 @@
 #    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/04/12 10:28:42 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/04/12 16:06:55 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS = main.c \
 		other_cmd.c \
 		builtin_env.c \
 		builtin_export.c \
+		init_bis.c \
 	
 SRCSD = srcs/
 OBJSD = objs/

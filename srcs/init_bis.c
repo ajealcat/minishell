@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*   init_bis.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/11 14:33:22 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/12 16:39:33 by ajearuth         ###   ########.fr       */
+/*   Created: 2022/04/12 16:06:36 by ajearuth          #+#    #+#             */
+/*   Updated: 2022/04/12 16:44:28 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	builtin_env(t_benv *env)
+t_benv	*init_env(char **envp)
 {
-	int	i;
-	int	j;
+	t_benv	*our_env;
+	int		i;
 
 	i = 0;
-	while (env->envp[i])
+	our_env = malloc(sizeof(t_benv));
+	while (envp[i])
+		i++;
+	our_env->envp = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (envp[i])
 	{
-		j = 0;
-		while (env->envp[i][j])
-		{
-			ft_putchar_fd(env->envp[i][j], 1);
-			j++;
-		}
-		ft_putchar_fd('\n', 1);
+		our_env->envp[i] = ft_strdup(envp[i]);
 		i++;
 	}
-	return (SUCCESS);
+	our_env->envp[i] = NULL;
+	return (our_env);
 }

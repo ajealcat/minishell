@@ -6,82 +6,94 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 10:28:13 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/12 12:40:39 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/12 16:32:55 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	is_var(char **env, char *tmp)
+int	is_var(t_benv *env, char *tmp)
 {
 	int	i;
 
 	i = 0;
-	while (env[i])
+	while (env->envp[i])
 	{
-		if (ft_strncmp(env[i], tmp, ft_strlen(tmp)) == 0)
+		if (ft_strncmp(env->envp[i], tmp, ft_strlen(tmp)) == 0)
 			return (SUCCESS);
 		i++;
 	}
 	return (FAILURE);
 }
 
-void	print_env(char **env)
+void	replace_value(t_benv *env, char **tmp)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	while (env[i])
+	while (env->envp[i])
 	{
-		j = 0;
-		while (env[i][j])
-		{
-			ft_putchar_fd(env[i][j], 1);
-			j++;
-		}
-		ft_putchar_fd('\n', 1);
+		if (ft_strncmp(env->envp[i], tmp[0], ft_strlen(tmp[0])) == 0)
+			norm_export(tmp, env, i);
 		i++;
 	}
 }
 
 
-void	replace_value(char **env, char **tmp)
+void	norm_export(char **tmp, t_benv *env, int i)
 {
-	int	i;
 	int	j;
 	int	k;
 
-	i = 0;
-	while (env[i])
+	j = 0;
+	while (env->envp[i][j] != '=')
+		j++;
+	k = 0;
+	if (env->envp[i][j] == '=')
 	{
-		j = 0;
-		if (ft_strncmp(env[i], tmp[0], ft_strlen(tmp[0])) == 0)
+		j++;
+		while (env->envp[i][j])
 		{
-			while (env[i][j] != '=')
-				j++;
-			k = 0;
-			if (env[i][j] == '=')
+			while (tmp[1][k])
 			{
+				env->envp[i][j] = tmp[1][k];
+				k++;
 				j++;
-				while (env[i][j])
-				{
-					while (tmp[1][k])
-					{
-						env[i][j] = tmp[1][k];
-						k++;
-						j++;
-					}
-					env[i][j] = '\0';
-					j++;
-				}
 			}
+			env->envp[i][j] = '\0';
+			j++;
 		}
-		i++;
 	}
 }
 
-int	builtin_export(t_token *list, char **env)
+char	**create_value(t_benv *env, char **av)
+{
+	int		i;
+	int		j;
+	char	**tmp_str;
+
+	i = 0;
+	j = 1;
+	while (env->envp[i])
+		i++;
+	tmp_str = malloc(sizeof(char *) * (i + (count_av(av) - 1)) + 1);
+	i = 0;
+	while (env->envp[i])
+	{
+		tmp_str[i] = ft_strdup(env->envp[i]);
+		i++;
+	}
+	while (av[j])
+	{
+		tmp_str[i] = ft_strdup(av[j]);
+		j++;
+		i++;
+	}
+	tmp_str[i] = NULL;
+	return (tmp_str);
+}
+
+int	builtin_export(t_token *list, t_benv *env)
 {
 	char	**tmp;
 	char	**av;
@@ -97,6 +109,11 @@ int	builtin_export(t_token *list, char **env)
 			tmp = ft_split(av[i], '=');
 			if (is_var(env, tmp[0]) == SUCCESS)
 				replace_value(env, tmp);
+			else
+			{	
+				create_value(env, av);
+				env->envp = tmp;
+			}
 			i++;
 		}
 	}

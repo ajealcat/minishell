@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   exc_onecmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/11 14:50:34 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/13 14:29:36 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	make_exec_word(t_token *list, char **envp, t_data *data)
+int	make_exec_word(t_token *list, t_env *our_env, t_data *data)
 {
 	int		status;
 	pid_t	child_cmd;
 	t_path	*our_path;
 
-	if (parse_builtin(list, list->value, data, envp) == SUCCESS)
+	if (parse_builtin(list, list->value, data, our_env) == SUCCESS)
 		return (SUCCESS);
-	our_path = init_path(envp, list);
+	our_path = init_path(our_env, list);
 	if (check_path(our_path) == FAILURE)
 	{
 		free_our_path(our_path);

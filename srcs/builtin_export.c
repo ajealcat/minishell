@@ -6,112 +6,67 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 10:28:13 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/13 14:00:29 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 14:48:40 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	is_var(char **our_env, char *tmp)
+int	is_var(t_env *our_env, char *tmp)
 {
 	int	i;
 
 	i = 0;
-	while (our_env[i])
+	while (our_env->envp[i])
 	{
-		if (ft_strncmp(our_env[i], tmp, ft_strlen(tmp)) == 0)
+		if (ft_strncmp(our_env->envp[i], tmp, ft_strlen(tmp)) == 0)
 			return (SUCCESS);
 		i++;
 	}
 	return (FAILURE);
 }
 
-void	replace_value(char **our_env, char **tmp)
+void	replace_value(t_env *our_env, char **tmp)
 {
 	int	i;
 
 	i = 0;
-	while (our_env[i])
+	while (our_env->envp[i])
 	{
-		if (ft_strncmp(our_env[i], tmp[0], ft_strlen(tmp[0])) == 0)
+		if (ft_strncmp(our_env->envp[i], tmp[0], ft_strlen(tmp[0])) == 0)
 			norm_export(tmp, our_env, i);
 		i++;
 	}
 }
 
-void	norm_export(char **tmp, char **our_env, int i)
+void	norm_export(char **tmp, t_env *our_env, int i)
 {
-	// int	j;
-	// int	k;
+	char	*tmp2;
 
-	// j = 0;
-	// while (our_env[i][j] != '=')
-	// 	j++;
-	// k = 0;
-	// if (our_env[i][j] == '=')
-	// {
-	// 	j++;
-	// 	while (our_env[i][j])
-	// 	{
-	// 		while (tmp[1][k])
-	// 		{
-	// 			our_env[i][j] = tmp[1][k];
-	// 			k++;
-	// 			j++;
-	// 		}
-	// 		our_env[i][j] = '\0';
-	// 		j++;
-	// 	}
-	// }
-	char    *tmp2;
-
-	if (tmp == NULL || our_env == NULL)
+	if (tmp == NULL || our_env->envp == NULL)
 		return ;
 	tmp2 = ft_strjoin(tmp[0], "=");
-	// free(our_env[i]);
+	free(our_env->envp[i]);
 	if (tmp[1] == NULL)
-		our_env[i] = ft_strdup(tmp2);
+		our_env->envp[i] = ft_strdup(tmp2);
 	else
-		our_env[i] = ft_strjoin(tmp2, tmp[1]);
+		our_env->envp[i] = ft_strjoin(tmp2, tmp[1]);
 	free(tmp2);
 
 }
 
-char	**create_value(char **our_env, char *av)
+char	**create_value(t_env *our_env, char *av)
 {
-	// int		i;
-	// int		j;
-	// char	**tmp_str;
-
-	// i = 0;
-	// j = 1;
-	// while (our_env[i])
-	// 	i++;
-	// tmp_str = malloc(sizeof(char *) * (i + (count_av(av) - 1)) + 1);
-	// i = 0;
-	// while (our_env[i])
-	// {
-	// 	tmp_str[i] = ft_strdup(our_env[i]);
-	// 	i++;
-	// }
-	// while (av[j])
-	// {
-	// 	tmp_str[i] = ft_strdup(av[j]);
-	// 	j++;
-	// 	i++;
-	// }
-	// tmp_str[i] = NULL;
-	// return (tmp_str);
 	char	**tmp;
 	int		i;
 
 	i = 0;
-	if (our_env == NULL || av == NULL)
+	if (our_env->envp == NULL || av == NULL)
 		return (NULL);
-	tmp = (char **)malloc(sizeof(char *) * (ft_tablen(our_env) + 2));
-	while (our_env[i])
+	tmp = (char **)malloc(sizeof(char *) * (ft_tablen(our_env->envp) + 2));
+	while (our_env->envp[i])
 	{
-		tmp[i] = ft_strdup(our_env[i]);
+		tmp[i] = ft_strdup(our_env->envp[i]);
 		i++;
 	}
 	tmp[i] = ft_strdup(av);
@@ -119,33 +74,8 @@ char	**create_value(char **our_env, char *av)
 	return (tmp);
 }
 
-int	builtin_export(t_token *list, char **our_env)
+int	builtin_export(t_token *list, t_env *our_env)
 {
-	// char	**tmp;
-	// char	**av;
-	// int		i;
-
-	// i = 1;
-	// av = create_arg(list);
-	// tmp = NULL;
-	// if (count_av(av) > 1)
-	// {
-	// 	while (av[i])
-	// 	{
-	// 		tmp = ft_split(av[i], '=');
-	// 		if (is_var(our_env, tmp[0]) == SUCCESS)
-	// 			replace_value(our_env, tmp);
-	// 		else
-	// 		{	
-	// 			tmp = create_value(our_env, av);
-	// 			our_env = tmp;
-	// 		}
-	// 		i++;
-	// 	}
-	// }
-	// free_split(av);
-	// free_split(tmp);
-	// return (SUCCESS);
 	char	**tmp;
 	char	**av;
 	int		i;
@@ -167,12 +97,13 @@ int	builtin_export(t_token *list, char **our_env)
 			{
 				free_split(tmp);
 				tmp = create_value(our_env, av[i]);
-				free_split(our_env);
-				our_env = tmp;
+				free_split(our_env->envp);
+				our_env->envp = tmp;
 			}
 			i++;
 		}
 	}
+	free_split(tmp);
 	free_split(av);
 	return (SUCCESS);
 }

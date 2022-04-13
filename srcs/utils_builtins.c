@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:08:36 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/13 13:53:28 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 14:32:17 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,18 @@ char	**create_arg(t_token *list)
 	return (av);
 }
 
-void	print_env(char **our_env)
+void	print_env(t_env *our_env)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (our_env[i])
+	while (our_env->envp[i])
 	{
 		j = 0;
-		while (our_env[i][j])
+		while (our_env->envp[i][j])
 		{
-			ft_putchar_fd(our_env[i][j], 1);
+			ft_putchar_fd(our_env->envp[i][j], 1);
 			j++;
 		}
 		ft_putchar_fd('\n', 1);

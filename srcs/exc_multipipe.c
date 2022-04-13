@@ -6,26 +6,25 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/12 12:14:32 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 14:31:32 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	make_exec_pipe(t_token *list, char **envp, t_data *data)
+int	make_exec_pipe(t_token *list, t_env *our_env, t_data *data)
 {
 	t_token		*tmp_list;
 	pid_t		child_cmd;
 	t_path		*our_path;
 	t_pipex		*multi;
 
+	(void)data;
 	tmp_list = list;
 	multi = init_pipex(list);
-	if (parse_builtin(list, list->value, \
-		data, envp) != SUCCESS)
 	while (multi->i <= multi->count)
 	{
-		our_path = init_path2(envp, &tmp_list);
+		our_path = init_path2(our_env, &tmp_list);
 		if (check_path(our_path) == FAILURE)
 			path_not_found(our_path);
 		child_cmd = fork();

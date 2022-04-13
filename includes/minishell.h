@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/13 14:09:43 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 14:27:35 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-typedef struct s_benv
+typedef struct s_env
 {
-	char **env;
-}	t_benv;
+	char			**envp;
+}	t_env;
 
 typedef struct s_token
 {
@@ -67,15 +67,15 @@ typedef struct s_pipex
 
 
 	/* prompt.c */
-int		print_prompt(t_data *data, char **our_env);
+int		print_prompt(t_data *data, t_env *our_env);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 	/* init.c */
 void	init_token(t_token *token);
 void	init_data(t_data *data);
 t_pipex	*init_pipex(t_token *list);
-t_path	*init_path(char **our_env, t_token *list);
-t_path	*init_path2(char **our_env, t_token **tmp_list);
+t_path	*init_path(t_env *our_env, t_token *list);
+t_path	*init_path2(t_env *our_env, t_token **tmp_list);
 
 	/* init_bis.c */
 // t_benv	*init_env(char **envp);
@@ -84,8 +84,8 @@ t_path	*init_path2(char **our_env, t_token **tmp_list);
 t_token	*parse(t_token *list, t_data *data);
 t_token	*check_category(t_token *list, t_data *data);
 int		does_list_contain_pipe(t_token *list);
-int		parsing_for_exec(t_token *list, char **our_env, t_data *data);
-int		parse_builtin(t_token *list, char *value, t_data *data, char **our_env);
+int		parsing_for_exec(t_token *list, t_env *our_env, t_data *data);
+int		parse_builtin(t_token *list, char *value, t_data *data, t_env *our_env);
 
 	/* protection_quote.c */
 int		check_quotes(char *token);
@@ -139,20 +139,20 @@ void	free_list(t_token **list);
 void	free_split(char **cmd);
 void	free_our_path(t_path *our_path);
 void	free_multi(t_pipex *multi);
-// void	free_our_env(t_benv *our_env);
+void	free_our_env(t_env *our_env);
 
 	/*  security.c */
 int		secure_child(pid_t child_cmd);
 int		path_not_found(t_path *our_path);
 
 	/* crete_child.c */
-int		make_exec_word(t_token *list, char **envp, t_data *data);
+int		make_exec_word(t_token *list, t_env *env, t_data *data);
 int		check_path(t_path *our_path);
 void	cmd_execute(t_path *our_path);
 
 	/* exc_mutipipe.c */
 
-int		make_exec_pipe(t_token *list, char **envp, t_data *data);
+int		make_exec_pipe(t_token *list, t_env *our_path, t_data *data);
 int		how_much_pipe(t_token *list);
 void	close_fd(int i, int count, int **fd);
 void	make_child(pid_t child, t_pipex *multi, t_path *our_path);
@@ -180,16 +180,16 @@ int		free_exit(t_token *list, t_data *data, int code, char **av);
 int		builtin_exit(t_token *list, t_data *data);
 
 	/* builtin_env.c */
-int		builtin_env(char **our_env);
+int		builtin_env(t_env *our_env);
 
 	/* builtin_export.c */
 
-int		is_var(char **our_env, char *tmp);
-void	replace_value(char **our_env, char **tmp);
-char	**create_value(char **our_env, char *av);
-void	print_env(char **our_env);
-int		builtin_export(t_token *list, char **our_env);
-void	norm_export(char **tmp, char **our_env, int i);
+int		is_var(t_env *our_env, char *tmp);
+void	replace_value(t_env *our_env, char **tmp);
+char	**create_value(t_env *our_env, char *av);
+void	print_env(t_env *our_env);
+int		builtin_export(t_token *list, t_env *our_env);
+void	norm_export(char **tmp, t_env *our_env, int i);
 
 	/* other_cmd.c */
 

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:00:34 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/13 12:38:14 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 13:28:05 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	free_split(char **cmd)
 	int	i;
 
 	i = 0;
+	if (cmd == NULL)
+    	return ;
 	while (cmd[i])
 	{
 		free(cmd[i]);

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/13 12:36:37 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 13:35:54 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_data(t_data *data)
 	data->i = 0;
 }
 
-t_path	*init_path(char **envp, t_token *list)
+t_path	*init_path(char **our_env, t_token *list)
 {
 	t_path	*our_path;
 	char	*tmp;
@@ -37,7 +37,7 @@ t_path	*init_path(char **envp, t_token *list)
 	our_path = malloc(sizeof(t_path));
 	if (!our_path)
 		return (NULL);
-	our_path->envp = envp;
+	our_path->envp = our_env;
 	our_path->find_path = getenv("PATH");
 	our_path->option_cmd = get_option_cmd(list);
 	our_path->my_path = ft_split((const char *)our_path->find_path, ':');
@@ -54,7 +54,7 @@ t_path	*init_path(char **envp, t_token *list)
 	return (our_path);
 }
 
-t_path	*init_path2(char **envp, t_token **tmp_list)
+t_path	*init_path2(char **our_env, t_token **tmp_list)
 {
 	t_path	*our_path;
 	char	*tmp;
@@ -64,7 +64,7 @@ t_path	*init_path2(char **envp, t_token **tmp_list)
 	our_path = malloc(sizeof(t_path));
 	if (!our_path)
 		return (NULL);
-	our_path->envp = envp;
+	our_path->envp = our_env;
 	our_path->find_path = getenv("PATH");
 	our_path->option_cmd = get_option_cmd2(*tmp_list);
 	our_path->my_path = ft_split((const char *)our_path->find_path, ':');

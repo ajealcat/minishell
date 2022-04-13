@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/13 12:37:19 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 13:33:16 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,17 @@ int	does_list_contain_pipe(t_token *list)
 	return (FAILURE);
 }
 
-int	parsing_for_exec(t_token *list, char **envp, t_data *data)
+int	parsing_for_exec(t_token *list, char **our_env, t_data *data)
 {
 	if (list && does_list_contain_pipe(list) == SUCCESS)
-		make_exec_pipe(list, envp, data);
+		make_exec_pipe(list, our_env, data);
 	else if (list && does_list_contain_pipe(list) == FAILURE)
-		make_exec_word(list, envp, data);
+		make_exec_word(list, our_env, data);
 	return (0);
 }
 
 
-int	parse_builtin(t_token *list, char *value, t_data *data, char **envp)
+int	parse_builtin(t_token *list, char *value, t_data *data, char **our_env)
 {
 	if (ft_strncmp(value, "exit", 5) == 0)
 		return (builtin_exit(list, data));
@@ -84,10 +84,10 @@ int	parse_builtin(t_token *list, char *value, t_data *data, char **envp)
 	else if (ft_strncmp(value, "cd", 3) == 0)
 		return (builtin_cd(list));
 	else if (ft_strncmp(value, "export", 7) == 0)
-		return (builtin_export(list, envp));
+		return (builtin_export(list, our_env));
 /*	else if (ft_strncmp(value, "unset", 6) == 0)
 		return (builtin_unset());*/
 	else if (ft_strncmp(value, "env", 4) == 0)	
-		return (builtin_env(/*list,*/ envp));
+		return (builtin_env(/*list,*/ our_env));
 	return (FAILURE);
 }

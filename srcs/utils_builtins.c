@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:08:36 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/13 12:41:01 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 13:53:28 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,55 @@ char	**create_arg(t_token *list)
 	return (av);
 }
 
-void	print_env(char **env)
+void	print_env(char **our_env)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (env[i])
+	while (our_env[i])
 	{
 		j = 0;
-		while (env[i][j])
+		while (our_env[i][j])
 		{
-			ft_putchar_fd(env[i][j], 1);
+			ft_putchar_fd(our_env[i][j], 1);
 			j++;
 		}
 		ft_putchar_fd('\n', 1);
 		i++;
 	}
+}
+
+char	**create_ourenv(char **tab)
+{
+	int			i;
+	char		**new;
+	int			tablen;
+
+	if (!tab)
+		return (NULL);
+	tablen = 0;
+	while (tab[tablen])
+		tablen++;
+	i = 0;
+	new = (char **)malloc(sizeof(char *) * (tablen + 1));
+	if (new == NULL)
+		return (NULL);
+	while (tab[i])
+	{
+		new[i] = ft_strdup(tab[i]);
+		i++;
+	}
+	new[i] = NULL;
+	return (new);
+}
+
+int	ft_tablen(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab && tab[i])
+		i++;
+	return (i);
 }

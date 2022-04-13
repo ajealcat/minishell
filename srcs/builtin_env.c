@@ -6,24 +6,24 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 14:33:22 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/13 12:37:40 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 13:34:01 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	builtin_env(char **envp)
+int	builtin_env(char **our_env)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (envp[i])
+	while (our_env[i])
 	{
 		j = 0;
-		while (envp[i][j])
+		while (our_env[i][j])
 		{
-			ft_putchar_fd(envp[i][j], 1);
+			ft_putchar_fd(our_env[i][j], 1);
 			j++;
 		}
 		ft_putchar_fd('\n', 1);

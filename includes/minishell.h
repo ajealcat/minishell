@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/13 12:38:52 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 14:09:43 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+typedef struct s_benv
+{
+	char **env;
+}	t_benv;
 
 typedef struct s_token
 {
@@ -62,15 +67,15 @@ typedef struct s_pipex
 
 
 	/* prompt.c */
-int		print_prompt(t_data *data, char **envp);
+int		print_prompt(t_data *data, char **our_env);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 	/* init.c */
 void	init_token(t_token *token);
 void	init_data(t_data *data);
 t_pipex	*init_pipex(t_token *list);
-t_path	*init_path(char **envp, t_token *list);
-t_path	*init_path2(char **envp, t_token **tmp_list);
+t_path	*init_path(char **our_env, t_token *list);
+t_path	*init_path2(char **our_env, t_token **tmp_list);
 
 	/* init_bis.c */
 // t_benv	*init_env(char **envp);
@@ -79,8 +84,8 @@ t_path	*init_path2(char **envp, t_token **tmp_list);
 t_token	*parse(t_token *list, t_data *data);
 t_token	*check_category(t_token *list, t_data *data);
 int		does_list_contain_pipe(t_token *list);
-int		parsing_for_exec(t_token *list, char **envp, t_data *data);
-int		parse_builtin(t_token *list, char *value, t_data *data, char **envp);
+int		parsing_for_exec(t_token *list, char **our_env, t_data *data);
+int		parse_builtin(t_token *list, char *value, t_data *data, char **our_env);
 
 	/* protection_quote.c */
 int		check_quotes(char *token);
@@ -166,6 +171,8 @@ int		check_flagn(char *av);
 	/* utils_builtins.c */
 int		count_av(char **av);
 char	**create_arg(t_token *list);
+char	**create_ourenv(char **tab);
+int		ft_tablen(char **tab);
 
 	/* builtin_exit.c */
 int		only_digit(char *av);
@@ -173,16 +180,16 @@ int		free_exit(t_token *list, t_data *data, int code, char **av);
 int		builtin_exit(t_token *list, t_data *data);
 
 	/* builtin_env.c */
-int		builtin_env(char **envp);
+int		builtin_env(char **our_env);
 
 	/* builtin_export.c */
 
-int		is_var(char **envp, char *tmp);
-void	replace_value(char **envp, char **tmp);
-char	**create_value(char **envp, char **av);
-void	print_env(char **envp);
-int		builtin_export(t_token *list, char **envp);
-void	norm_export(char **tmp, char **envp, int i);
+int		is_var(char **our_env, char *tmp);
+void	replace_value(char **our_env, char **tmp);
+char	**create_value(char **our_env, char *av);
+void	print_env(char **our_env);
+int		builtin_export(t_token *list, char **our_env);
+void	norm_export(char **tmp, char **our_env, int i);
 
 	/* other_cmd.c */
 

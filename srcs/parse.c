@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/12 16:46:48 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 12:37:19 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,6 @@ int	parsing_for_exec(t_token *list, char **envp, t_data *data)
 
 int	parse_builtin(t_token *list, char *value, t_data *data, char **envp)
 {
-	t_benv	*our_env;
-
-	our_env = init_env(envp);
 	if (ft_strncmp(value, "exit", 5) == 0)
 		return (builtin_exit(list, data));
 /*	else if (ft_strncmp(value, "$?", 3) == 0)
@@ -87,14 +84,10 @@ int	parse_builtin(t_token *list, char *value, t_data *data, char **envp)
 	else if (ft_strncmp(value, "cd", 3) == 0)
 		return (builtin_cd(list));
 	else if (ft_strncmp(value, "export", 7) == 0)
-	{
-		printf("oooo\n");
-		return (builtin_export(list, our_env));
-	}
+		return (builtin_export(list, envp));
 /*	else if (ft_strncmp(value, "unset", 6) == 0)
 		return (builtin_unset());*/
 	else if (ft_strncmp(value, "env", 4) == 0)	
-		return (builtin_env(/*list,*/ our_env));
-	free_our_env(our_env);
+		return (builtin_env(/*list,*/ envp));
 	return (FAILURE);
 }

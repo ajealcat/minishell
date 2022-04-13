@@ -6,67 +6,66 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 10:28:13 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/12 16:32:55 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 12:36:22 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	is_var(t_benv *env, char *tmp)
+int	is_var(char **envp, char *tmp)
 {
 	int	i;
 
 	i = 0;
-	while (env->envp[i])
+	while (envp[i])
 	{
-		if (ft_strncmp(env->envp[i], tmp, ft_strlen(tmp)) == 0)
+		if (ft_strncmp(envp[i], tmp, ft_strlen(tmp)) == 0)
 			return (SUCCESS);
 		i++;
 	}
 	return (FAILURE);
 }
 
-void	replace_value(t_benv *env, char **tmp)
+void	replace_value(char **envp, char **tmp)
 {
 	int	i;
 
 	i = 0;
-	while (env->envp[i])
+	while (envp[i])
 	{
-		if (ft_strncmp(env->envp[i], tmp[0], ft_strlen(tmp[0])) == 0)
-			norm_export(tmp, env, i);
+		if (ft_strncmp(envp[i], tmp[0], ft_strlen(tmp[0])) == 0)
+			norm_export(tmp, envp, i);
 		i++;
 	}
 }
 
-
-void	norm_export(char **tmp, t_benv *env, int i)
+void	norm_export(char **tmp, char **envp, int i)
 {
 	int	j;
 	int	k;
 
 	j = 0;
-	while (env->envp[i][j] != '=')
+	while (envp[i][j] != '=')
 		j++;
 	k = 0;
-	if (env->envp[i][j] == '=')
+	if (envp[i][j] == '=')
 	{
 		j++;
-		while (env->envp[i][j])
+		while (envp[i][j])
 		{
 			while (tmp[1][k])
 			{
-				env->envp[i][j] = tmp[1][k];
+				envp[i][j] = tmp[1][k];
 				k++;
 				j++;
 			}
-			env->envp[i][j] = '\0';
+			envp[i][j] = '\0';
 			j++;
 		}
 	}
 }
 
-char	**create_value(t_benv *env, char **av)
+char	**create_value(char **envp, char **av)
 {
 	int		i;
 	int		j;
@@ -74,13 +73,13 @@ char	**create_value(t_benv *env, char **av)
 
 	i = 0;
 	j = 1;
-	while (env->envp[i])
+	while (envp[i])
 		i++;
 	tmp_str = malloc(sizeof(char *) * (i + (count_av(av) - 1)) + 1);
 	i = 0;
-	while (env->envp[i])
+	while (envp[i])
 	{
-		tmp_str[i] = ft_strdup(env->envp[i]);
+		tmp_str[i] = ft_strdup(envp[i]);
 		i++;
 	}
 	while (av[j])
@@ -93,7 +92,7 @@ char	**create_value(t_benv *env, char **av)
 	return (tmp_str);
 }
 
-int	builtin_export(t_token *list, t_benv *env)
+int	builtin_export(t_token *list, char **envp)
 {
 	char	**tmp;
 	char	**av;
@@ -107,12 +106,12 @@ int	builtin_export(t_token *list, t_benv *env)
 		while (av[i])
 		{
 			tmp = ft_split(av[i], '=');
-			if (is_var(env, tmp[0]) == SUCCESS)
-				replace_value(env, tmp);
+			if (is_var(envp, tmp[0]) == SUCCESS)
+				replace_value(envp, tmp);
 			else
 			{	
-				create_value(env, av);
-				env->envp = tmp;
+				tmp = create_value(envp, av);
+				envp = tmp;
 			}
 			i++;
 		}

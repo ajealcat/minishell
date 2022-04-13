@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/12 16:37:13 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 12:38:52 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_path
 	char			**my_path;
 }	t_path;
 
+
 typedef struct s_data
 {
 	char			*buf;
@@ -58,10 +59,6 @@ typedef struct s_pipex
 	t_token			*list;
 }	t_pipex;
 
-typedef struct s_benv
-{
-	char	**envp;
-}	t_benv;
 
 
 	/* prompt.c */
@@ -76,7 +73,7 @@ t_path	*init_path(char **envp, t_token *list);
 t_path	*init_path2(char **envp, t_token **tmp_list);
 
 	/* init_bis.c */
-t_benv	*init_env(char **envp);
+// t_benv	*init_env(char **envp);
 
 	/* parse.c */
 t_token	*parse(t_token *list, t_data *data);
@@ -137,7 +134,7 @@ void	free_list(t_token **list);
 void	free_split(char **cmd);
 void	free_our_path(t_path *our_path);
 void	free_multi(t_pipex *multi);
-void	free_our_env(t_benv *our_env);
+// void	free_our_env(t_benv *our_env);
 
 	/*  security.c */
 int		secure_child(pid_t child_cmd);
@@ -176,16 +173,16 @@ int		free_exit(t_token *list, t_data *data, int code, char **av);
 int		builtin_exit(t_token *list, t_data *data);
 
 	/* builtin_env.c */
-int		builtin_env(/*t_token *list,*/ t_benv *env);
+int		builtin_env(char **envp);
 
 	/* builtin_export.c */
 
-int		is_var(t_benv *env, char *tmp);
-void	replace_value(t_benv *env, char **tmp);
-char	**create_value(t_benv *env, char **av);
-void	print_env(t_benv *env);
-int		builtin_export(t_token *list, t_benv *env);
-void	norm_export(char **tmp, t_benv *env, int i);
+int		is_var(char **envp, char *tmp);
+void	replace_value(char **envp, char **tmp);
+char	**create_value(char **envp, char **av);
+void	print_env(char **envp);
+int		builtin_export(t_token *list, char **envp);
+void	norm_export(char **tmp, char **envp, int i);
 
 	/* other_cmd.c */
 

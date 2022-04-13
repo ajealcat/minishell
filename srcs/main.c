@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:14 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/13 15:11:53 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 15:29:54 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 // gerer le "$?" --> doit afficher le dernier code d'erreur
 // revoir les dquote et squote vides ou avec juste un espace
 // heredoc + signaux + redirections
+// $ + var en minuscule segfault
 
 int	main(int ac, char **av, char **envp)
 {
@@ -27,6 +28,7 @@ int	main(int ac, char **av, char **envp)
 	if (!our_env)
 		return (FAILURE);
 	our_env->envp = create_ourenv(envp);
+	our_env->av = NULL;
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (FAILURE);

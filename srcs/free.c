@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:00:34 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/13 15:12:00 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 15:29:06 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ void	free_multi(t_pipex *multi)
 
 void	free_our_env(t_env *our_env)
 {
-	free_split(our_env->envp);
+	if (our_env->envp)
+		free_split(our_env->envp);
+	if (our_env->av)
+		free_split(our_env->av);
 	free(our_env);
 }

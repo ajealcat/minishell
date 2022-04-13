@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/13 15:30:14 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 16:55:03 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,10 @@ void	print_env(t_env *our_env);
 int		builtin_export(t_token *list, t_env *our_env);
 void	norm_export(char **tmp, t_env *our_env, int i);
 
-	/* other_cmd.c */
+	/* builtin_unset.c */
+
+int		builtin_unset(t_token *list, t_env *our_env);
+int		is_var_unset(t_env *our_env, char *tmp);
+// char	**unset_value(t_env *our_env, char *av);
 
 #endif

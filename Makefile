@@ -6,7 +6,7 @@
 #    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/04/13 15:23:39 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/04/13 15:35:15 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ $(NAME): $(LIBS) $(OBJS)
 	@echo ".-/     (    o\_//    *~o~o~* OK *~o~o~* "
 	@echo " |  ___  \_/\---'   "
 	@echo "  |_||  |_||        "
-	@echo "\033[0;35m                     Bonne correction !"
+	@echo "\033[0;35m                     Bonne correction !\033[0m"
 
 
 $(OBJSD)%.o: $(SRCSD)%.c

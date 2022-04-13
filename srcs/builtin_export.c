@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 10:28:13 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/13 15:11:28 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 17:52:55 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ char	**create_value(t_env *our_env, char *av)
 	if (our_env->envp == NULL || av == NULL)
 		return (NULL);
 	tmp = (char **)malloc(sizeof(char *) * (ft_tablen(our_env->envp) + 2));
+	if (!tmp)
+		return (FAILURE);
 	while (our_env->envp[i])
 	{
 		tmp[i] = ft_strdup(our_env->envp[i]);

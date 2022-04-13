@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:08:36 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/13 14:32:17 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 14:59:11 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	**create_ourenv(char **tab)
 	while (tab[tablen])
 		tablen++;
 	i = 0;
-	new = (char **)malloc(sizeof(char *) * (tablen + 1));
+	new = malloc(sizeof(char *) * (tablen + 1));
 	if (new == NULL)
 		return (NULL);
 	while (tab[i])

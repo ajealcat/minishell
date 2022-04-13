@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/13 14:27:35 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 15:09:04 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,8 +176,8 @@ int		ft_tablen(char **tab);
 
 	/* builtin_exit.c */
 int		only_digit(char *av);
-int		free_exit(t_token *list, t_data *data, int code, char **av);
-int		builtin_exit(t_token *list, t_data *data);
+int		free_exit(t_token *list, t_data *data, int code, char **av, t_env *our_env);
+int		builtin_exit(t_token *list, t_data *data, t_env *our_env);
 
 	/* builtin_env.c */
 int		builtin_env(t_env *our_env);

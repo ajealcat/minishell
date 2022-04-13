@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/13 14:37:03 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 15:07:50 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	parsing_for_exec(t_token *list, t_env *our_env, t_data *data)
 int	parse_builtin(t_token *list, char *value, t_data *data, t_env *our_env)
 {
 	if (ft_strncmp(value, "exit", 5) == 0)
-		return (builtin_exit(list, data));
+		return (builtin_exit(list, data, our_env));
 /*	else if (ft_strncmp(value, "$?", 3) == 0)
 		return (other_cmd(list));*/
 	else if (ft_strncmp(value, "echo", 5) == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:48:27 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/11 14:20:14 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/13 15:08:41 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	only_digit(char *av)
 	return (1);
 }
 
-int	free_exit(t_token *list, t_data *data, int code, char **av)
+int	free_exit(t_token *list, t_data *data, int code, char **av, t_env *our_env)
 {
 	if (data != NULL)
 	{
@@ -52,11 +52,13 @@ int	free_exit(t_token *list, t_data *data, int code, char **av)
 		free_list(&list);
 	if (av)
 		free_split(av);
+	if (our_env)
+		free_our_env(our_env);
 	rl_clear_history();
 	exit(code);
 }
 
-int	builtin_exit(t_token *list, t_data *data)
+int	builtin_exit(t_token *list, t_data *data, t_env *our_env)
 {
 	char	**av;
 
@@ -64,17 +66,17 @@ int	builtin_exit(t_token *list, t_data *data)
 	if (count_av(av) == 1)
 	{
 		ft_putstr_fd("exit\n", 1);
-		free_exit(list, data, SUCCESS, av);
+		free_exit(list, data, SUCCESS, av, our_env);
 	}
 	else if (count_av(av) == 2)
 	{
 		ft_putstr_fd("exit\n", 1);
 		if (only_digit(av[1]) == 1)
-			free_exit(list, data, ft_atoi(av[1]), av);
+			free_exit(list, data, ft_atoi(av[1]), av, our_env);
 		else
 		{
 			printf("exit: %s : numeric argument required\n", av[1]);
-			free_exit(list, data, ft_atoi(av[1]), av);
+			free_exit(list, data, ft_atoi(av[1]), av, our_env);
 		}
 	}
 	else

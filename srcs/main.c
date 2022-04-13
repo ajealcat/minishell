@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:14 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/13 14:50:06 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 15:11:53 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,12 @@ int	main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
-	our_env = NULL;
 	our_env = malloc(sizeof(t_env));
 	if (!our_env)
 		return (FAILURE);
 	our_env->envp = create_ourenv(envp);
 	data = malloc(sizeof(t_data));
 	if (!data)
-		return (FAILURE);
-	if (data == NULL)
 		return (FAILURE);
 	if (ac || av)
 		print_prompt(data, our_env);

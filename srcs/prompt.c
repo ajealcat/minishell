@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/13 12:10:11 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/13 12:40:13 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	print_prompt(t_data *data, char **envp)
 	while (1)
 	{
 		list = NULL;
-		init_data(data, envp);
+		init_data(data);
 		signal(SIGINT, gestion_signaux);
 		signal(SIGQUIT, gestion_signaux);
 		data->buf = readline(PROMPT);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 10:28:13 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/13 17:52:55 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/14 13:17:25 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	norm_export(char **tmp, t_env *our_env, int i)
 	else
 		our_env->envp[i] = ft_strjoin(tmp2, tmp[1]);
 	free(tmp2);
-
 }
 
 char	**create_value(t_env *our_env, char *av)
@@ -65,7 +64,7 @@ char	**create_value(t_env *our_env, char *av)
 		return (NULL);
 	tmp = (char **)malloc(sizeof(char *) * (ft_tablen(our_env->envp) + 2));
 	if (!tmp)
-		return (FAILURE);
+		return (NULL);
 	while (our_env->envp[i])
 	{
 		tmp[i] = ft_strdup(our_env->envp[i]);

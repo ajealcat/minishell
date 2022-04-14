@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/13 16:55:03 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/14 12:03:10 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ typedef struct s_pipex
 	t_token			*list;
 }	t_pipex;
 
-
-
 	/* prompt.c */
 int		print_prompt(t_data *data, t_env *our_env);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -105,7 +103,6 @@ t_token	*r_redirect(t_token *list, t_data *data);
 t_token	*l_redirect(t_token *list, t_data *data);
 t_token	*token_word(t_token *list, t_data *data);
 t_token	*token_dollar(t_token *list, t_data *data);
-
 
 	/* token_quote.c */
 t_token	*reduce_fonction(char *str, char *tmp, int i, t_token *list);
@@ -184,7 +181,6 @@ int		builtin_exit(t_token *list, t_data *data, t_env *our_env);
 int		builtin_env(t_env *our_env);
 
 	/* builtin_export.c */
-
 int		is_var(t_env *our_env, char *tmp);
 void	replace_value(t_env *our_env, char **tmp);
 char	**create_value(t_env *our_env, char *av);
@@ -193,9 +189,6 @@ int		builtin_export(t_token *list, t_env *our_env);
 void	norm_export(char **tmp, t_env *our_env, int i);
 
 	/* builtin_unset.c */
-
 int		builtin_unset(t_token *list, t_env *our_env);
-int		is_var_unset(t_env *our_env, char *tmp);
-// char	**unset_value(t_env *our_env, char *av);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/13 16:08:45 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/14 12:29:04 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 t_token	*parse(t_token *list, t_data *data)
 {
 	data->str_trimed = ft_strtrim(data->buf, " \t\n\r\f\v");
-	// if (unclose_quote(data->str_trimed) == FAILURE)
-	// 	return (NULL);
 	list = check_category(list, data);
 	return (list);
 }
@@ -69,7 +67,6 @@ int	parsing_for_exec(t_token *list, t_env *our_env, t_data *data)
 		make_exec_word(list, our_env, data);
 	return (0);
 }
-
 
 int	parse_builtin(t_token *list, char *value, t_data *data, t_env *our_env)
 {

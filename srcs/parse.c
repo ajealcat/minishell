@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/14 12:29:04 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/14 15:19:20 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ int	parse_builtin(t_token *list, char *value, t_data *data, t_env *our_env)
 {
 	if (ft_strncmp(value, "exit", 5) == 0)
 		return (builtin_exit(list, data, our_env));
-/*	else if (ft_strncmp(value, "$?", 3) == 0)
-		return (other_cmd(list));*/
+	else if (ft_strncmp(value, "$?", 3) == 0)
+		return (other_cmd());
 	else if (ft_strncmp(value, "echo", 5) == 0)
 		return (builtin_echo(list));
 	else if (ft_strncmp(value, "pwd", 4) == 0)

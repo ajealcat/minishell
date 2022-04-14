@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:36:04 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/11 12:09:18 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/14 15:05:12 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,3 @@ int	builtin_echo(t_token *list)
 	free_split(av);
 	return (SUCCESS);
 }
-

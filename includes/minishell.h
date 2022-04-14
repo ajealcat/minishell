@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/14 12:03:10 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/14 15:33:28 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+int global_status;
 
 typedef struct s_env
 {
@@ -47,7 +49,6 @@ typedef struct s_path
 	char			**option_cmd;
 	char			**my_path;
 }	t_path;
-
 
 typedef struct s_data
 {
@@ -180,6 +181,9 @@ int		builtin_exit(t_token *list, t_data *data, t_env *our_env);
 	/* builtin_env.c */
 int		builtin_env(t_env *our_env);
 
+	/*other_cmd.c */
+int		other_cmd(void);
+
 	/* builtin_export.c */
 int		is_var(t_env *our_env, char *tmp);
 void	replace_value(t_env *our_env, char **tmp);
@@ -190,5 +194,6 @@ void	norm_export(char **tmp, t_env *our_env, int i);
 
 	/* builtin_unset.c */
 int		builtin_unset(t_token *list, t_env *our_env);
+char	**unset_copy(t_env *our_env, char **tmp, char *av);
 
 #endif

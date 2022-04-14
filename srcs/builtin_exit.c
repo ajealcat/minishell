@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:48:27 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/13 15:29:12 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/14 15:28:44 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,15 @@ int	free_exit(t_token *list, t_data *data, int code, t_env *our_env)
 	}
 	if (list)
 		free_list(&list);
-	// if (our_env->av)
-	// 	free_split(our_env->av);
 	if (our_env)
 		free_our_env(our_env);
 	rl_clear_history();
+	global_status = 0;
 	exit(code);
 }
 
 int	builtin_exit(t_token *list, t_data *data, t_env *our_env)
 {
-	// char	**av;
-
 	our_env->av = create_arg(list);
 	if (count_av(our_env->av) == 1)
 	{
@@ -77,12 +74,14 @@ int	builtin_exit(t_token *list, t_data *data, t_env *our_env)
 		{
 			printf("exit: %s : numeric argument required\n", our_env->av[1]);
 			free_exit(list, data, ft_atoi(our_env->av[1]), our_env);
+			global_status = 2;
 		}
 	}
 	else
 	{
 		ft_putstr_fd("exit\n", 1);
 		ft_putstr_fd("exit : too many arguments\n", 2);
+		global_status = 1;
 	}
 	return (SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:14 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/14 15:26:03 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/15 12:44:42 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
-	global_status = 0;
+	// g_status = 0;
 	our_env = malloc(sizeof(t_env));
 	if (!our_env)
 		return (FAILURE);

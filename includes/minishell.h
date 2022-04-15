@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/14 15:33:28 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/15 12:43:55 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-int global_status;
+// int g_status;
 
 typedef struct s_env
 {
@@ -194,6 +194,7 @@ void	norm_export(char **tmp, t_env *our_env, int i);
 
 	/* builtin_unset.c */
 int		builtin_unset(t_token *list, t_env *our_env);
-char	**unset_copy(t_env *our_env, char **tmp, char *av);
+char	**unset_copy(t_env *our_env, char **av, int count);
+int		is_argument(char **av, char *env_var);
 
 #endif

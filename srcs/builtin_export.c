@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 10:28:13 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/14 13:38:05 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/15 12:36:56 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_var(t_env *our_env, char *tmp)
 	int	i;
 
 	i = 0;
-	while (our_env->envp[i])
+	while (our_env && our_env->envp && our_env->envp[i])
 	{
 		if (ft_strncmp(our_env->envp[i], tmp, ft_strlen(tmp)) == 0)
 			return (SUCCESS);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:22:42 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/14 14:50:01 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/15 12:39:19 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,61 +14,70 @@
 
 int	builtin_unset(t_token *list, t_env *our_env)
 {
-	char	**tmp;
+	char	**to_free;
 	char	**av;
 	int		i;
-	// int		j;
-	// int		count;
-	int		k;
+	int		count;
 
-	i = 1;
-	// j = 0;
-	k = 0;
-	// count = 0;
 	av = create_arg(list);
-	tmp = NULL;
-	// while (av[i])
-	// {
-	// 	if (is_var(our_env, av[i]) == SUCCESS)
-	// 		count++;
-	// 	i++;
-	// }
-	tmp = malloc(sizeof(char *) * ft_tablen(our_env->envp) + 2);
-	if (!tmp)
-		return (FAILURE);
 	i = 1;
-	if (count_av(av) > 1)
+	count = 0;
+	while (our_env && our_env->envp && av && av[i])
 	{
-		while (av[i])
-		{
-			tmp = unset_copy(our_env, tmp, av[i]);
-			i++;
-		}
+		if (is_var(our_env, av[i]) == SUCCESS)
+			count++;
+		i++;
 	}
-	free_split(our_env->envp);
-	our_env->envp = tmp;
+	if (count == 0)
+	{
+		free_split(av);
+		return (SUCCESS);
+	}
+	to_free = our_env->envp;
+	our_env->envp = unset_copy(our_env, av, count);
+	free_split(to_free);
 	free_split(av);
-	free_split(tmp);
 	return (SUCCESS);
 }
 
-char	**unset_copy(t_env *our_env, char **tmp, char *av)
+/*
+Renvoie SUCCESS si la variable d'environment fait partie
+des arguments donnés, FAILURE sinon.
+*/
+int	is_argument(char **av, char *env_var)
 {
-	int	j;
-	int	k;
+	int	i;
 
-	j = 0;
-	k = 0;
-	while (our_env->envp[k])
+	i = 0;
+	while (env_var && av && av[i])
 	{
-		if (ft_strncmp(our_env->envp[k], av, ft_strlen(av)) == 0)
-			k++;
-		else
+		if (ft_strncmp(av[i], env_var, ft_strlen(av[i])) == 0)
+			return (SUCCESS);
+		i++;
+	}
+	return (FAILURE);
+}
+
+char	**unset_copy(t_env *our_env, char **av, int count)
+{
+	char	**tmp;
+	int		i;
+	int		j;
+
+	tmp = malloc(sizeof(char *) * (ft_tablen(our_env->envp) - count + 1));
+	if (!tmp)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (our_env->envp[i])
+	{
+		if (count && is_argument(av, our_env->envp[i]) == SUCCESS)
 		{
-			tmp[j] = ft_strdup(our_env->envp[k]);
-			j++;
-			k++;
+			++i;
+			--count;
 		}
+		else
+			tmp[j++] = ft_strdup(our_env->envp[i++]);
 	}
 	tmp[j] = NULL;
 	return (tmp);

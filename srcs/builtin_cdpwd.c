@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cdpwd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 18:02:33 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/14 15:28:59 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/15 12:44:42 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	builtin_cd(t_token *list)
 	else
 	{
 		perror("chdir");
-		global_status = 1;
+		// g_status = 1;
 	}
 	free_split(av);
 	return (SUCCESS);

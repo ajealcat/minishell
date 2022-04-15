@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:08:36 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/13 17:44:46 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/15 12:37:07 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	count_av(char **av)
 	int	i;
 
 	i = 0;
-	while (av[i])
+	while (av && av[i])
 		i++;
 	return (i);
 }

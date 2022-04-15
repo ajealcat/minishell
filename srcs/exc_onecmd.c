@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exc_onecmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/14 15:28:07 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/15 12:44:42 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	make_exec_word(t_token *list, t_env *our_env, t_data *data)
 	if (check_path(our_path) == FAILURE)
 	{
 		free_our_path(our_path);
-		global_status = 127;
+		// g_status = 127;
 		perror("Path");
 		return (FAILURE);
 	}
@@ -32,7 +32,7 @@ int	make_exec_word(t_token *list, t_env *our_env, t_data *data)
 	if (child_cmd < 0)
 	{
 		perror("Fork");
-		global_status = 127;
+		// g_status = 127;
 		return (FAILURE);
 	}
 	if (child_cmd == 0)
@@ -53,7 +53,7 @@ int	check_path(t_path *our_path)
 			return (SUCCESS);
 		++i;
 	}
-	global_status = 127;
+	// g_status = 127;
 	return (FAILURE);
 }
 
@@ -69,7 +69,7 @@ void	cmd_execute(t_path *our_path)
 			if (execve(our_path->my_path[i], our_path->option_cmd, our_path->envp) == -1)
 			{
 				free_our_path(our_path);
-				global_status = 127;
+				// g_status = 127;
 				perror("Execve");
 			}
 		}

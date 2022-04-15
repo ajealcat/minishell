@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:40:58 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/08 15:51:37 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/15 14:43:59 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_token	*reduce_fonction(char *str, char *tmp, int i, t_token *list)
 
 	tmp = ft_substr(str, (i + 1), (ft_strlen_dollar(str + i) - 1));
 	env = gojo_expand(tmp);
-	list = create_node(list, env, var_word); // word a la place de var pour test
+	list = create_node(list, env, var_word);
 	return (list);
 }
 
@@ -58,21 +58,30 @@ t_token	*token_between_dquote(t_token *list, t_data *data)
 	char		*tmp;
 	int			count;
 
-	count = count_quote(data->str_trimed + data->i, '\"');
-	size = ft_strlen_between_quotes(data->str_trimed + data->i, count, '\"');
-	tmp = malloc(sizeof(char) * ((size - count) + 1));
-	if (!tmp)
-		return (NULL);
-	j = 0;
-	while (data->str_trimed[data->i] && j < (size - count))
+	if (ft_strncmp(data->str_trimed + data->i, "\"\"", 2) == 0)
 	{
-		if (data->str_trimed[data->i] == '\"')
-			data->i++;
-		else
-			tmp[j++] = data->str_trimed[data->i++];
+		list = create_node(list, " ", var_word);
+		data->i++;
 	}
-	tmp[j] = '\0';
-	list = reparse_dquote(list, tmp);
+	else
+	{
+		count = count_quote(data->str_trimed + data->i, '\"');
+		size = ft_strlen_between_quotes(data->str_trimed + data->i, \
+			count, '\"');
+		tmp = malloc(sizeof(char) * ((size - count) + 1));
+		if (!tmp)
+			return (NULL);
+		j = 0;
+		while (data->str_trimed[data->i] && j < (size - count))
+		{
+			if (data->str_trimed[data->i] == '\"')
+				data->i++;
+			else
+				tmp[j++] = data->str_trimed[data->i++];
+		}
+		tmp[j] = '\0';
+		list = reparse_dquote(list, tmp);
+	}
 	return (list);
 }
 
@@ -99,25 +108,31 @@ t_token	*token_between_squote(t_token *list, t_data *data)
 	char	*tmp;
 	int		count;
 
-	count = count_quote(data->str_trimed + data->i, '\'');
-	size = ft_strlen_between_quotes(data->str_trimed + data->i, count, '\'');
-	tmp = malloc(sizeof(char) * ((size - count) + 1));
-	if (!tmp)
-		return (NULL);
-	j = 0;
-	if (ft_strlen(data->str_trimed) == (size_t)count)
-		return (NULL);
+	if (ft_strncmp(data->str_trimed + data->i, "''", 2) == 0)
+		list = create_node(list, " ", var_word);
 	else
 	{
-		while (data->str_trimed[data->i] && j < (size - count))
+		count = count_quote(data->str_trimed + data->i, '\'');
+		size = ft_strlen_between_quotes(data->str_trimed + data->i, \
+			count, '\'');
+		tmp = malloc(sizeof(char) * ((size - count) + 1));
+		if (!tmp)
+			return (NULL);
+		j = 0;
+		if (ft_strlen(data->str_trimed) == (size_t)count)
+			return (NULL);
+		else
 		{
-			if (data->str_trimed[data->i] == '\'')
-				data->i++;
-			else
-				tmp[j++] = data->str_trimed[data->i++];
+			while (data->str_trimed[data->i] && j < (size - count))
+			{
+				if (data->str_trimed[data->i] == '\'')
+					data->i++;
+				else
+					tmp[j++] = data->str_trimed[data->i++];
+			}
+			tmp[j] = '\0';
+			list = create_node(list, tmp, word);
 		}
-		tmp[j] = '\0';
-		list = create_node(list, tmp, word);
 	}
 	return (list);
 }

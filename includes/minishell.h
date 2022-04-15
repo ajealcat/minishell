@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/15 13:46:44 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/15 14:54:43 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ t_token	*r_redirect(t_token *list, t_data *data);
 t_token	*l_redirect(t_token *list, t_data *data);
 t_token	*token_word(t_token *list, t_data *data);
 t_token	*token_dollar(t_token *list, t_data *data);
+int		is_maj(char *str);
 
 	/* token_quote.c */
 t_token	*reduce_fonction(char *str, char *tmp, int i, t_token *list);

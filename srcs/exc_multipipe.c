@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/13 14:31:32 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/15 14:26:36 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	make_exec_pipe(t_token *list, t_env *our_env, t_data *data)
 		multi->j++;
 	}
 	free_multi(multi);
+	g_status = 0;
 	return (0);
 }
 

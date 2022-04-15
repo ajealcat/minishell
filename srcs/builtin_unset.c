@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:22:42 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/15 12:39:19 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/15 14:26:22 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	builtin_unset(t_token *list, t_env *our_env)
 	our_env->envp = unset_copy(our_env, av, count);
 	free_split(to_free);
 	free_split(av);
+	g_status = 0;
 	return (SUCCESS);
 }
 

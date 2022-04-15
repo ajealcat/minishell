@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:36:04 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/14 15:05:12 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/15 14:20:53 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,20 @@ int	printf_echo(char **av, int n)
 	int	i;
 
 	i = 0;
-	while (av[i])
+	if (ft_strncmp(av[i], "$?", 3) == 0)
 	{
-		printf("%s", av[i]);
-		if (*av[i] && av[i + 1] && *av[i + 1])
-			printf(" ");
-		i++;
+		printf("%d", g_status);
+		g_status = 0;
+	}
+	else
+	{
+		while (av[i])
+		{
+			printf("%s", av[i]);
+			if (*av[i] && av[i + 1] && *av[i + 1])
+				printf(" ");
+			i++;
+		}
 	}
 	if (n == 0)
 		printf("\n");

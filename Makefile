@@ -6,7 +6,7 @@
 #    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/04/13 15:35:15 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/04/15 13:52:58 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ OBJS = $(addprefix $(OBJSD), $(SRCS:.c=.o))
 all: $(NAME)
 
 $(NAME): $(LIBS) $(OBJS)
-	$(COMPIL) -lreadline $(FLAGS) $(OBJS) $(LIBS) -o $@
+	$(COMPIL) -lreadline $(FLAGS) $(OBJS) $(LIBS) -o $@ 
 	@echo "\033[0;32m\n          _         "
 	@echo "   ______/ \-.   _  "
 	@echo ".-/     (    o\_//    *~o~o~* OK *~o~o~* "

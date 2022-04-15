@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:14 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/15 12:44:42 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/15 14:12:00 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 // heredoc + signaux + redirections
 // $ + var en minuscule segfault
 
+int g_status = 0;
+
 int	main(int ac, char **av, char **envp)
 {
 	t_data	*data;
@@ -24,7 +26,6 @@ int	main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
-	// g_status = 0;
 	our_env = malloc(sizeof(t_env));
 	if (!our_env)
 		return (FAILURE);

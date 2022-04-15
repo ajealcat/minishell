@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 18:02:33 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/15 12:44:42 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/15 14:25:38 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	builtin_pwd(void)
 	pwd = getcwd(NULL, 0);
 	printf("%s\n", pwd);
 	free(pwd);
+	g_status = 0;
 	return (SUCCESS);
 }
 
@@ -50,8 +51,9 @@ int	builtin_cd(t_token *list)
 	else
 	{
 		perror("chdir");
-		// g_status = 1;
+		g_status = 1;
 	}
 	free_split(av);
+	g_status = 0;
 	return (SUCCESS);
 }

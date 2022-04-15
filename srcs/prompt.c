@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/13 15:05:35 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/15 14:06:47 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	print_prompt(t_data *data, t_env *our_env)
 	char	*cmd;
 	t_token	*list;
 
-
 	cmd = "exit";
 	while (1)
 	{
@@ -65,7 +64,7 @@ int	print_prompt(t_data *data, t_env *our_env)
 		if (data->buf != NULL && ft_strlen(data->buf) != 0)
 			add_history(data->buf);
 		list = parse(list, data);
-	//	print_test(list);
+		// print_test(list);
 		if (checker_red(list) != FAILURE
 			&& unclose_quote(data->str_trimed) != FAILURE)
 			parsing_for_exec(list, our_env, data);

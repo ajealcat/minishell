@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/13 15:19:55 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/15 14:16:47 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,22 +66,31 @@ t_token	*token_dollar(t_token *list, t_data *data)
 	char	*tmp;
 	char	*env;
 
-	size = ft_strlen_dollar(data->str_trimed + data->i);
-	tmp = malloc(sizeof(char) * (size + 1));
-	if (!tmp)
-		return (NULL);
-	j = 0;
-	while (check_sep_for_word(data->str_trimed[data->i]) == SUCCESS
-		&& j < (size - 1))
+	if (ft_strncmp(data->str_trimed + data->i, "$", 2) == 0)
+		list = create_node(list, "$", var_word);
+	if (ft_strncmp(data->str_trimed + data->i, "$?", 3) == 0)
 	{
-		tmp[j] = data->str_trimed[data->i + 1];
+		list = create_node(list, "$?", var_word);
 		data->i++;
-		j++;
-
 	}
-	tmp[j] = '\0';
-	env = gojo_expand(tmp);
-	list = create_node(list, env, var_word);
-	free(tmp);
+	else
+	{
+		size = ft_strlen_dollar(data->str_trimed + data->i);
+		tmp = malloc(sizeof(char) * (size + 1));
+		if (!tmp)
+			return (NULL);
+		j = 0;
+		while (check_sep_for_word(data->str_trimed[data->i]) == SUCCESS
+			&& j < (size - 1))
+		{
+			tmp[j] = data->str_trimed[data->i + 1];
+			data->i++;
+			j++;
+		}
+		tmp[j] = '\0';
+		env = gojo_expand(tmp);
+		list = create_node(list, env, var_word);
+		free(tmp);
+	}
 	return (list);
 }

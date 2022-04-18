@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/18 14:58:25 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:55:58 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,10 @@ void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data, t_e
 		if (parse_builtin(multi->list, multi->list->value, \
 			data, our_env) == SUCCESS)
 		{
-			free_our_path(our_path);
-			printf("adresse 1 : %p\n", &multi->list);
-			// free_list(&multi->list);
+			free_list(&multi->list);
 			free_multi(multi);
+			// free(multi);
+			free_our_path(our_path);
 			free_exit(NULL, data, 0, our_env);
 		}
 		else

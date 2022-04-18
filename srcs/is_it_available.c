@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 18:07:03 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/05 11:47:47 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/18 17:14:08 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,14 @@ int	is_valid_t_pipe(t_token *list)
 {
 	if (list->type == t_pipe)
 	{
-		if (list->prev == NULL || list->prev->type != word)
+		if (list->prev == NULL || list->prev->type != word
+			|| list->prev->type != var_word)
 		{
 			ft_putstr_fd("Syntax error pipe\n", 2);
 			return (FAILURE);
 		}
-		if (list->next == NULL || list->next->type != word)
+		if (list->next == NULL || list->next->type != word
+			|| list->prev->type != var_word)
 		{
 			ft_putstr_fd("Syntax error pipe\n", 2);
 			return (FAILURE);

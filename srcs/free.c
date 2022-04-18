@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:00:34 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/18 14:54:14 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:56:07 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	free_list(t_token **list)
 {
-	printf("adresse 2 :%p\n", list);
 	t_token	*tmp;
 	t_token	*del;
 

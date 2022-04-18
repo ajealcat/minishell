@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_others.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/15 14:59:25 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/18 17:08:55 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,18 @@ t_token	*token_dollar(t_token *list, t_data *data)
 		}
 		tmp[j] = '\0';
 		env = gojo_expand(tmp);
-		list = create_node(list, env, var_word);
+		if (env)
+		{
+			list = create_node(list, env, var_word);
+			free(tmp);
+			return (list);
+		}
+		else
+		{
+			list = create_node(list, "", var_word);
+			free(tmp);
+			return (list);
+		}
 		free(tmp);
 	}
 	return (list);

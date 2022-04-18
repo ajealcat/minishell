@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:00:34 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/13 15:29:06 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/18 14:54:14 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	free_list(t_token **list)
 {
+	printf("adresse 2 :%p\n", list);
 	t_token	*tmp;
 	t_token	*del;
 
@@ -68,7 +69,7 @@ void	free_multi(t_pipex *multi)
 		i++;
 	}
 	free(multi->fd);
-//	free_list(&multi->list);
+	// free_list(&multi->list);
 	free(multi);
 }
 

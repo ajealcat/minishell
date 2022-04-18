@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exc_multipipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/18 13:42:07 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/18 14:58:25 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	make_exec_pipe(t_token *list, t_env *our_env, t_data *data)
 		child_cmd = fork();
 		secure_child(child_cmd);
 		make_child(child_cmd, multi, our_path, data, our_env);
+		multi->list = increase_tmp_list(&multi->list);
 		free_our_path(our_path);
 		multi->i++;
 	}
@@ -42,7 +43,6 @@ int	make_exec_pipe(t_token *list, t_env *our_env, t_data *data)
 	g_status = 0;
 	return (0);
 }
-
 
 int	how_much_pipe(t_token *list)
 {
@@ -96,14 +96,16 @@ void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data, t_e
 			dup2(multi->fd[multi->i + 1][1], 1);
 		}
 		if (parse_builtin(multi->list, multi->list->value, \
-			data, our_env) == FAILURE)
+			data, our_env) == SUCCESS)
 		{
-			cmd_execute(our_path);
-			printf("oui\n");
+			free_our_path(our_path);
+			printf("adresse 1 : %p\n", &multi->list);
+			// free_list(&multi->list);
+			free_multi(multi);
+			free_exit(NULL, data, 0, our_env);
 		}
-		printf("houhou\n");
-		multi->list = increase_tmp_list(&multi->list);
-		exit(0);
+		else
+			cmd_execute(our_path);
 	}
 }
 

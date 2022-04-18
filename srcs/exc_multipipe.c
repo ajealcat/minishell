@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/15 14:26:36 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/18 13:42:07 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ int	make_exec_pipe(t_token *list, t_env *our_env, t_data *data)
 	t_path		*our_path;
 	t_pipex		*multi;
 
-	(void)data;
 	tmp_list = list;
-	multi = init_pipex(list);
+	multi = init_pipex(tmp_list);
 	while (multi->i <= multi->count)
 	{
 		our_path = init_path2(our_env, &tmp_list);
@@ -29,7 +28,7 @@ int	make_exec_pipe(t_token *list, t_env *our_env, t_data *data)
 			path_not_found(our_path);
 		child_cmd = fork();
 		secure_child(child_cmd);
-		make_child(child_cmd, multi, our_path);
+		make_child(child_cmd, multi, our_path, data, our_env);
 		free_our_path(our_path);
 		multi->i++;
 	}
@@ -76,7 +75,7 @@ void	close_fd(int i, int count, int **fd)
 	}
 }
 
-void	make_child(pid_t child, t_pipex *multi, t_path *our_path)
+void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data, t_env *our_env)
 {
 	if (child == 0)
 	{
@@ -96,7 +95,15 @@ void	make_child(pid_t child, t_pipex *multi, t_path *our_path)
 			dup2(multi->fd[multi->i][0], 0);
 			dup2(multi->fd[multi->i + 1][1], 1);
 		}
-		cmd_execute(our_path);
+		if (parse_builtin(multi->list, multi->list->value, \
+			data, our_env) == FAILURE)
+		{
+			cmd_execute(our_path);
+			printf("oui\n");
+		}
+		printf("houhou\n");
+		multi->list = increase_tmp_list(&multi->list);
+		exit(0);
 	}
 }
 

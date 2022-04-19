@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:56:16 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/19 13:52:25 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/19 15:13:35 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,53 +19,52 @@ int	check_redirections(t_token *list)
 	tmp = list;
 	while (tmp)
 	{
-		if (tmp->type == r_red || tmp->type == dr_red)
-			return (SUCCESS);
+		if (tmp->type == r_red)
+		{
+			if (tmp->next->type == word)
+			{
+				tmp = tmp->next;
+				open_or_createfd(tmp->value, 1);
+			}
+		}
+		else if (tmp->type == dr_red)
+		{
+			if (tmp->next->type == word)
+			{
+				tmp = tmp->next;
+				open_or_createfd(tmp->value, 2);
+			}
+		}
 		tmp = tmp->next;
 	}
-	free(tmp);
-	return (FAILURE);
+	return (SUCCESS);
 }
 
 
-int	open_or_createfd(t_token *list)
+int	open_or_createfd(char *value, int nb)
 {
-	t_token	*tmp;
-	int		i;
 	int		fd1;
 	int		fd2;
 
-	i = 0;
-	tmp = list;
-	while (tmp)
+	if (nb == 1)
 	{
-		if (tmp->type == r_red || tmp->type == dr_red)
-			break ;
-		tmp = tmp->next;
-	}
-	if (tmp && tmp->type == r_red && tmp->next->type == word)
-	{
-		tmp = tmp->next;
-		fd1 = open(tmp->value, O_CREAT | O_RDWR | O_TRUNC, 0644);
+		fd1 = open(value, O_CREAT | O_RDWR | O_TRUNC, 0644);
 		if (fd1 == -1)
 		{
 			perror("Open");
 			g_status = 127;
 			return (FAILURE);
 		}
-		dup2(fd1, 0);
 	}
-	else if (tmp && tmp->type == dr_red && tmp->next->type == word)
+	else if (nb == 2)
 	{
-		tmp = tmp->next;
-		fd2 = open(tmp->value, O_CREAT | O_RDWR | O_APPEND, 0644);
+		fd2 = open(value, O_CREAT | O_RDWR | O_APPEND, 0644);
 		if (fd2 == -1)
 		{
 			perror("Open");
 			g_status = 127;
 			return (FAILURE);
 		}
-		dup2(fd2, 0);
 	}
 	return (FAILURE);
 }

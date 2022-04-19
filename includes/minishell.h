@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/19 14:13:35 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/19 15:10:12 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,6 @@ int		is_argument(char **av, char *env_var);
 
 	/* redicrections.c */
 int		check_redirections(t_token *list);
-int		open_or_createfd(t_token *list);
+int		open_or_createfd(char *value, int nb);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:00:34 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/18 15:56:07 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/19 14:27:24 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ void	free_list(t_token **list)
 		(*list) = NULL;
 	}
 }
+
+// void	free_fromstart(t_token **list)
+// {
+// 	while (*list && (*list)->prev)
+// 		*list = (*list)->prev;
+// 	if ((*list)->prev == NULL)
+// 		free_list(list);
+// }
 
 void	free_split(char **cmd)
 {
@@ -68,7 +76,7 @@ void	free_multi(t_pipex *multi)
 		i++;
 	}
 	free(multi->fd);
-	// free_list(&multi->list);
+	free_list(&multi->list);
 	free(multi);
 }
 

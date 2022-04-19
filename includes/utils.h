@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:56:39 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/14 15:33:18 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/19 13:13:14 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # define s_quote 6
 # define word 7
 # define t_pipe 8
-# define var 9
-# define var_word 10
+// # define var 9
+# define var_word 9
 
 
 //colors 

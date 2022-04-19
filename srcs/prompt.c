@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/15 14:06:47 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/19 13:27:57 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ void	print_test(t_token *list)
 			printf("DQUOTE: |%s|\n", tmp->value);
 		else if (tmp->type == s_quote)
 			printf("SQUOTE: |%s|\n", tmp->value);
-		else if (tmp->type == var)
-			printf("var: |%s|\n", tmp->value);
+		// else if (tmp->type == var)
+		// 	printf("var: |%s|\n", tmp->value);
+		else if (tmp->type == var_word)
+			printf("var_word: |%s|\n", tmp->value);
 		tmp = tmp->next;
 	}
 }

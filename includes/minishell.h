@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/19 12:21:36 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/19 14:13:35 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ char	**get_option_cmd2(t_token *list);
 
 	/* free.c */
 void	free_list(t_token **list);
+void	free_fromstart(t_token **list);
 void	free_split(char **cmd);
 void	free_our_path(t_path *our_path);
 void	free_multi(t_pipex *multi);

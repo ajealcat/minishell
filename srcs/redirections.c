@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:56:16 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/19 12:34:53 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/19 13:52:25 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	open_or_createfd(t_token *list)
 			break ;
 		tmp = tmp->next;
 	}
-	if (tmp && tmp->type == r_red && tmp->next == word)
+	if (tmp && tmp->type == r_red && tmp->next->type == word)
 	{
 		tmp = tmp->next;
 		fd1 = open(tmp->value, O_CREAT | O_RDWR | O_TRUNC, 0644);
@@ -53,9 +53,9 @@ int	open_or_createfd(t_token *list)
 			g_status = 127;
 			return (FAILURE);
 		}
-		return (fd1);
+		dup2(fd1, 0);
 	}
-	else if (tmp && tmp->type == dr_red && tmp->next == word)
+	else if (tmp && tmp->type == dr_red && tmp->next->type == word)
 	{
 		tmp = tmp->next;
 		fd2 = open(tmp->value, O_CREAT | O_RDWR | O_APPEND, 0644);
@@ -65,7 +65,7 @@ int	open_or_createfd(t_token *list)
 			g_status = 127;
 			return (FAILURE);
 		}
-		return (fd2);
+		dup2(fd2, 0);
 	}
 	return (FAILURE);
 }

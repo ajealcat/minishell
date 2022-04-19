@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/18 15:55:58 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/19 12:35:12 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,12 @@ void	close_fd(int i, int count, int **fd)
 
 void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data, t_env *our_env)
 {
+	int fd_out;
+
+	fd_out = 1;
+	
+	if (check_redirections(multi->list) == SUCCESS)
+		fd_out = open_or_createfd(multi->list);
 	if (child == 0)
 	{
 		if (multi->i == 0)
@@ -100,7 +106,6 @@ void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data, t_e
 		{
 			free_list(&multi->list);
 			free_multi(multi);
-			// free(multi);
 			free_our_path(our_path);
 			free_exit(NULL, data, 0, our_env);
 		}

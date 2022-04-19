@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/18 13:24:54 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/19 12:21:36 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,5 +197,9 @@ void	norm_export(char **tmp, t_env *our_env, int i);
 int		builtin_unset(t_token *list, t_env *our_env);
 char	**unset_copy(t_env *our_env, char **av, int count);
 int		is_argument(char **av, char *env_var);
+
+	/* redicrections.c */
+int		check_redirections(t_token *list);
+int		open_or_createfd(t_token *list);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/19 15:07:10 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/20 12:42:15 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	does_list_contain_pipe(t_token *list)
 
 int	parsing_for_exec(t_token *list, t_env *our_env, t_data *data)
 {
-	check_redirections(list);
 	if (list && does_list_contain_pipe(list) == SUCCESS)
 		make_exec_pipe(list, our_env, data);
 	else if (list && does_list_contain_pipe(list) == FAILURE)

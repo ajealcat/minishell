@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/19 15:18:26 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/20 12:43:58 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	make_exec_pipe(t_token *list, t_env *our_env, t_data *data)
 		our_path = init_path2(our_env, &tmp_list);
 		if (check_path(our_path) == FAILURE)
 			path_not_found(our_path);
+		check_redirections(multi->list);
 		child_cmd = fork();
 		secure_child(child_cmd);
 		make_child(child_cmd, multi, our_path, data, our_env);

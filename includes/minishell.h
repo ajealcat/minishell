@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/19 15:10:12 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/20 13:01:33 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_pipex
 	int				count;
 	int				i;
 	int				j;
+	int				fd_file;
 	t_token			*list;
 }	t_pipex;
 
@@ -145,6 +146,7 @@ void	free_our_env(t_env *our_env);
 	/*  security.c */
 int		secure_child(pid_t child_cmd);
 int		path_not_found(t_path *our_path);
+int		secure_fd(int fd);
 
 	/* crete_child.c */
 int		make_exec_word(t_token *list, t_env *env, t_data *data);
@@ -200,7 +202,7 @@ char	**unset_copy(t_env *our_env, char **av, int count);
 int		is_argument(char **av, char *env_var);
 
 	/* redicrections.c */
-int		check_redirections(t_token *list);
+int		check_redirections(t_pipex *multi);
 int		open_or_createfd(char *value, int nb);
 
 #endif

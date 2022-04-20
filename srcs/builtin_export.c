@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 10:28:13 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/15 14:26:05 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:59:31 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,7 @@ int	builtin_export(t_token *list, t_env *our_env)
 				free_split(tmp);
 			}
 			else
-			{
-				free_split(tmp);
-				tmp = create_value(our_env, av[i]);
-				free_split(our_env->envp);
-				our_env->envp = tmp;
-			}
+				reduce_builtexport(tmp, our_env, av, i);
 			i++;
 		}
 	}

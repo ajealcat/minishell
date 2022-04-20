@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/20 16:14:33 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:03:46 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ t_token	*increase_tmp_list(t_token **tmp_list);
 	/* builtin_cdpwd.c */
 int		builtin_pwd(void);
 int		builtin_cd(t_token *list);
+void	reduce_builtcd(char *oldpwd, char *pwd, char *pwd_ptr);
 char	*move_pwd(char **av, char *pwd);
 
 	/* builtin_echo.c */
@@ -177,6 +178,9 @@ int		count_av(char **av);
 char	**create_arg(t_token *list);
 char	**create_ourenv(char **tab);
 int		ft_tablen(char **tab);
+
+	/* utils_builtins_bis.c */
+void	(char **tmp, t_env *our_env, char *av, int i);
 
 	/* builtin_exit.c */
 int		only_digit(char *av);

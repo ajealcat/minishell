@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 10:28:13 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/20 16:59:31 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:16:08 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	builtin_export(t_token *list, t_env *our_env)
 				free_split(tmp);
 			}
 			else
-				reduce_builtexport(tmp, our_env, av, i);
+				reduce_builtexport(tmp, our_env, av[i]);
 			i++;
 		}
 	}

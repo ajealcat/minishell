@@ -6,11 +6,23 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 15:21:45 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/05 16:48:48 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:13:15 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+char	**reduce_goc(t_token *list)
+{
+	char	**option_cmd;
+
+	option_cmd = malloc(sizeof(char *) * 2);
+	if (!option_cmd)
+		return (NULL);
+	option_cmd[0] = ft_strdup(list->value);
+	option_cmd[1] = NULL;
+	return (option_cmd);
+}
 
 char	**get_option_cmd(t_token *list)
 {
@@ -22,14 +34,7 @@ char	**get_option_cmd(t_token *list)
 	tmp = list;
 	i = 0;
 	if (tmp == NULL || tmp->next == NULL)
-	{
-		option_cmd = malloc(sizeof(char *) * 2);
-		if (!option_cmd)
-			return (NULL);
-		option_cmd[0] = ft_strdup(tmp->value);
-		option_cmd[1] = NULL;
-		return (option_cmd);
-	}
+		option_cmd = reduce_goc(tmp);
 	else
 	{
 		while (tmp->type == word && tmp->next != NULL)

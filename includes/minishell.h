@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/20 17:03:46 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:15:12 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ char	*gojo_expand(char *tmp);
 void	gestion_signaux(int sig);
 
 	/* exec_access.c */
+char	**reduce_goc(t_token *list);
 char	**get_option_cmd(t_token *list);
 char	**get_option_cmd2(t_token *list);
 // char	*find_path(t_token *list, char **envp);
@@ -180,7 +181,7 @@ char	**create_ourenv(char **tab);
 int		ft_tablen(char **tab);
 
 	/* utils_builtins_bis.c */
-void	(char **tmp, t_env *our_env, char *av, int i);
+void	reduce_builtexport(char **tmp, t_env *our_env, char *av);
 
 	/* builtin_exit.c */
 int		only_digit(char *av);

@@ -6,11 +6,11 @@
 #    By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/04/20 11:59:00 by fboumell         ###   ########.fr        #
+#    Updated: 2022/04/20 16:11:10 by fboumell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Minishell
+NAME = minishell
 
 # Project sources and objs 
 

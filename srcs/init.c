@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/20 12:53:42 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:14:52 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ t_pipex	*init_pipex(t_token *list)
 	multi->j = 0;
 	multi->count = how_much_pipe(list);
 	multi->list = list;
-	multi->fd_file = 0;
+	multi->fd_file_out = 0;
+	multi->fd_file_in = 0;
 	multi->fd = malloc(sizeof(int *) * (multi->count + 2));
 	if (multi->fd == 0)
 		return (NULL);

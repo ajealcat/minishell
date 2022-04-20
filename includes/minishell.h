@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/20 13:01:33 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:14:33 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ typedef struct s_pipex
 	int				count;
 	int				i;
 	int				j;
-	int				fd_file;
+	int				fd_file_out;
+	int				fd_file_in;
 	t_token			*list;
 }	t_pipex;
 

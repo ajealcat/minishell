@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/20 12:43:58 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:35:57 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	make_exec_pipe(t_token *list, t_env *our_env, t_data *data)
 		our_path = init_path2(our_env, &tmp_list);
 		if (check_path(our_path) == FAILURE)
 			path_not_found(our_path);
-		check_redirections(multi->list);
+		check_redirections(multi);
 		child_cmd = fork();
 		secure_child(child_cmd);
 		make_child(child_cmd, multi, our_path, data, our_env);
@@ -84,17 +84,50 @@ void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data, t_e
 		{
 			close_fd(multi->i, multi->count, multi->fd);
 			dup2(multi->fd[multi->i + 1][1], 1);
+			close(multi->fd[multi->i + 1][1]);
+			if (multi->fd_file_out != 0)
+			{
+				dup2(multi->fd_file_out, 1);
+				close(multi->fd_file_out);
+			}
+			if (multi->fd_file_in != 0)
+			{
+				dup2(multi->fd_file_in, 0);
+				close(multi->fd_file_in);
+			}
 		}
 		else if (multi->i == multi->count)
 		{
 			close_fd(multi->i, multi->count, multi->fd);
 			dup2(multi->fd[multi->i][0], 0);
+			close(multi->fd[multi->i][0]);
+			if (multi->fd_file_out != 0)
+			{
+				dup2(multi->fd_file_out, 1);
+				close(multi->fd_file_out);
+			}
+			if (multi->fd_file_in != 0)
+			{
+				dup2(multi->fd_file_in, 0);
+				close(multi->fd_file_in);
+			}
 		}
 		else
 		{
 			close_fd(multi->i, multi->count, multi->fd);
 			dup2(multi->fd[multi->i][0], 0);
 			dup2(multi->fd[multi->i + 1][1], 1);
+			close(multi->fd[multi->i + 1][1]);
+			if (multi->fd_file_out != 0)
+			{
+				dup2(multi->fd_file_out, 1);
+				close(multi->fd_file_out);
+			}
+			if (multi->fd_file_in != 0)
+			{
+				dup2(multi->fd_file_in, 0);
+				close(multi->fd_file_in);
+			}
 		}
 		if (parse_builtin(multi->list, multi->list->value, \
 			data, our_env) == SUCCESS)

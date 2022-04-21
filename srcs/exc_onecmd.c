@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/21 15:20:03 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:28:04 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ void	cmd_execute(t_path *our_path)
 	{
 		if (access(our_path->my_path[i], X_OK) == 0)
 		{
-			if (execve(our_path->my_path[i], our_path->option_cmd, our_path->envp) == -1)
+			if (execve(our_path->my_path[i], our_path->option_cmd, \
+				our_path->envp) == -1)
 			{
 				free_our_path(our_path);
 				g_status = 127;
@@ -93,7 +94,7 @@ int	set_up_fd(t_pipex *multi, t_data *data, t_env *our_env)
 		dup2(multi->fd_file_in, 0);
 		close(multi->fd_file_in);
 	}
-	if (parse_builtin(list, data, our_env) == SUCCESS)
+	if (parse_builtin(multi->list, data, our_env) == SUCCESS)
 	{
 		if (multi->fd_file_out != 0)
 		{
@@ -107,4 +108,5 @@ int	set_up_fd(t_pipex *multi, t_data *data, t_env *our_env)
 		}
 		return (SUCCESS);
 	}
+	return (SUCCESS);
 }

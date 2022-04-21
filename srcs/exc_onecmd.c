@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exc_onecmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/20 15:31:23 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:20:03 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ int	make_exec_word(t_token *list, t_env *our_env, t_data *data)
 	int		status;
 	pid_t	child_cmd;
 	t_path	*our_path;
-	
-	if (parse_builtin(list, list->value, data, our_env) == SUCCESS)
-		return (SUCCESS);
+	t_pipex	*multi;
+
+	multi = init_pipex(list);
+	check_redirections(multi);
+	set_up_fd(multi, data, our_env);
 	our_path = init_path(our_env, list);
 	child_cmd = fork();
 	secure_child(child_cmd);
@@ -33,6 +35,7 @@ int	make_exec_word(t_token *list, t_env *our_env, t_data *data)
 	if (child_cmd == 0)
 		cmd_execute(our_path);
 	waitpid(child_cmd, &status, 0);
+	free_multi(multi);
 	free_our_path(our_path);
 	g_status = 0;
 	return (SUCCESS);
@@ -72,4 +75,36 @@ void	cmd_execute(t_path *our_path)
 		++i;
 	}
 }
-	
+
+int	set_up_fd(t_pipex *multi, t_data *data, t_env *our_env)
+{
+	int	save_fdin;
+	int	save_fdout;
+
+	save_fdin = dup(0);
+	save_fdout = dup(1);
+	if (multi->fd_file_out != 0)
+	{
+		dup2(multi->fd_file_out, 1);
+		close(multi->fd_file_out);
+	}
+	if (multi->fd_file_in != 0)
+	{
+		dup2(multi->fd_file_in, 0);
+		close(multi->fd_file_in);
+	}
+	if (parse_builtin(list, data, our_env) == SUCCESS)
+	{
+		if (multi->fd_file_out != 0)
+		{
+			dup2(save_fdout, 1);
+			close(save_fdout);
+		}
+		if (multi->fd_file_in != 0)
+		{
+			dup2(save_fdin, 0);
+			close(save_fdin);
+		}
+		return (SUCCESS);
+	}
+}

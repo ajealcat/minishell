@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/20 17:15:12 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:23:12 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_token	*parse(t_token *list, t_data *data);
 t_token	*check_category(t_token *list, t_data *data);
 int		does_list_contain_pipe(t_token *list);
 int		parsing_for_exec(t_token *list, t_env *our_env, t_data *data);
-int		parse_builtin(t_token *list, char *value, t_data *data, t_env *our_env);
+int		parse_builtin(t_token *list, t_data *data, t_env *our_env);
 
 	/* protection_quote.c */
 int		check_quotes(char *token);
@@ -150,18 +150,18 @@ int		secure_child(pid_t child_cmd);
 int		path_not_found(t_path *our_path);
 int		secure_fd(int fd);
 
-	/* crete_child.c */
-int		make_exec_word(t_token *list, t_env *env, t_data *data);
-int		check_path(t_path *our_path);
-void	cmd_execute(t_path *our_path);
-
 	/* exc_mutipipe.c */
-
 int		make_exec_pipe(t_token *list, t_env *our_path, t_data *data);
 int		how_much_pipe(t_token *list);
 void	close_fd(int i, int count, int **fd);
 void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data, t_env *our_env);
 t_token	*increase_tmp_list(t_token **tmp_list);
+
+	/* exc_onecmd.c */
+int		make_exec_word(t_token *list, t_env *our_env, t_data *data);
+int		check_path(t_path *our_path);
+void	cmd_execute(t_path *our_path);
+int		set_up_fd(t_pipex *multi, t_data *data, t_env *our_env);
 
 	/* builtin_cdpwd.c */
 int		builtin_pwd(void);

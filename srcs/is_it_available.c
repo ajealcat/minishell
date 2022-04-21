@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_it_available.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 18:07:03 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/20 12:01:29 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/21 12:18:37 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,12 @@ int	is_valid_t_pipe(t_token *list)
 				&& list->prev->type != var_word))
 		{
 			ft_putstr_fd("Syntax error pipe\n", 2);
-			printf("c'estmoi\n");
 			return (FAILURE);
 		}
 		if (list->next == NULL || (list->next->type != word
 				&& list->next->type != var_word))
 		{
 			ft_putstr_fd("Syntax error pipe\n", 2);
-			printf("non, c'estmoi\n");
 			return (FAILURE);
 		}
 		return (SUCCESS);

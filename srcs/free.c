@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:00:34 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/20 15:57:54 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/21 14:43:01 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_list(t_token **list)
 	t_token	*tmp;
 	t_token	*del;
 
-	if (*list != NULL)
+	if (list != NULL && *list != NULL)
 	{
 		tmp = (*list);
 		while (tmp != NULL)
@@ -68,7 +68,8 @@ void	free_multi(t_pipex *multi)
 		i++;
 	}
 	free(multi->fd);
-	free_list(&multi->list);
+//	free_list(&multi->list);
+//	multi->list = NULL;
 	free(multi);
 }
 

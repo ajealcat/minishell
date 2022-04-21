@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/20 12:42:15 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:07:36 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,23 @@ int	parsing_for_exec(t_token *list, t_env *our_env, t_data *data)
 	return (0);
 }
 
-int	parse_builtin(t_token *list, char *value, t_data *data, t_env *our_env)
+int	parse_builtin(t_token *list, t_data *data, t_env *our_env)
 {
-	if (ft_strncmp(value, "exit", 5) == 0)
+	if (ft_strncmp(list->value, "exit", 5) == 0)
 		return (builtin_exit(list, data, our_env));
-	else if (ft_strncmp(value, "$?", 3) == 0)
+	else if (ft_strncmp(list->value, "$?", 3) == 0)
 		return (other_cmd());
-	else if (ft_strncmp(value, "echo", 5) == 0)
+	else if (ft_strncmp(list->value, "echo", 5) == 0)
 		return (builtin_echo(list));
-	else if (ft_strncmp(value, "pwd", 4) == 0)
+	else if (ft_strncmp(list->value, "pwd", 4) == 0)
 		return (builtin_pwd());
-	else if (ft_strncmp(value, "cd", 3) == 0)
+	else if (ft_strncmp(list->value, "cd", 3) == 0)
 		return (builtin_cd(list));
-	else if (ft_strncmp(value, "export", 7) == 0)
+	else if (ft_strncmp(list->value, "export", 7) == 0)
 		return (builtin_export(list, our_env));
-	else if (ft_strncmp(value, "unset", 6) == 0)
+	else if (ft_strncmp(list->value, "unset", 6) == 0)
 		return (builtin_unset(list, our_env));
-	else if (ft_strncmp(value, "env", 4) == 0)
+	else if (ft_strncmp(list->value, "env", 4) == 0)
 		return (builtin_env(our_env));
 	return (FAILURE);
 }

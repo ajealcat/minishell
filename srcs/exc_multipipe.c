@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exc_multipipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/20 16:41:16 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:08:13 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	make_exec_pipe(t_token *list, t_env *our_env, t_data *data)
 	while (multi->i <= multi->count)
 	{
 		our_path = init_path2(our_env, &tmp_list);
+		if (our_path == NULL)
+			return (FAILURE);
 		if (check_path(our_path) == FAILURE)
 			path_not_found(our_path);
 		check_redirections(multi);
@@ -129,9 +131,9 @@ void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data, t_e
 				close(multi->fd_file_in);
 			}
 		}
-		if (parse_builtin(multi->list, multi->list->value, \
-			data, our_env) == SUCCESS)
+		if (parse_builtin(multi->list, data, our_env) == SUCCESS)
 		{
+			free_list(&multi->list);
 			free_multi(multi);
 			free_our_path(our_path);
 			free_exit(NULL, data, 0, our_env);

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/21 17:24:53 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/21 18:21:44 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,6 @@ t_token	*token_dollar(t_token *list, t_data *data)
 
 	if (ft_strncmp(data->str_trimed + data->i, "$", 2) == 0)
 		list = create_node(list, "$", var_word);
-	// if (ft_strncmp(data->str_trimed + data->i, "$?", 3) == 0)
-	// {
-	// 	list = create_node(list, "$?", var_word);
-	// 	data->i++;
-	// }
-	// else
-	// {
 	size = ft_strlen_dollar(data->str_trimed + data->i);
 	tmp = malloc(sizeof(char) * (size + 1));
 	if (!tmp)
@@ -102,6 +95,5 @@ t_token	*token_dollar(t_token *list, t_data *data)
 		return (list);
 	}
 	free(tmp);
-	// }
 	return (list);
 }

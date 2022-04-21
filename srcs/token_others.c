@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_others.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/20 15:54:08 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:24:53 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,40 +68,40 @@ t_token	*token_dollar(t_token *list, t_data *data)
 
 	if (ft_strncmp(data->str_trimed + data->i, "$", 2) == 0)
 		list = create_node(list, "$", var_word);
-	if (ft_strncmp(data->str_trimed + data->i, "$?", 3) == 0)
+	// if (ft_strncmp(data->str_trimed + data->i, "$?", 3) == 0)
+	// {
+	// 	list = create_node(list, "$?", var_word);
+	// 	data->i++;
+	// }
+	// else
+	// {
+	size = ft_strlen_dollar(data->str_trimed + data->i);
+	tmp = malloc(sizeof(char) * (size + 1));
+	if (!tmp)
+		return (NULL);
+	j = 0;
+	while (check_sep_for_word(data->str_trimed[data->i]) == SUCCESS
+		&& j < (size - 1))
 	{
-		list = create_node(list, "$?", var_word);
+		tmp[j] = data->str_trimed[data->i + 1];
 		data->i++;
+		j++;
+	}
+	tmp[j] = '\0';
+	env = gojo_expand(tmp, data->our_env);
+	if (env)
+	{
+		list = create_node(list, env, var_word);
+		free(tmp);
+		return (list);
 	}
 	else
 	{
-		size = ft_strlen_dollar(data->str_trimed + data->i);
-		tmp = malloc(sizeof(char) * (size + 1));
-		if (!tmp)
-			return (NULL);
-		j = 0;
-		while (check_sep_for_word(data->str_trimed[data->i]) == SUCCESS
-			&& j < (size - 1))
-		{
-			tmp[j] = data->str_trimed[data->i + 1];
-			data->i++;
-			j++;
-		}
-		tmp[j] = '\0';
-		env = gojo_expand(tmp);
-		if (env)
-		{
-			list = create_node(list, env, var_word);
-			free(tmp);
-			return (list);
-		}
-		else
-		{
-			list = create_node(list, "", var_word);
-			free(tmp);
-			return (list);
-		}
+		list = create_node(list, "", var_word);
 		free(tmp);
+		return (list);
 	}
+	free(tmp);
+	// }
 	return (list);
 }

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/21 15:07:36 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:42:23 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,19 @@ int	does_list_contain_pipe(t_token *list)
 	return (FAILURE);
 }
 
-int	parsing_for_exec(t_token *list, t_env *our_env, t_data *data)
+int	parsing_for_exec(t_token *list, t_data *data)
 {
 	if (list && does_list_contain_pipe(list) == SUCCESS)
-		make_exec_pipe(list, our_env, data);
+		make_exec_pipe(list, data);
 	else if (list && does_list_contain_pipe(list) == FAILURE)
-		make_exec_word(list, our_env, data);
+		make_exec_word(list, data);
 	return (0);
 }
 
-int	parse_builtin(t_token *list, t_data *data, t_env *our_env)
+int	parse_builtin(t_token *list, t_data *data)
 {
 	if (ft_strncmp(list->value, "exit", 5) == 0)
-		return (builtin_exit(list, data, our_env));
-	else if (ft_strncmp(list->value, "$?", 3) == 0)
-		return (other_cmd());
+		return (builtin_exit(list, data, data->our_env));
 	else if (ft_strncmp(list->value, "echo", 5) == 0)
 		return (builtin_echo(list));
 	else if (ft_strncmp(list->value, "pwd", 4) == 0)
@@ -81,10 +79,29 @@ int	parse_builtin(t_token *list, t_data *data, t_env *our_env)
 	else if (ft_strncmp(list->value, "cd", 3) == 0)
 		return (builtin_cd(list));
 	else if (ft_strncmp(list->value, "export", 7) == 0)
-		return (builtin_export(list, our_env));
+		return (builtin_export(list, data->our_env));
 	else if (ft_strncmp(list->value, "unset", 6) == 0)
-		return (builtin_unset(list, our_env));
+		return (builtin_unset(list, data->our_env));
 	else if (ft_strncmp(list->value, "env", 4) == 0)
-		return (builtin_env(our_env));
+		return (builtin_env(data->our_env));
+	return (FAILURE);
+}
+
+int	is_builtin(t_token *list)
+{
+	if (ft_strncmp(list->value, "exit", 5) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(list->value, "echo", 5) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(list->value, "pwd", 4) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(list->value, "cd", 3) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(list->value, "export", 7) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(list->value, "unset", 6) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(list->value, "env", 4) == 0)
+		return (SUCCESS);
 	return (FAILURE);
 }

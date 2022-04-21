@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_access.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 15:21:45 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/20 17:13:15 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:15:19 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**get_option_cmd(t_token *list)
 		option_cmd = reduce_goc(tmp);
 	else
 	{
-		while (tmp->type == word && tmp->next != NULL)
+		while ((tmp->type == word || tmp->type == var_word) && tmp->next != NULL)
 		{
 			tmp = tmp->next;
 			i++;
@@ -49,7 +49,7 @@ char	**get_option_cmd(t_token *list)
 			return (NULL);
 		tmp = list;
 		i = 0;
-		while (tmp && tmp->type == word && (i < j))
+		while (tmp && (tmp->type == word || tmp->type == var_word) && (i < j))
 		{
 			option_cmd[i] = ft_strdup(tmp->value);
 			tmp = tmp->next;
@@ -69,7 +69,7 @@ char	**get_option_cmd2(t_token *list)
 
 	tmp = list;
 	i = 0;
-	while (tmp->type == word && tmp->next != NULL)
+	while ((tmp->type == word || tmp->type == var_word) && tmp->next != NULL)
 	{
 		tmp = tmp->next;
 		i++;
@@ -81,7 +81,7 @@ char	**get_option_cmd2(t_token *list)
 		return (NULL);
 	tmp = list;
 	i = 0;
-	while (tmp && tmp->type == word && (i < j))
+	while (tmp && (tmp->type == word || tmp->type == var_word) && (i < j))
 	{
 		option_cmd[i++] = ft_strdup(tmp->value);
 		tmp = tmp->next;

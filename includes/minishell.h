@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/21 15:23:12 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:44:42 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_data
 	char			*buf;
 	char			*str_trimed;
 	int				i;
+	t_env			*our_env;
 }	t_data;
 
 typedef struct s_pipex
@@ -69,7 +70,7 @@ typedef struct s_pipex
 }	t_pipex;
 
 	/* prompt.c */
-int		print_prompt(t_data *data, t_env *our_env);
+int		print_prompt(t_data *data);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 	/* init.c */
@@ -86,8 +87,9 @@ t_path	*init_path2(t_env *our_env, t_token **tmp_list);
 t_token	*parse(t_token *list, t_data *data);
 t_token	*check_category(t_token *list, t_data *data);
 int		does_list_contain_pipe(t_token *list);
-int		parsing_for_exec(t_token *list, t_env *our_env, t_data *data);
-int		parse_builtin(t_token *list, t_data *data, t_env *our_env);
+int		parsing_for_exec(t_token *list, t_data *data);
+int		parse_builtin(t_token *list, t_data *data);
+int		is_builtin(t_token *list);
 
 	/* protection_quote.c */
 int		check_quotes(char *token);
@@ -126,7 +128,8 @@ int		is_valid_right(t_token *list);
 int		is_valid_t_pipe(t_token *list);
 
 	/* gojo_expand.c */
-char	*gojo_expand(char *tmp);
+char	*gojo_expand(char *tmp, t_env *our_env);
+char	*find_var(t_env *our_env, char *tmp);
 
 	/* signaux.c */
 void	gestion_signaux(int sig);
@@ -151,17 +154,17 @@ int		path_not_found(t_path *our_path);
 int		secure_fd(int fd);
 
 	/* exc_mutipipe.c */
-int		make_exec_pipe(t_token *list, t_env *our_path, t_data *data);
+int		make_exec_pipe(t_token *list, t_data *data);
 int		how_much_pipe(t_token *list);
 void	close_fd(int i, int count, int **fd);
-void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data, t_env *our_env);
+void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data);
 t_token	*increase_tmp_list(t_token **tmp_list);
 
 	/* exc_onecmd.c */
-int		make_exec_word(t_token *list, t_env *our_env, t_data *data);
+int		make_exec_word(t_token *list, t_data *data);
 int		check_path(t_path *our_path);
 void	cmd_execute(t_path *our_path);
-int		set_up_fd(t_pipex *multi, t_data *data, t_env *our_env);
+int		set_up_fd(t_pipex *multi, t_data *data);
 
 	/* builtin_cdpwd.c */
 int		builtin_pwd(void);

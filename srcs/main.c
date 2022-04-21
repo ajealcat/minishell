@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:14 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/20 17:19:17 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:38:41 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,19 @@ int g_status = 0;
 int	main(int ac, char **av, char **envp)
 {
 	t_data	*data;
-	t_env	*our_env;	
 
 	(void)ac;
 	(void)av;
-	our_env = malloc(sizeof(t_env));
-	if (!our_env)
-		return (FAILURE);
-	our_env->envp = create_ourenv(envp);
-	our_env->av = NULL;
 	data = malloc(sizeof(t_data));
+	data->our_env = malloc(sizeof(t_env));
+	if (!data->our_env)
+		return (FAILURE);
+	data->our_env->envp = create_ourenv(envp);
+	data->our_env->av = NULL;
 	if (!data)
 		return (FAILURE);
 	if (ac || av)
-		print_prompt(data, our_env);
-	free_our_env(our_env);
+		print_prompt(data);
+	free_our_env(data->our_env);
 	return (SUCCESS);
 }

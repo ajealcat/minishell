@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/19 13:27:57 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:45:16 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,13 @@ void	print_test(t_token *list)
 			printf("DQUOTE: |%s|\n", tmp->value);
 		else if (tmp->type == s_quote)
 			printf("SQUOTE: |%s|\n", tmp->value);
-		// else if (tmp->type == var)
-		// 	printf("var: |%s|\n", tmp->value);
 		else if (tmp->type == var_word)
 			printf("var_word: |%s|\n", tmp->value);
 		tmp = tmp->next;
 	}
 }
 
-int	print_prompt(t_data *data, t_env *our_env)
+int	print_prompt(t_data *data)
 {
 	char	*cmd;
 	t_token	*list;
@@ -60,7 +58,7 @@ int	print_prompt(t_data *data, t_env *our_env)
 		{
 			ft_putstr_fd("exit\n", 1);
 			free(data);
-			free_our_env(our_env);
+			free_our_env(data->our_env);
 			exit(0);
 		}
 		if (data->buf != NULL && ft_strlen(data->buf) != 0)
@@ -69,7 +67,7 @@ int	print_prompt(t_data *data, t_env *our_env)
 		// print_test(list);
 		if (checker_red(list) != FAILURE
 			&& unclose_quote(data->str_trimed) != FAILURE)
-			parsing_for_exec(list, our_env, data);
+			parsing_for_exec(list, data);
 		if (data != NULL)
 		{
 			free(data->buf);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:14:51 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/03/25 11:10:14 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:07:14 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_strlen_dollar(char *str)
 
 	i = 1;
 	while (str[i] && str[i] != '$'
-		&& (ft_isalnum(str[i]) == 1 || str[i] == '_'))
+		&& (ft_isalnum(str[i]) == 1 || str[i] == '_' || str[i] == '?'))
 		++i;
 	return (i);
 }

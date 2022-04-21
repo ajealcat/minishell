@@ -6,13 +6,13 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/21 15:08:13 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:41:39 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	make_exec_pipe(t_token *list, t_env *our_env, t_data *data)
+int	make_exec_pipe(t_token *list, t_data *data)
 {
 	t_token		*tmp_list;
 	pid_t		child_cmd;
@@ -23,7 +23,7 @@ int	make_exec_pipe(t_token *list, t_env *our_env, t_data *data)
 	multi = init_pipex(tmp_list);
 	while (multi->i <= multi->count)
 	{
-		our_path = init_path2(our_env, &tmp_list);
+		our_path = init_path2(data->our_env, &tmp_list);
 		if (our_path == NULL)
 			return (FAILURE);
 		if (check_path(our_path) == FAILURE)
@@ -31,7 +31,7 @@ int	make_exec_pipe(t_token *list, t_env *our_env, t_data *data)
 		check_redirections(multi);
 		child_cmd = fork();
 		secure_child(child_cmd);
-		make_child(child_cmd, multi, our_path, data, our_env);
+		make_child(child_cmd, multi, our_path, data);
 		multi->list = increase_tmp_list(&multi->list);
 		free_our_path(our_path);
 		multi->i++;
@@ -78,7 +78,7 @@ void	close_fd(int i, int count, int **fd)
 	}
 }
 
-void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data, t_env *our_env)
+void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data)
 {
 	if (child == 0)
 	{
@@ -131,12 +131,12 @@ void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data, t_e
 				close(multi->fd_file_in);
 			}
 		}
-		if (parse_builtin(multi->list, data, our_env) == SUCCESS)
+		if (parse_builtin(multi->list, data) == SUCCESS)
 		{
 			free_list(&multi->list);
 			free_multi(multi);
 			free_our_path(our_path);
-			free_exit(NULL, data, 0, our_env);
+			free_exit(NULL, data, 0, data->our_env);
 		}
 		else
 			cmd_execute(our_path);

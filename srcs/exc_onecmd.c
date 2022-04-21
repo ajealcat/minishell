@@ -6,13 +6,13 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/21 15:28:04 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:43:11 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	make_exec_word(t_token *list, t_env *our_env, t_data *data)
+int	make_exec_word(t_token *list, t_data *data)
 {
 	int		status;
 	pid_t	child_cmd;
@@ -21,8 +21,9 @@ int	make_exec_word(t_token *list, t_env *our_env, t_data *data)
 
 	multi = init_pipex(list);
 	check_redirections(multi);
-	set_up_fd(multi, data, our_env);
-	our_path = init_path(our_env, list);
+	if (set_up_fd(multi, data) == SUCCESS)
+		return (SUCCESS);
+	our_path = init_path(data->our_env, list);
 	child_cmd = fork();
 	secure_child(child_cmd);
 	if (check_path(our_path) == FAILURE)
@@ -33,7 +34,19 @@ int	make_exec_word(t_token *list, t_env *our_env, t_data *data)
 		return (FAILURE);
 	}
 	if (child_cmd == 0)
+	{
+		if (multi->fd_file_out != 0)
+		{
+			dup2(multi->fd_file_out, 1);
+			close(multi->fd_file_out);
+		}
+		if (multi->fd_file_in != 0)
+		{
+			dup2(multi->fd_file_in, 0);
+			close(multi->fd_file_in);
+		}
 		cmd_execute(our_path);
+	}
 	waitpid(child_cmd, &status, 0);
 	free_multi(multi);
 	free_our_path(our_path);
@@ -77,25 +90,26 @@ void	cmd_execute(t_path *our_path)
 	}
 }
 
-int	set_up_fd(t_pipex *multi, t_data *data, t_env *our_env)
+int	set_up_fd(t_pipex *multi, t_data *data)
 {
 	int	save_fdin;
 	int	save_fdout;
 
-	save_fdin = dup(0);
-	save_fdout = dup(1);
-	if (multi->fd_file_out != 0)
+	if (is_builtin(multi->list) == SUCCESS)
 	{
-		dup2(multi->fd_file_out, 1);
-		close(multi->fd_file_out);
-	}
-	if (multi->fd_file_in != 0)
-	{
-		dup2(multi->fd_file_in, 0);
-		close(multi->fd_file_in);
-	}
-	if (parse_builtin(multi->list, data, our_env) == SUCCESS)
-	{
+		save_fdin = dup(0);
+		save_fdout = dup(1);
+		if (multi->fd_file_out != 0)
+		{
+			dup2(multi->fd_file_out, 1);
+			close(multi->fd_file_out);
+		}
+		if (multi->fd_file_in != 0)
+		{
+			dup2(multi->fd_file_in, 0);
+			close(multi->fd_file_in);
+		}
+		parse_builtin(multi->list, data);
 		if (multi->fd_file_out != 0)
 		{
 			dup2(save_fdout, 1);
@@ -106,7 +120,8 @@ int	set_up_fd(t_pipex *multi, t_data *data, t_env *our_env)
 			dup2(save_fdin, 0);
 			close(save_fdin);
 		}
+		free_multi(multi);
 		return (SUCCESS);
 	}
-	return (SUCCESS);
+	return (FAILURE);
 }

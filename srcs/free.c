@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:00:34 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/21 14:43:01 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:21:26 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ void	free_multi(t_pipex *multi)
 		i++;
 	}
 	free(multi->fd);
-//	free_list(&multi->list);
-//	multi->list = NULL;
 	free(multi);
 }
 

@@ -6,23 +6,13 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:40:58 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/15 14:43:59 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/21 18:19:15 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_token	*reduce_fonction(char *str, char *tmp, int i, t_token *list)
-{
-	char	*env;
-
-	tmp = ft_substr(str, (i + 1), (ft_strlen_dollar(str + i) - 1));
-	env = gojo_expand(tmp);
-	list = create_node(list, env, var_word);
-	return (list);
-}
-
-t_token	*reparse_dquote(t_token *list, char *str)
+t_token	*reparse_dquote(t_token *list, char *str, t_data *data)
 {
 	int		i;
 	int		j;
@@ -43,7 +33,9 @@ t_token	*reparse_dquote(t_token *list, char *str)
 		}
 		if (str[i] && str[i] == '$')
 		{
-			list = reduce_fonction(str, tmp, i, list);
+			tmp = ft_substr(str, (i + 1), (ft_strlen_dollar(str + i) - 1));
+			tmp = gojo_expand(tmp, data->our_env);
+			list = create_node(list, tmp, var_word);
 			i += ft_strlen_dollar(str + i);
 			j = i;
 		}
@@ -80,7 +72,7 @@ t_token	*token_between_dquote(t_token *list, t_data *data)
 				tmp[j++] = data->str_trimed[data->i++];
 		}
 		tmp[j] = '\0';
-		list = reparse_dquote(list, tmp);
+		list = reparse_dquote(list, tmp, data);
 	}
 	return (list);
 }

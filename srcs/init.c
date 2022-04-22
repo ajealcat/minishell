@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/21 17:37:53 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/22 11:46:33 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_path	*init_path2(t_env *our_env, t_token **tmp_list)
 	our_path->envp = our_env->envp;
 	our_path->find_path = getenv("PATH");
 	our_path->option_cmd = get_option_cmd2(*tmp_list);
-	our_path->my_path = ft_split((const char *)our_path->find_path, ':');		
+	our_path->my_path = ft_split((const char *)our_path->find_path, ':');
 	while (*tmp_list && (*tmp_list)->type != t_pipe && our_path->my_path[i])
 	{
 		tmp = our_path->my_path[i];

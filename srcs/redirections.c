@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:56:16 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/22 12:55:19 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/22 14:02:43 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ int	check_redirections(t_pipex *multi)
 				fd_in = open_or_createfd(tmp->value, 3);
 			}
 		}
-		// else if (tmp->type == dl_red)
-		// {
-		// 	if (tmp->next->type == word)
-		// 	{
-		// 		tmp = tmp->next;
-		// 		fd_in = here_doc(tmp->value);
-		// 	}
-		// }
+		else if (tmp->type == dl_red)
+		{
+			if (tmp->next->type == word)
+			{
+				tmp = tmp->next;
+				fd_in = here_doc(tmp->value);
+			}
+		}
 		else if (tmp->type == dr_red)
 		{
 			if (tmp->next->type == word)
@@ -91,19 +91,3 @@ int	open_or_createfd(char *value, int nb)
 	}
 	return (FAILURE);
 }
-
-// 1. lancer un '>'
-// 2. read chaque entre et la reecrire 
-// 3. comparer a notre char *value
-// 4. stocker tout ce qu il y a dans un fichier cache ou idk
-// 5 renvoyer les fichier cache en std_in pour la prochaine commande 
-
-// fork
-// afficher prompt avec readline et comparer la ligne avec delimitateur
-// mettre ce qui est ecrit dans un buffer avec retour a la ligne et join a hque fois
-// expandre les var environnement dans le here here_doc
-
-// int	here_doc(char *value)
-// {
-	
-// }

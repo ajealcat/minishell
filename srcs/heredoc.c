@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 13:56:47 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/22 17:02:13 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/22 17:31:18 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,18 @@ int	here_doc(char *eof)
 	fd_heredoc_out = 1;
 	fd_heredoc_in = 0;
 	buffer = ft_strdup("");
+	child_cmd = fork();
+	secure_child(child_cmd);
 	fd_heredoc_out = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd_heredoc_out < 0)
 		return (FAILURE);
-	child_cmd = fork();
-	secure_child(child_cmd);
 	if (child_cmd == 0)
 	{
 		line = readline(">");
 		while (1)
 		{
+			// signal(SIGINT, gestion_signaux);
+			// signal(SIGQUIT, gestion_signaux);
 			if (strncmp(line, eof, ft_strlen(eof)) == 0)
 				break ;
 			tmp = buffer;
@@ -68,6 +70,8 @@ int	here_doc(char *eof)
 			line = readline(">");
 		}
 		fd_heredoc_in = make_here_doc(buffer, fd_heredoc_in, fd_heredoc_out);
+		free(buffer);
+		free(line);
 	}
 	waitpid(child_cmd, 0, 0);
 	unlink(".heredoc");

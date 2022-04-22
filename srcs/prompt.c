@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/22 12:43:52 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:45:48 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	print_prompt(t_data *data)
 		init_data(data);
 		signal(SIGINT, gestion_signaux);
 		signal(SIGQUIT, gestion_signaux);
+		// signal(SIGSEGV, gestion_signaux);
 		data->buf = readline(PROMPT);
 		if (!data->buf)
 		{

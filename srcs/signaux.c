@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:54:02 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/15 13:45:30 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:45:56 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,9 @@ void	gestion_signaux(int sig)
 		g_status = 127;
 		ft_putstr_fd("\b\b  \b\b  \b\b", 1);
 	}
+	// if (sig == SIGSEGV)
+	// {
+	// 	printf("exit ctrl + d\n");
+	// 	exit(0);
+	// }
 }

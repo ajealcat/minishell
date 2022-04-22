@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/22 12:13:26 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:18:52 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,5 +212,10 @@ int		is_argument(char **av, char *env_var);
 	/* redicrections.c */
 int		check_redirections(t_pipex *multi);
 int		open_or_createfd(char *value, int nb);
+
+	/* heredoc.c */
+
+int		here_doc(char *eof);
+int	make_here_doc(char *buffer, int fd_heredoc_in, int fd_heredoc_out);
 
 #endif

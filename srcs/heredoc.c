@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 13:56:47 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/22 14:44:00 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/22 17:02:13 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,51 @@ mettre ce qui est ecrit dans un buffer avec retour a la ligne et join a hque foi
 expandre les var environnement dans le here here_doc
 */
 
-int	here_doc(char *value)
+int	make_here_doc(char *buffer, int fd_heredoc_in, int fd_heredoc_out)
 {
-	int		fd_heredoc;
-	pid_t	child_cmd;
-	char	*ret_heredoc;
-	char	*tmp;
+	write(fd_heredoc_out, buffer, ft_strlen(buffer));
+	close(fd_heredoc_out);
+	fd_heredoc_in = open(".heredoc", O_RDONLY);
+	if (fd_heredoc_in < 0)
+		return (FAILURE);
+	return (fd_heredoc_in);
+}
 
-	fd_heredoc = 0;
-	// child_cmd = fork();
-	// secure_child(child_cmd);
-	// if (child_cmd == 0)
-	// 	ret_heredoc = create_heredoc();
-	while (1)
+int	here_doc(char *eof)
+{
+	int		fd_heredoc_out;
+	int		fd_heredoc_in;
+	pid_t	child_cmd;
+	char	*line;
+	char	*tmp;
+	char	*buffer;
+
+	fd_heredoc_out = 1;
+	fd_heredoc_in = 0;
+	buffer = ft_strdup("");
+	fd_heredoc_out = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (fd_heredoc_out < 0)
+		return (FAILURE);
+	child_cmd = fork();
+	secure_child(child_cmd);
+	if (child_cmd == 0)
 	{
-		tmp = readline(">");
-		if (strncmp(ret_heredoc, value, ft_strlen(value)) == 0)
-			break ;
-		tmp = read(0, )
-	waitpid(child_cmd, &status, 0);
-	return (fd_heredoc);
+		line = readline(">");
+		while (1)
+		{
+			if (strncmp(line, eof, ft_strlen(eof)) == 0)
+				break ;
+			tmp = buffer;
+			buffer = ft_strjoin(tmp, line);
+			free(tmp);
+			tmp = buffer;
+			buffer = ft_strjoin(tmp, "\n");
+			free(line);
+			line = readline(">");
+		}
+		fd_heredoc_in = make_here_doc(buffer, fd_heredoc_in, fd_heredoc_out);
+	}
+	waitpid(child_cmd, 0, 0);
+	unlink(".heredoc");
+	return (fd_heredoc_in);
 }

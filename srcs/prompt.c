@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/21 17:45:16 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/22 12:43:52 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int	print_prompt(t_data *data)
 		if (!data->buf)
 		{
 			ft_putstr_fd("exit\n", 1);
-			free(data);
 			free_our_env(data->our_env);
+			free(data);
 			exit(0);
 		}
 		if (data->buf != NULL && ft_strlen(data->buf) != 0)

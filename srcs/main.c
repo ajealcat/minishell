@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:14 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/22 12:04:07 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/22 12:18:00 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int ac, char **av, char **envp)
 	data->our_env->av = NULL;
 	if (ac || av)
 		print_prompt(data);
-	free_our_env(data->our_env);
+	if (data->our_env)
+		free_our_env(data->our_env);
 	return (SUCCESS);
 }

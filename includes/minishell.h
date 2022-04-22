@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/21 18:19:13 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/22 12:13:26 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_token	*parse(t_token *list, t_data *data);
 t_token	*check_category(t_token *list, t_data *data);
 int		does_list_contain_pipe(t_token *list);
 int		parsing_for_exec(t_token *list, t_data *data);
-int		parse_builtin(t_token *list, t_data *data);
+int		parse_builtin(t_token *list, t_data *data, t_pipex *multi);
 int		is_builtin(t_token *list);
 
 	/* protection_quote.c */
@@ -187,8 +187,8 @@ void	reduce_builtexport(char **tmp, t_env *our_env, char *av);
 
 	/* builtin_exit.c */
 int		only_digit(char *av);
-int		free_exit(t_token *list, t_data *data, int code, t_env *our_env);
-int		builtin_exit(t_token *list, t_data *data, t_env *our_env);
+int		free_exit(t_token *list, t_data *data, int code, t_pipex *multi);
+int		builtin_exit(t_token *list, t_data *data, t_pipex *multi);
 
 	/* builtin_env.c */
 int		builtin_env(t_env *our_env);

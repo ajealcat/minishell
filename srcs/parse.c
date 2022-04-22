@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/21 17:42:23 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/22 12:24:20 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ int	parsing_for_exec(t_token *list, t_data *data)
 	return (0);
 }
 
-int	parse_builtin(t_token *list, t_data *data)
+int	parse_builtin(t_token *list, t_data *data, t_pipex *multi)
 {
 	if (ft_strncmp(list->value, "exit", 5) == 0)
-		return (builtin_exit(list, data, data->our_env));
+		return (builtin_exit(list, data, multi));
 	else if (ft_strncmp(list->value, "echo", 5) == 0)
 		return (builtin_echo(list));
 	else if (ft_strncmp(list->value, "pwd", 4) == 0)

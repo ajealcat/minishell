@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/21 17:41:39 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/22 12:41:55 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,12 +131,12 @@ void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data)
 				close(multi->fd_file_in);
 			}
 		}
-		if (parse_builtin(multi->list, data) == SUCCESS)
+		if (parse_builtin(multi->list, data, multi) == SUCCESS)
 		{
 			free_list(&multi->list);
 			free_multi(multi);
 			free_our_path(our_path);
-			free_exit(NULL, data, 0, data->our_env);
+			free_exit(NULL, data, 0, NULL);
 		}
 		else
 			cmd_execute(our_path);

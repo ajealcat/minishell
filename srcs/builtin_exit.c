@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:48:27 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/22 12:21:32 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/22 13:54:00 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	free_exit(t_token *list, t_data *data, int code, t_pipex *multi)
 	if (list)
 		free_list(&list);
 	if (multi)
-		free(multi);
+		free_multi(multi);
 	rl_clear_history();
 	g_status = 0;
 	exit(code);

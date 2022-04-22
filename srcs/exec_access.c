@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 15:21:45 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/22 12:01:16 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/22 12:49:59 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ char	**get_option_cmd(t_token *list)
 		option_cmd = reduce_goc(tmp);
 	else
 	{
-		while ((tmp->type == word || tmp->type == var_word) && tmp->next != NULL)
+		while ((tmp->type == word || tmp->type == var_word)
+			&& tmp->next != NULL)
 		{
 			tmp = tmp->next;
 			i++;

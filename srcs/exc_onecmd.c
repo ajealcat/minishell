@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/25 16:48:07 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:52:08 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,16 +84,7 @@ int	set_up_fd(t_pipex *multi, t_data *data)
 	{
 		save_fdin = dup(0);
 		save_fdout = dup(1);
-		if (multi->fd_file_out != 0)
-		{
-			dup2(multi->fd_file_out, 1);
-			close(multi->fd_file_out);
-		}
-		if (multi->fd_file_in != 0)
-		{
-			dup2(multi->fd_file_in, 0);
-			close(multi->fd_file_in);
-		}
+		reduce_setupfd(multi);
 		parse_builtin(multi->list, data, multi);
 		if (multi->fd_file_out != 0)
 		{
@@ -110,3 +101,5 @@ int	set_up_fd(t_pipex *multi, t_data *data)
 	}
 	return (FAILURE);
 }
+
+// 32

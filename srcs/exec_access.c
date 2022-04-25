@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 15:21:45 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/22 12:49:59 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:06:20 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,7 @@ char	**get_option_cmd(t_token *list)
 		}
 		i++;
 		j = i;
-		option_cmd = malloc(sizeof(char *) * (i + 1));
-		if (!option_cmd)
-			return (NULL);
-		tmp = list;
-		i = 0;
-		while (tmp && (tmp->type == word || tmp->type == var_word) && (i < j))
-		{
-			option_cmd[i] = ft_strdup(tmp->value);
-			tmp = tmp->next;
-			i++;
-		}
-		option_cmd[i] = NULL;
+		option_cmd = reduce_goc_bis(tmp, list, i, j);
 	}
 	return (option_cmd);
 }
@@ -77,6 +66,14 @@ char	**get_option_cmd2(t_token *list)
 	}
 	i++;
 	j = i;
+	option_cmd = reduce_goc_bis(tmp, list, i, j);
+	return (option_cmd);
+}
+
+char	**reduce_goc_bis(t_token *tmp, t_token *list, int i, int j)
+{
+	char	**option_cmd;
+
 	option_cmd = malloc(sizeof(char *) * (i + 1));
 	if (!option_cmd)
 		return (NULL);

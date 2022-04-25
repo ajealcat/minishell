@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:44:10 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 16:47:23 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:51:02 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,18 @@ void	wait_onecmd(pid_t child_cmd, t_pipex *multi, t_path *our_path)
 	free_multi(multi);
 	free_our_path(our_path);
 	g_status = 0;
+}
+
+void	reduce_setupfd(t_pipex *multi)
+{
+	if (multi->fd_file_out != 0)
+	{
+		dup2(multi->fd_file_out, 1);
+		close(multi->fd_file_out);
+	}
+	if (multi->fd_file_in != 0)
+	{
+		dup2(multi->fd_file_in, 0);
+		close(multi->fd_file_in);
+	}
 }

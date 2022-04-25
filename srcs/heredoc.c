@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 13:56:47 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/22 17:31:18 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 12:47:59 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	make_here_doc(char *buffer, int fd_heredoc_in, int fd_heredoc_out)
 	return (fd_heredoc_in);
 }
 
-int	here_doc(char *eof)
+int	here_doc(char *eof, t_pipex *multi, t_data *data)
 {
 	int		fd_heredoc_out;
 	int		fd_heredoc_in;
@@ -49,7 +49,7 @@ int	here_doc(char *eof)
 	buffer = ft_strdup("");
 	child_cmd = fork();
 	secure_child(child_cmd);
-	fd_heredoc_out = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	fd_heredoc_out = open("objs/.heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd_heredoc_out < 0)
 		return (FAILURE);
 	if (child_cmd == 0)
@@ -64,16 +64,20 @@ int	here_doc(char *eof)
 			tmp = buffer;
 			buffer = ft_strjoin(tmp, line);
 			free(tmp);
+			free(line);
 			tmp = buffer;
 			buffer = ft_strjoin(tmp, "\n");
-			free(line);
+			free(tmp);
 			line = readline(">");
 		}
 		fd_heredoc_in = make_here_doc(buffer, fd_heredoc_in, fd_heredoc_out);
 		free(buffer);
 		free(line);
+		free_exit(multi->list, data, 0, multi);
 	}
 	waitpid(child_cmd, 0, 0);
-	unlink(".heredoc");
+	if (buffer)
+		free(buffer);
+	unlink("objs/.heredoc");
 	return (fd_heredoc_in);
 }

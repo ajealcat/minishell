@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/22 17:09:29 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 13:48:48 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,12 @@ int	make_exec_word(t_token *list, t_data *data)
 	t_pipex	*multi;
 
 	multi = init_pipex(list);
-	check_redirections(multi);
+	check_redirections(multi, data);
 	if (set_up_fd(multi, data) == SUCCESS)
 		return (SUCCESS);
 	our_path = init_path(data->our_env, list);
 	if (check_path(our_path) == FAILURE)
-	{
-		free_our_path(our_path);
-		g_status = 127;
-		// perror("Path");
-		return (FAILURE);
-	}
+		path_not_found(our_path, multi);
 	child_cmd = fork();
 	secure_child(child_cmd);
 	if (child_cmd == 0)

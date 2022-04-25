@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/22 16:18:52 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 13:49:38 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void	free_our_env(t_env *our_env);
 
 	/*  security.c */
 int		secure_child(pid_t child_cmd);
-int		path_not_found(t_path *our_path);
+int		path_not_found(t_path *our_path, t_pipex *multi);
 int		secure_fd(int fd);
 
 	/* exc_mutipipe.c */
@@ -210,12 +210,12 @@ char	**unset_copy(t_env *our_env, char **av, int count);
 int		is_argument(char **av, char *env_var);
 
 	/* redicrections.c */
-int		check_redirections(t_pipex *multi);
+int		check_redirections(t_pipex *multi, t_data *data);
 int		open_or_createfd(char *value, int nb);
 
 	/* heredoc.c */
 
-int		here_doc(char *eof);
-int	make_here_doc(char *buffer, int fd_heredoc_in, int fd_heredoc_out);
+int		here_doc(char *eof, t_pipex *multi, t_data *data);
+int		make_here_doc(char *buffer, int fd_heredoc_in, int fd_heredoc_out);
 
 #endif

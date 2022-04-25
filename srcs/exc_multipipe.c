@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/22 12:41:55 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 12:02:17 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	make_exec_pipe(t_token *list, t_data *data)
 			return (FAILURE);
 		if (check_path(our_path) == FAILURE)
 			path_not_found(our_path);
-		check_redirections(multi);
+		check_redirections(multi, data);
 		child_cmd = fork();
 		secure_child(child_cmd);
 		make_child(child_cmd, multi, our_path, data);

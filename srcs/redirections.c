@@ -6,13 +6,13 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:56:16 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/22 17:03:34 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 12:01:49 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	check_redirections(t_pipex *multi)
+int	check_redirections(t_pipex *multi, t_data *data)
 {
 	t_token	*tmp;
 	int		fd_out;
@@ -44,7 +44,7 @@ int	check_redirections(t_pipex *multi)
 			if (tmp->next->type == word)
 			{
 				tmp = tmp->next;
-				fd_in = here_doc(tmp->value);
+				fd_in = here_doc(tmp->value, multi, data);
 			}
 		}
 		else if (tmp->type == dr_red)

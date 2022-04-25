@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/25 13:48:48 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 14:15:19 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,13 @@ int	make_exec_word(t_token *list, t_data *data)
 		return (SUCCESS);
 	our_path = init_path(data->our_env, list);
 	if (check_path(our_path) == FAILURE)
-		path_not_found(our_path, multi);
+	{
+		free_our_path(our_path);
+		if (multi)
+			free_multi(multi);
+		g_status = 127;
+		return (FAILURE);
+	}
 	child_cmd = fork();
 	secure_child(child_cmd);
 	if (child_cmd == 0)

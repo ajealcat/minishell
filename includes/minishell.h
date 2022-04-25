@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 13:49:38 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 14:14:25 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void	free_our_env(t_env *our_env);
 
 	/*  security.c */
 int		secure_child(pid_t child_cmd);
-int		path_not_found(t_path *our_path, t_pipex *multi);
+int		path_not_found(t_path *our_path);
 int		secure_fd(int fd);
 
 	/* exc_mutipipe.c */

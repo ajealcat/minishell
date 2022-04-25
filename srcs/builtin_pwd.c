@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 18:02:33 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/08 17:41:49 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 15:53:48 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,10 @@ int	builtin_pwd(void)
 char	*move_pwd(char **av, char *pwd)
 {
 	char	*new_path;
-//	char	*pwd;
 
 	new_path = NULL;
 	if (av[1])
 	{
-//		pwd = getenv("PWD");
 		new_path = ft_strjoin(pwd, "/");
 		new_path = ft_strjoin(new_path, av[1]);
 		printf("new_path = %s\n", new_path);

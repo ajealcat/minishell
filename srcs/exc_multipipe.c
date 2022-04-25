@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 14:14:05 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:12:49 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,7 @@ int	make_exec_pipe(t_token *list, t_data *data)
 		multi->i++;
 	}
 	close_fd(multi->i, multi->count, multi->fd);
-	while (multi->j <= multi->count)
-	{
-		waitpid(child_cmd, 0, 0);
-		multi->j++;
-	}
-	free_multi(multi);
-	g_status = 0;
+	wait_exec_pipe(multi, child_cmd);
 	return (0);
 }
 

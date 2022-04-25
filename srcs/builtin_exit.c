@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:48:27 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/22 16:32:00 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 15:53:22 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	builtin_exit(t_token *list, t_data *data, t_pipex *multi)
 	}
 	else
 	{
-		ft_putstr_fd("exit\n", 1);
 		ft_putstr_fd("exit : too many arguments\n", 2);
 		g_status = 1;
 	}

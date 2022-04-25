@@ -6,7 +6,7 @@
 #    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/04/22 13:57:09 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/04/25 15:55:09 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS = main.c \
 		redirections.c \
 		utils_builtins_bis.c \
 		heredoc.c \
+		utils_exec.c \
 	
 SRCSD = srcs/
 OBJSD = objs/

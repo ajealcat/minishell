@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 15:26:01 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:28:01 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,24 @@ void	print_test(t_token *list)
 	tmp = list;
 	while (tmp != NULL)
 	{
-		if (tmp->type == word)
-			printf("word: |%s|\n", tmp->value);
-		else if (tmp->type == t_pipe)
+		if (tmp->type == WORD)
+			printf("WORD: |%s|\n", tmp->value);
+		else if (tmp->type == T_PIPE)
 			printf("PIPE: |%s|\n", tmp->value);
-		else if (tmp->type == l_red)
+		else if (tmp->type == L_RED)
 			printf("LESS: |%s|\n", tmp->value);
-		else if (tmp->type == r_red)
+		else if (tmp->type == R_RED)
 			printf("GREAT: |%s|\n", tmp->value);
-		else if (tmp->type == dl_red)
+		else if (tmp->type == DL_RED)
 			printf("DLESS: |%s|\n", tmp->value);
-		else if (tmp->type == dr_red)
+		else if (tmp->type == DR_RED)
 			printf("DGREAT: |%s|\n", tmp->value);
-		else if (tmp->type == d_quote)
+		else if (tmp->type == D_QUOTE)
 			printf("DQUOTE: |%s|\n", tmp->value);
-		else if (tmp->type == s_quote)
+		else if (tmp->type == S_QUOTE)
 			printf("SQUOTE: |%s|\n", tmp->value);
-		else if (tmp->type == var_word)
-			printf("var_word: |%s|\n", tmp->value);
+		else if (tmp->type == VAR_WORD)
+			printf("VAR_WORD: |%s|\n", tmp->value);
 		tmp = tmp->next;
 	}
 }

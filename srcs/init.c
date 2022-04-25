@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/22 13:52:07 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:24:16 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_path	*init_path2(t_env *our_env, t_token **tmp_list)
 	our_path = malloc(sizeof(t_path));
 	if (!our_path)
 		return (NULL);
-	if (*tmp_list && (*tmp_list)->type == l_red)
+	if (*tmp_list && (*tmp_list)->type == L_RED)
 	{
 		printf("Error : Not such file or directory\n");
 		return (NULL);
@@ -73,7 +73,7 @@ t_path	*init_path2(t_env *our_env, t_token **tmp_list)
 	our_path->find_path = getenv("PATH");
 	our_path->option_cmd = get_option_cmd2(*tmp_list);
 	our_path->my_path = ft_split((const char *)our_path->find_path, ':');
-	while (*tmp_list && (*tmp_list)->type != t_pipe && our_path->my_path[i])
+	while (*tmp_list && (*tmp_list)->type != T_PIPE && our_path->my_path[i])
 	{
 		tmp = our_path->my_path[i];
 		our_path->my_path[i] = ft_strjoin(our_path->my_path[i], "/");

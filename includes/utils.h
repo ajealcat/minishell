@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:56:39 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/20 14:19:36 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:18:02 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@
 # define FAILURE -1
 
 // tokens
-# define l_red 1
-# define r_red 2
-# define dl_red 3
-# define dr_red 4
-# define d_quote 5
-# define s_quote 6
-# define word 7
-# define t_pipe 8
-# define var_word 9
+# define L_RED 1
+# define R_RED 2
+# define DL_RED 3
+# define DR_RED 4
+# define D_QUOTE 5
+# define S_QUOTE 6
+# define WORD 7
+# define T_PIPE 8
+# define VAR_WORD 9
 
 
 //colors 

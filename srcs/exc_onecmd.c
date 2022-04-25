@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/25 16:52:08 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:30:27 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,3 @@ int	set_up_fd(t_pipex *multi, t_data *data)
 	}
 	return (FAILURE);
 }
-
-// 32

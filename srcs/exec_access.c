@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 15:21:45 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 17:06:20 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:17:18 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**get_option_cmd(t_token *list)
 		option_cmd = reduce_goc(tmp);
 	else
 	{
-		while ((tmp->type == word || tmp->type == var_word)
+		while ((tmp->type == WORD || tmp->type == VAR_WORD)
 			&& tmp->next != NULL)
 		{
 			tmp = tmp->next;
@@ -59,7 +59,7 @@ char	**get_option_cmd2(t_token *list)
 
 	tmp = list;
 	i = 0;
-	while ((tmp->type == word || tmp->type == var_word) && tmp->next != NULL)
+	while ((tmp->type == WORD || tmp->type == VAR_WORD) && tmp->next != NULL)
 	{
 		tmp = tmp->next;
 		i++;
@@ -79,7 +79,7 @@ char	**reduce_goc_bis(t_token *tmp, t_token *list, int i, int j)
 		return (NULL);
 	tmp = list;
 	i = 0;
-	while (tmp && (tmp->type == word || tmp->type == var_word) && (i < j))
+	while (tmp && (tmp->type == WORD || tmp->type == VAR_WORD) && (i < j))
 	{
 		option_cmd[i++] = ft_strdup(tmp->value);
 		tmp = tmp->next;

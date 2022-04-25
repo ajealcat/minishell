@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:08:36 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/25 17:11:45 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:17:18 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**create_arg(t_token *list)
 	count = 0;
 	while (tmp)
 	{
-		if (tmp->type == word || tmp->type == var_word)
+		if (tmp->type == WORD || tmp->type == VAR_WORD)
 			count++;
 		tmp = tmp->next;
 	}
@@ -42,7 +42,7 @@ char	**create_arg(t_token *list)
 	if (!av)
 		return (NULL);
 	tmp = list;
-	while (tmp && (tmp->type == word || tmp->type == var_word))
+	while (tmp && (tmp->type == WORD || tmp->type == VAR_WORD))
 	{
 		av[i++] = ft_strdup(tmp->value);
 		tmp = tmp->next;

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/21 18:21:44 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:29:24 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ t_token	*r_redirect(t_token *list, t_data *data)
 {
 	if (ft_strncmp(data->str_trimed + data->i, ">>", 2) == 0)
 	{
-		list = create_node(list, ">>", dr_red);
+		list = create_node(list, ">>", DR_RED);
 		data->i++;
 	}
 	else
-		list = create_node(list, ">", r_red);
+		list = create_node(list, ">", R_RED);
 	return (list);
 }
 
@@ -28,11 +28,11 @@ t_token	*l_redirect(t_token *list, t_data *data)
 {
 	if (ft_strncmp(data->str_trimed + data->i, "<<", 2) == 0)
 	{
-		list = create_node(list, "<<", dl_red);
+		list = create_node(list, "<<", DL_RED);
 		data->i++;
 	}
 	else
-		list = create_node(list, "<", l_red);
+		list = create_node(list, "<", L_RED);
 	return (list);
 }
 
@@ -54,7 +54,7 @@ t_token	*token_word(t_token *list, t_data *data)
 		j++;
 	}
 	tmp[j] = '\0';
-	list = create_node(list, tmp, word);
+	list = create_node(list, tmp, WORD);
 	data->i--;
 	return (list);
 }
@@ -67,7 +67,7 @@ t_token	*token_dollar(t_token *list, t_data *data)
 	char	*env;
 
 	if (ft_strncmp(data->str_trimed + data->i, "$", 2) == 0)
-		list = create_node(list, "$", var_word);
+		list = create_node(list, "$", VAR_WORD);
 	size = ft_strlen_dollar(data->str_trimed + data->i);
 	tmp = malloc(sizeof(char) * (size + 1));
 	if (!tmp)
@@ -84,13 +84,13 @@ t_token	*token_dollar(t_token *list, t_data *data)
 	env = gojo_expand(tmp, data->our_env);
 	if (env)
 	{
-		list = create_node(list, env, var_word);
+		list = create_node(list, env, VAR_WORD);
 		free(tmp);
 		return (list);
 	}
 	else
 	{
-		list = create_node(list, "", var_word);
+		list = create_node(list, "", VAR_WORD);
 		free(tmp);
 		return (list);
 	}

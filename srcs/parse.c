@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/25 17:09:49 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:28:57 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_token	*check_category(t_token *list, t_data *data)
 		if (data->str_trimed[data->i] == '\'')
 			list = token_between_squote(list, data);
 		if (data->str_trimed[data->i] == '|')
-			list = create_node(list, "|", t_pipe);
+			list = create_node(list, "|", T_PIPE);
 		if (data->str_trimed[data->i] == '$')
 			list = token_dollar(list, data);
 		else if (go_for_word(data->str_trimed[data->i]) == SUCCESS)
@@ -51,7 +51,7 @@ int	does_list_contain_pipe(t_token *list)
 	tmp = list;
 	while (tmp)
 	{
-		if (tmp->type == t_pipe)
+		if (tmp->type == T_PIPE)
 			return (SUCCESS);
 		tmp = tmp->next;
 	}

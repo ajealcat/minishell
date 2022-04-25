@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 17:09:43 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:21:45 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_token
 typedef struct s_path
 {
 	char			**envp;
-	char			*find_path; /* no need to free this one */
+	char			*find_path;
 	char			**option_cmd;
 	char			**my_path;
 }	t_path;

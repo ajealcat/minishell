@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 16:22:18 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:30:59 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	how_much_pipe(t_token *list)
 	tmp = list;
 	while (tmp)
 	{
-		if (tmp->type == t_pipe)
+		if (tmp->type == T_PIPE)
 			count++;
 		tmp = tmp->next;
 	}
@@ -96,9 +96,9 @@ void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data)
 
 t_token	*increase_tmp_list(t_token **tmp_list)
 {
-	while (*tmp_list && (*tmp_list)->type != t_pipe)
+	while (*tmp_list && (*tmp_list)->type != T_PIPE)
 		*tmp_list = (*tmp_list)->next;
-	if (*tmp_list && (*tmp_list)->type == t_pipe)
+	if (*tmp_list && (*tmp_list)->type == T_PIPE)
 		*tmp_list = (*tmp_list)->next;
 	return (*tmp_list);
 }

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:40:58 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/22 11:56:19 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:17:18 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ t_token	*reparse_dquote(t_token *list, char *str, t_data *data)
 			if (str[i] == '$' || str[i] == '\0')
 			{
 				tmp = ft_substr(str, j, i - j);
-				list = create_node(list, tmp, word);
+				list = create_node(list, tmp, WORD);
 			}
 		}
 		if (str[i] && str[i] == '$')
 		{
 			tmp = ft_substr(str, (i + 1), (ft_strlen_dollar(str + i) - 1));
 			tmp = gojo_expand(tmp, data->our_env);
-			list = create_node(list, tmp, var_word);
+			list = create_node(list, tmp, VAR_WORD);
 			i += ft_strlen_dollar(str + i);
 			j = i;
 		}
@@ -52,7 +52,7 @@ t_token	*token_between_dquote(t_token *list, t_data *data)
 
 	if (ft_strncmp(data->str_trimed + data->i, "\"\"", 3) == 0)
 	{
-		list = create_node(list, " ", var_word);
+		list = create_node(list, " ", VAR_WORD);
 		data->i++;
 	}
 	else
@@ -101,7 +101,7 @@ t_token	*token_between_squote(t_token *list, t_data *data)
 	int		count;
 
 	if (ft_strncmp(data->str_trimed + data->i, "''", 3) == 0)
-		list = create_node(list, " ", var_word);
+		list = create_node(list, " ", VAR_WORD);
 	else
 	{
 		count = count_quote(data->str_trimed + data->i, '\'');
@@ -123,7 +123,7 @@ t_token	*token_between_squote(t_token *list, t_data *data)
 					tmp[j++] = data->str_trimed[data->i++];
 			}
 			tmp[j] = '\0';
-			list = create_node(list, tmp, word);
+			list = create_node(list, tmp, WORD);
 		}
 	}
 	return (list);

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 16:18:44 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:47:19 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,5 +224,9 @@ void	wait_exec_pipe(t_pipex *multi, pid_t child_cmd);
 void	reduce_make_child_one(t_pipex *multi);
 void	reduce_make_child_two(t_pipex *multi);
 void	reduce_make_child_three(t_pipex *multi);
+
+	/* utils_exec.c */
+void	reduce_make_child_onecmd(t_pipex *multi, t_path *our_path);
+void	wait_onecmd(pid_t child_cmd, t_pipex *multi, t_path *our_path);
 
 #endif

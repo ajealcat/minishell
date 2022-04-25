@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/25 15:46:19 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:48:07 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	make_exec_word(t_token *list, t_data *data)
 {
-	int		status;
 	pid_t	child_cmd;
 	t_path	*our_path;
 	t_pipex	*multi;
@@ -35,23 +34,8 @@ int	make_exec_word(t_token *list, t_data *data)
 	child_cmd = fork();
 	secure_child(child_cmd);
 	if (child_cmd == 0)
-	{
-		if (multi->fd_file_out != 0)
-		{
-			dup2(multi->fd_file_out, 1);
-			close(multi->fd_file_out);
-		}
-		if (multi->fd_file_in != 0)
-		{
-			dup2(multi->fd_file_in, 0);
-			close(multi->fd_file_in);
-		}
-		cmd_execute(our_path);
-	}
-	waitpid(child_cmd, &status, 0);
-	free_multi(multi);
-	free_our_path(our_path);
-	g_status = 0;
+		reduce_make_child_onecmd(multi, our_path);
+	wait_onecmd(child_cmd, multi, our_path);
 	return (SUCCESS);
 }
 

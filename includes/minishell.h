@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 16:12:17 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:18:44 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,5 +221,8 @@ int		make_here_doc(char *buffer, int fd_heredoc_in, int fd_heredoc_out);
 
 	/* utils_exec.c */
 void	wait_exec_pipe(t_pipex *multi, pid_t child_cmd);
+void	reduce_make_child_one(t_pipex *multi);
+void	reduce_make_child_two(t_pipex *multi);
+void	reduce_make_child_three(t_pipex *multi);
 
 #endif

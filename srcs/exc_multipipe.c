@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 16:12:49 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:22:18 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,54 +77,11 @@ void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data)
 	if (child == 0)
 	{
 		if (multi->i == 0)
-		{
-			close_fd(multi->i, multi->count, multi->fd);
-			dup2(multi->fd[multi->i + 1][1], 1);
-			close(multi->fd[multi->i + 1][1]);
-			if (multi->fd_file_out != 0)
-			{
-				dup2(multi->fd_file_out, 1);
-				close(multi->fd_file_out);
-			}
-			if (multi->fd_file_in != 0)
-			{
-				dup2(multi->fd_file_in, 0);
-				close(multi->fd_file_in);
-			}
-		}
+			reduce_make_child_one(multi);
 		else if (multi->i == multi->count)
-		{
-			close_fd(multi->i, multi->count, multi->fd);
-			dup2(multi->fd[multi->i][0], 0);
-			close(multi->fd[multi->i][0]);
-			if (multi->fd_file_out != 0)
-			{
-				dup2(multi->fd_file_out, 1);
-				close(multi->fd_file_out);
-			}
-			if (multi->fd_file_in != 0)
-			{
-				dup2(multi->fd_file_in, 0);
-				close(multi->fd_file_in);
-			}
-		}
+			reduce_make_child_two(multi);
 		else
-		{
-			close_fd(multi->i, multi->count, multi->fd);
-			dup2(multi->fd[multi->i][0], 0);
-			dup2(multi->fd[multi->i + 1][1], 1);
-			close(multi->fd[multi->i + 1][1]);
-			if (multi->fd_file_out != 0)
-			{
-				dup2(multi->fd_file_out, 1);
-				close(multi->fd_file_out);
-			}
-			if (multi->fd_file_in != 0)
-			{
-				dup2(multi->fd_file_in, 0);
-				close(multi->fd_file_in);
-			}
-		}
+			reduce_make_child_three(multi);
 		if (parse_builtin(multi->list, data, multi) == SUCCESS)
 		{
 			free_list(&multi->list);

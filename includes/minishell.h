@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 14:14:25 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 14:19:31 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ char	*find_var(t_env *our_env, char *tmp);
 
 	/* signaux.c */
 void	gestion_signaux(int sig);
+void	heredoc_signaux(int sig);
 
 	/* exec_access.c */
 char	**reduce_goc(t_token *list);

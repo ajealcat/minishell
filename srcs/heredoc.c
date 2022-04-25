@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 13:56:47 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 12:47:59 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 15:48:46 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,13 @@ int	here_doc(char *eof, t_pipex *multi, t_data *data)
 		return (FAILURE);
 	if (child_cmd == 0)
 	{
+		//  signal(SIGINT, );
 		line = readline(">");
 		while (1)
 		{
-			// signal(SIGINT, gestion_signaux);
-			// signal(SIGQUIT, gestion_signaux);
+			signal(SIGSEGV, heredoc_signaux);
+			// signal(SIGINT, heredoc_signaux);
+			// signal(SIGQUIT, heredoc_signaux);
 			if (strncmp(line, eof, ft_strlen(eof)) == 0)
 				break ;
 			tmp = buffer;

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:54:02 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/22 16:45:56 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 15:48:58 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,29 @@ void	gestion_signaux(int sig)
 		g_status = 127;
 		ft_putstr_fd("\b\b  \b\b  \b\b", 1);
 	}
-	// if (sig == SIGSEGV)
+}
+
+void	heredoc_signaux(int sig)
+{
+
+	// if (sig == SIGINT)
 	// {
-	// 	printf("exit ctrl + d\n");
-	// 	exit(0);
+
+	// 	ft_putstr_fd("\n", 0);
+	// 	rl_replace_line("", 0);
+	// 	g_status = 130;
+	// 	write(1, "\n", 1);
+	// 	// rl_replace_line("", 0);
+	// 	close(STDIN_FILENO);
 	// }
+	// if (sig == SIGQUIT)
+	// {
+	// 	g_status = 127;
+	// 	rl_replace_line("", 0);
+	// }
+	if (sig == SIGSEGV)
+	{
+		printf("\n");
+		exit(0);
+	}
 }

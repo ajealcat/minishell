@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_builtins_bis.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 17:00:23 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/20 17:15:26 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:09:01 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,23 @@ void	reduce_builtexport(char **tmp, t_env *our_env, char *av)
 	tmp = create_value(our_env, av);
 	free_split(our_env->envp);
 	our_env->envp = tmp;
+}
+
+int	is_builtin(t_token *list)
+{
+	if (ft_strncmp(list->value, "exit", 5) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(list->value, "echo", 5) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(list->value, "pwd", 4) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(list->value, "cd", 3) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(list->value, "export", 7) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(list->value, "unset", 6) == 0)
+		return (SUCCESS);
+	else if (ft_strncmp(list->value, "env", 4) == 0)
+		return (SUCCESS);
+	return (FAILURE);
 }

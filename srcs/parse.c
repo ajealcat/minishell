@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 12:26:13 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/22 12:24:20 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:09:49 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,24 +84,5 @@ int	parse_builtin(t_token *list, t_data *data, t_pipex *multi)
 		return (builtin_unset(list, data->our_env));
 	else if (ft_strncmp(list->value, "env", 4) == 0)
 		return (builtin_env(data->our_env));
-	return (FAILURE);
-}
-
-int	is_builtin(t_token *list)
-{
-	if (ft_strncmp(list->value, "exit", 5) == 0)
-		return (SUCCESS);
-	else if (ft_strncmp(list->value, "echo", 5) == 0)
-		return (SUCCESS);
-	else if (ft_strncmp(list->value, "pwd", 4) == 0)
-		return (SUCCESS);
-	else if (ft_strncmp(list->value, "cd", 3) == 0)
-		return (SUCCESS);
-	else if (ft_strncmp(list->value, "export", 7) == 0)
-		return (SUCCESS);
-	else if (ft_strncmp(list->value, "unset", 6) == 0)
-		return (SUCCESS);
-	else if (ft_strncmp(list->value, "env", 4) == 0)
-		return (SUCCESS);
 	return (FAILURE);
 }

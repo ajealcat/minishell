@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:08:36 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/19 14:27:07 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:11:45 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ char	**create_arg(t_token *list)
 	tmp = list;
 	while (tmp && (tmp->type == word || tmp->type == var_word))
 	{
-		av[i] = ft_strdup(tmp->value);
-		i++;
+		av[i++] = ft_strdup(tmp->value);
 		tmp = tmp->next;
 	}
 	av[i] = NULL;

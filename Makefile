@@ -6,7 +6,7 @@
 #    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/04/25 16:44:38 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/04/25 17:08:19 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,6 @@ SRCS = main.c \
 		builtin_cdpwd.c \
 		builtin_echo.c \
 		utils_builtins.c \
-		other_cmd.c \
 		builtin_env.c \
 		builtin_export.c \
 		builtin_unset.c \

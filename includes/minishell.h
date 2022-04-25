@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 17:01:31 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:09:43 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ t_token	*check_category(t_token *list, t_data *data);
 int		does_list_contain_pipe(t_token *list);
 int		parsing_for_exec(t_token *list, t_data *data);
 int		parse_builtin(t_token *list, t_data *data, t_pipex *multi);
-int		is_builtin(t_token *list);
 
 	/* protection_quote.c */
 int		check_quotes(char *token);
@@ -186,6 +185,7 @@ int		ft_tablen(char **tab);
 
 	/* utils_builtins_bis.c */
 void	reduce_builtexport(char **tmp, t_env *our_env, char *av);
+int		is_builtin(t_token *list);
 
 	/* builtin_exit.c */
 int		only_digit(char *av);

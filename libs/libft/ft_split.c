@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:57:56 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/26 15:49:59 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:06:57 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	**ft_split(const char *str, char c)
 	{
 		while (*str && *str == c)
 			++str;
-		tab[index] = malloc(sizeof(char) * ft_sizeofword(str, c) + 1);
+		tab[index] = malloc(sizeof(char) * ft_sizeofwords(str, c) + 1);
 		if (tab[index] == 0)
 			return (ft_error(tab, index));
 		i = 0;

@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/26 15:52:14 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:42:33 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,5 +233,11 @@ void	reduce_setupfd(t_pipex *multi);
 	/* utils_init.c */
 char	**reduce_init_path2(t_token **tmp_list, t_path *our_path);
 int		**reduce_init_pipex(t_pipex *multi);
+
+	/* utils_token.c */
+t_token	*reduce_reparse_dquote(char *tmp, t_data *data, t_token *list);
+t_token	*reduce_reparse_dquote2(int i, int j, char *str, t_token *list);
+char	*reduce_token_btw_dquote(t_data *data, int size, int count, char *tmp);
+char	*reduce_token_btw_squote(t_data *data, int size, int count, char *tmp);
 
 #endif

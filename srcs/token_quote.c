@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:40:58 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/26 15:46:19 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:44:33 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_token	*reparse_dquote(t_token *list, char *str, t_data *data)
 	int		i;
 	int		j;
 	char	*tmp;
-	char	*env;
 
 	i = 0;
 	j = 0;
@@ -26,25 +25,16 @@ t_token	*reparse_dquote(t_token *list, char *str, t_data *data)
 		while (str[i] && str[i] != '$')
 		{
 			i++;
-			if (str[i] == '$' || str[i] == '\0')
-			{
-				tmp = ft_substr(str, j, i - j);
-				list = create_node(list, tmp, WORD);
-			}
+			list = reduce_reparse_dquote2(i, j, str, list);
 		}
 		if (str[i] && str[i] == '$')
 		{
 			tmp = ft_substr(str, (i + 1), (ft_strlen_dollar(str + i) - 1));
-			env = gojo_expand(tmp, data->our_env);
-			if (env)
-				list = create_node(list, env, VAR_WORD);
-			else
-				list = create_node(list, "", VAR_WORD);
-			// list = create_node(list, tmp, VAR_WORD);
+			list = reduce_reparse_dquote(tmp, data, list);
 			i += ft_strlen_dollar(str + i);
 			j = i;
+			free(tmp);
 		}
-		free(tmp);
 	}
 	return (list);
 }
@@ -52,10 +42,10 @@ t_token	*reparse_dquote(t_token *list, char *str, t_data *data)
 t_token	*token_between_dquote(t_token *list, t_data *data)
 {
 	int			size;
-	int			j;
 	char		*tmp;
 	int			count;
 
+	tmp = NULL;
 	if (ft_strncmp(data->str_trimed + data->i, "\"\"", 3) == 0)
 	{
 		list = create_node(list, " ", VAR_WORD);
@@ -66,21 +56,10 @@ t_token	*token_between_dquote(t_token *list, t_data *data)
 		count = count_quote(data->str_trimed + data->i, '\"');
 		size = ft_strlen_between_quotes(data->str_trimed + data->i, \
 			count, '\"');
-		tmp = malloc(sizeof(char) * ((size - count) + 1));
-		if (!tmp)
-			return (NULL);
-		j = 0;
-		while (data->str_trimed[data->i] && j < (size - count))
-		{
-			if (data->str_trimed[data->i] == '\"')
-				data->i++;
-			else
-				tmp[j++] = data->str_trimed[data->i++];
-		}
-		tmp[j] = '\0';
+		tmp = reduce_token_btw_dquote(data, size, count, tmp);
 		list = reparse_dquote(list, tmp, data);
-		free(tmp);
 	}
+	free(tmp);
 	return (list);
 }
 
@@ -103,10 +82,10 @@ int	count_quote(char *str, char quote)
 t_token	*token_between_squote(t_token *list, t_data *data)
 {
 	int		size;
-	int		j;
 	char	*tmp;
 	int		count;
 
+	tmp = NULL;
 	if (ft_strncmp(data->str_trimed + data->i, "''", 3) == 0)
 		list = create_node(list, " ", VAR_WORD);
 	else
@@ -114,24 +93,8 @@ t_token	*token_between_squote(t_token *list, t_data *data)
 		count = count_quote(data->str_trimed + data->i, '\'');
 		size = ft_strlen_between_quotes(data->str_trimed + data->i, \
 			count, '\'');
-		tmp = malloc(sizeof(char) * ((size - count) + 1));
-		if (!tmp)
-			return (NULL);
-		j = 0;
-		if (ft_strlen(data->str_trimed) == (size_t)count)
-			return (NULL);
-		else
-		{
-			while (data->str_trimed[data->i] && j < (size - count))
-			{
-				if (data->str_trimed[data->i] == '\'')
-					data->i++;
-				else
-					tmp[j++] = data->str_trimed[data->i++];
-			}
-			tmp[j] = '\0';
-			list = create_node(list, tmp, WORD);
-		}
+		tmp = reduce_token_btw_squote(data, size, count, tmp);
+		list = create_node(list, tmp, WORD);
 	}
 	return (list);
 }

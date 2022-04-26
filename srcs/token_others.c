@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/26 14:16:55 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:57:32 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ t_token	*token_dollar(t_token *list, t_data *data)
 	int		size;
 	int		j;
 	char	*tmp;
-	char	*env;
 
 	if (ft_strncmp(data->str_trimed + data->i, "$", 2) == 0)
 		list = create_node(list, "$", VAR_WORD);
@@ -81,19 +80,6 @@ t_token	*token_dollar(t_token *list, t_data *data)
 		j++;
 	}
 	tmp[j] = '\0';
-	env = gojo_expand(tmp, data->our_env);
-	if (env)
-	{
-		list = create_node(list, env, VAR_WORD);
-		free(tmp);
-		return (list);
-	}
-	else
-	{
-		list = create_node(list, "", VAR_WORD);
-		free(tmp);
-		return (list);
-	}
-	free(tmp);
+	list = reduce_token_dollar(tmp, data, list);
 	return (list);
 }

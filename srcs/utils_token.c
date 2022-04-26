@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:08:21 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/26 16:42:21 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:55:37 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,24 @@ char	*reduce_token_btw_squote(t_data *data, int size, int count, char *tmp)
 		tmp[j] = '\0';
 	}
 	return (tmp);
+}
+
+t_token	*reduce_token_dollar(char *tmp, t_data *data, t_token *list)
+{
+	char	*env;
+
+	env = gojo_expand(tmp, data->our_env);
+	if (env)
+	{
+		list = create_node(list, env, VAR_WORD);
+		free(tmp);
+		return (list);
+	}
+	else
+	{
+		list = create_node(list, "", VAR_WORD);
+		free(tmp);
+		return (list);
+	}
+	return (list);
 }

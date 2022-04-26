@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/26 16:42:33 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/26 18:16:31 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,15 @@ typedef struct s_pipex
 	int				fd_file_in;
 	t_token			*list;
 }	t_pipex;
+
+typedef struct s_hdoc
+{
+	int		fd_heredoc_out;
+	int		fd_heredoc_in;
+	char	*buffer;
+	char	*line;
+	char	*eof;
+}	t_hdoc;
 
 	/* prompt.c */
 void	free_data_buf(t_data *data);
@@ -216,6 +225,8 @@ int		open_or_createfd(char *value, int nb);
 
 	/* heredoc.c */
 
+t_hdoc	*init_heredoc(char *eof);
+int		free_heredoc(t_hdoc *heredoc);
 int		here_doc(char *eof, t_pipex *multi, t_data *data);
 int		make_here_doc(char *buffer, int fd_heredoc_in, int fd_heredoc_out);
 
@@ -239,5 +250,10 @@ t_token	*reduce_reparse_dquote(char *tmp, t_data *data, t_token *list);
 t_token	*reduce_reparse_dquote2(int i, int j, char *str, t_token *list);
 char	*reduce_token_btw_dquote(t_data *data, int size, int count, char *tmp);
 char	*reduce_token_btw_squote(t_data *data, int size, int count, char *tmp);
+t_token	*reduce_token_dollar(char *tmp, t_data *data, t_token *list);
+
+	/* utils_heredoc.c */
+void	check_sig(int sig);
+void	boucle_line_heredoc(t_hdoc *heredoc, t_pipex *multi, t_data *data);
 
 #endif

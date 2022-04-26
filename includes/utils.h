@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:56:39 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/26 15:51:44 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/26 17:15:55 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,9 @@
 
 //prompt 
 # define PROMPT "Minishell🌌 > "
+
+//signal
+# define HEREDOC_IGN 60
+# define HEREDOC    61
 
 #endif

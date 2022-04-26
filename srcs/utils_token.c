@@ -6,9 +6,8 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:08:21 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/26 14:08:32 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/26 15:51:05 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-

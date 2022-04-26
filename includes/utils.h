@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:56:39 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 17:18:02 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/26 15:51:44 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # define WORD 7
 # define T_PIPE 8
 # define VAR_WORD 9
-
 
 //colors 
 # define GREEN "\033[0;32m"

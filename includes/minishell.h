@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/26 14:03:18 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/26 15:52:14 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ typedef struct s_pipex
 void	free_data_buf(t_data *data);
 void	free_data(t_data *data);
 int		print_prompt(t_data *data);
-
 
 	/* init.c */
 void	init_token(t_token *token);

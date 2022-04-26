@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:14 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 15:22:35 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/26 15:50:46 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // $ + var en minuscule segfault
 // cd sans arguments doit nous ramener au home
 
-int g_status = 0;
+int	g_status = 0;
 
 int	main(int ac, char **av, char **envp)
 {

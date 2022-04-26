@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signaux.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:54:02 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/25 17:29:45 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/26 12:59:27 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,16 @@ void	gestion_signaux(int sig)
 void	heredoc_signaux(int sig)
 {
 
-	// if (sig == SIGINT)
-	// {
+	if (sig == SIGINT)
+	{
 
-	// 	ft_putstr_fd("\n", 0);
-	// 	rl_replace_line("", 0);
-	// 	g_status = 130;
-	// 	write(1, "\n", 1);
-	// 	// rl_replace_line("", 0);
-	// 	close(STDIN_FILENO);
-	// }
-	// if (sig == SIGQUIT)
-	// {
-	// 	g_status = 127;
-	// 	rl_replace_line("", 0);
-	// }
-	if (sig == SIGSEGV)
+		write(1, "\n", 1);
+		close(STDIN_FILENO);
+		g_status = 130;
+	}
+	else if (sig == SIGQUIT)
+		write(1, "\b\b  \b\b", 6);
+	else if (sig == SIGSEGV)
 	{
 		printf("\n");
 		exit(0);

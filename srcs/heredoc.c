@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 13:56:47 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/26 12:59:04 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/26 13:10:56 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,13 @@ int	here_doc(char *eof, t_pipex *multi, t_data *data)
 		return (FAILURE);
 	if (child_cmd == 0)
 	{
-		line = readline(">");
+		
 		while (1)
 		{
 			signal(SIGSEGV, heredoc_signaux);
 			signal(SIGINT, heredoc_signaux);
 			signal(SIGQUIT, heredoc_signaux);
+			line = readline(">");
 			if (strncmp(line, eof, ft_strlen(eof)) == 0)
 				break ;
 			tmp = buffer;

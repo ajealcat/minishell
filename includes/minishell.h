@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 17:21:45 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/26 13:33:55 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,6 @@ void	init_data(t_data *data);
 t_pipex	*init_pipex(t_token *list);
 t_path	*init_path(t_env *our_env, t_token *list);
 t_path	*init_path2(t_env *our_env, t_token **tmp_list);
-
-	/* init_bis.c */
-// t_benv	*init_env(char **envp);
 
 	/* parse.c */
 t_token	*parse(t_token *list, t_data *data);
@@ -230,5 +227,9 @@ void	reduce_make_child_three(t_pipex *multi);
 void	reduce_make_child_onecmd(t_pipex *multi, t_path *our_path);
 void	wait_onecmd(pid_t child_cmd, t_pipex *multi, t_path *our_path);
 void	reduce_setupfd(t_pipex *multi);
+
+	/* utils_init.c */
+char	**reduce_init_path2(t_token **tmp_list, t_path *our_path);
+int		**reduce_init_pipex(t_pipex *multi);
 
 #endif

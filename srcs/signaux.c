@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:54:02 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/26 13:03:47 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:31:17 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	heredoc_signaux(int sig)
 	{
 
 		g_status = 130;
-		write(1, "\n", 1);
+		// write(1, "\n", 1);
 		rl_replace_line("", 0);
 		close(STDIN_FILENO);
 		// write(1, "\n", 1);

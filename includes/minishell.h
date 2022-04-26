@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/26 13:43:49 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:03:18 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,7 @@ char	**unset_copy(t_env *our_env, char **av, int count);
 int		is_argument(char **av, char *env_var);
 
 	/* redicrections.c */
+int		reduce_check_red(t_token *tmp, t_pipex *multi, t_data *data, int value);
 int		check_redirections(t_pipex *multi, t_data *data);
 int		open_or_createfd(char *value, int nb);
 

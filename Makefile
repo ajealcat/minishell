@@ -6,7 +6,7 @@
 #    By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/04/26 13:25:39 by fboumell         ###   ########.fr        #
+#    Updated: 2022/04/26 14:08:44 by fboumell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,8 @@ SRCS = main.c \
 		utils_exec.c \
 		utils_exec_word.c \
 		utils_init.c \
-	
+		utils_token.c \
+		
 SRCSD = srcs/
 OBJSD = objs/
 OBJS = $(addprefix $(OBJSD), $(SRCS:.c=.o))

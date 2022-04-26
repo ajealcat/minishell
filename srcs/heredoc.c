@@ -6,7 +6,7 @@
 /*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 13:56:47 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/26 13:10:56 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:32:09 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,22 @@ int	here_doc(char *eof, t_pipex *multi, t_data *data)
 	fd_heredoc_out = 1;
 	fd_heredoc_in = 0;
 	buffer = ft_strdup("");
+	signal(SIGSEGV, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	child_cmd = fork();
 	secure_child(child_cmd);
 	fd_heredoc_out = open("objs/.heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd_heredoc_out < 0)
 		return (FAILURE);
 	if (child_cmd == 0)
-	{
-		
-		while (1)
+	{	
+		signal(SIGSEGV, heredoc_signaux);
+		signal(SIGINT, heredoc_signaux);
+		signal(SIGQUIT, heredoc_signaux);
+		line = readline(">");
+		while (line)
 		{
-			signal(SIGSEGV, heredoc_signaux);
-			signal(SIGINT, heredoc_signaux);
-			signal(SIGQUIT, heredoc_signaux);
-			line = readline(">");
 			if (strncmp(line, eof, ft_strlen(eof)) == 0)
 				break ;
 			tmp = buffer;

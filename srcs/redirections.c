@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:56:16 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/25 17:25:28 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:07:20 by fboumell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	reduce_check_red(t_token *tmp, t_pipex *multi, t_data *data, int value)
+{
+	int		fd;
+
+	fd = 0;
+	if (value == 4)
+	{
+		if (tmp->next->type == WORD)
+		{
+			tmp = tmp->next;
+			fd = here_doc(tmp->value, multi, data);
+			return (fd);
+		}
+	}
+	if (tmp->next->type == WORD)
+	{
+		tmp = tmp->next;
+		fd = open_or_createfd(tmp->value, value);
+		return (fd);
+	}
+	return (FAILURE);
+}
 
 int	check_redirections(t_pipex *multi, t_data *data)
 {
@@ -24,37 +47,13 @@ int	check_redirections(t_pipex *multi, t_data *data)
 	while (tmp && tmp->type != T_PIPE)
 	{
 		if (tmp->type == R_RED)
-		{
-			if (tmp->next->type == WORD)
-			{
-				tmp = tmp->next;
-				fd_out = open_or_createfd(tmp->value, 1);
-			}
-		}
+			fd_out = reduce_check_red(tmp, NULL, NULL, 1);
 		else if (tmp->type == L_RED)
-		{
-			if (tmp->next->type == WORD)
-			{
-				tmp = tmp->next;
-				fd_in = open_or_createfd(tmp->value, 3);
-			}
-		}
+			fd_in = reduce_check_red(tmp, NULL, NULL, 3);
 		else if (tmp->type == DL_RED)
-		{
-			if (tmp->next->type == WORD)
-			{
-				tmp = tmp->next;
-				fd_in = here_doc(tmp->value, multi, data);
-			}
-		}
+			fd_in = reduce_check_red(tmp, multi, data, 4);
 		else if (tmp->type == DR_RED)
-		{
-			if (tmp->next->type == WORD)
-			{
-				tmp = tmp->next;
-				fd_out = open_or_createfd(tmp->value, 2);
-			}
-		}
+			fd_out = reduce_check_red(tmp, NULL, NULL, 2);
 		if (tmp && (tmp->next == NULL || tmp->next->type == T_PIPE))
 		{
 			multi->fd_file_out = fd_out;

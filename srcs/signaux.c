@@ -6,11 +6,32 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:54:02 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/27 12:48:45 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 15:56:50 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	check_sig(int sig)
+{
+	if (sig == HEREDOC_IGN)
+	{
+		signal(SIGSEGV, SIG_IGN);
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	if (sig == HEREDOC)
+	{
+		signal(SIGSEGV, heredoc_signaux);
+		signal(SIGINT, heredoc_signaux);
+		signal(SIGQUIT, heredoc_signaux);
+	}
+	if (sig == CHILD)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+	}
+}
 
 void	gestion_signaux(int sig)
 {

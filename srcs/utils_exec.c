@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 15:54:57 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 13:59:46 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 16:26:34 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void	wait_exec_pipe(t_pipex *multi, pid_t child_cmd)
 {
+	(void) child_cmd;
+	close_fd(multi->i, multi->count, multi->fd);
 	while (multi->j <= multi->count)
 	{
-		waitpid(child_cmd, 0, 0);
+		waitpid(-1, 0, 0);
 		multi->j++;
 	}
 	free_multi(multi);
@@ -25,7 +27,6 @@ void	wait_exec_pipe(t_pipex *multi, pid_t child_cmd)
 
 void	reduce_make_child_one(t_pipex *multi)
 {
-	// dup2(0, multi->fd[multi->i][0]);
 	close_fd(multi->i, multi->count, multi->fd);
 	dup2(multi->fd[multi->i + 1][1], 1);
 	close(multi->fd[multi->i + 1][1]);
@@ -43,7 +44,6 @@ void	reduce_make_child_one(t_pipex *multi)
 
 void	reduce_make_child_two(t_pipex *multi)
 {
-	// dup2(1, multi->fd[multi->i + 1][1]);
 	close_fd(multi->i, multi->count, multi->fd);
 	dup2(multi->fd[multi->i][0], 0);
 	close(multi->fd[multi->i][0]);
@@ -75,4 +75,10 @@ void	reduce_make_child_three(t_pipex *multi)
 		dup2(multi->fd_file_in, 0);
 		close(multi->fd_file_in);
 	}
+}
+
+void	reduce_vrreuumant(t_pipex *multi, t_data *data)
+{
+	check_redirections(multi, data);
+	check_sig(HEREDOC_IGN);
 }

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 12:34:46 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 15:59:10 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ char	*gojo_expand(char *tmp, t_env *our_env);
 char	*find_var(t_env *our_env, char *tmp);
 
 	/* signaux.c */
+void	check_sig(int sig);
 void	gestion_signaux(int sig);
 void	heredoc_signaux(int sig);
 
@@ -158,14 +159,14 @@ void	free_our_env(t_env *our_env);
 
 	/*  security.c */
 int		secure_child(pid_t child_cmd);
-int		path_not_found(t_path *our_path);
+int		path_not_found(t_path *our_path, t_pipex *multi);
 int		secure_fd(int fd);
 
 	/* exc_mutipipe.c */
 int		make_exec_pipe(t_token *list, t_data *data);
 int		how_much_pipe(t_token *list);
 void	close_fd(int i, int count, int **fd);
-void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data);
+int		make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data);
 t_token	*increase_tmp_list(t_token **tmp_list);
 
 	/* exc_onecmd.c */
@@ -237,8 +238,9 @@ void	wait_exec_pipe(t_pipex *multi, pid_t child_cmd);
 void	reduce_make_child_one(t_pipex *multi);
 void	reduce_make_child_two(t_pipex *multi);
 void	reduce_make_child_three(t_pipex *multi);
+void	reduce_vrreuumant(t_pipex *multi, t_data *data);
 
-	/* utils_exec.c */
+	/* utils_exec_word.c */
 int		reduce_make_child_onecmd(t_pipex *multi, t_path *our_path);
 int		check_path_failed(t_path *our_path, t_pipex *multi);
 void	wait_onecmd(pid_t child_cmd, t_pipex *multi, t_path *our_path);
@@ -256,7 +258,6 @@ char	*reduce_token_btw_squote(t_data *data, int size, int count, char *tmp);
 t_token	*reduce_token_dollar(char *tmp, t_data *data, t_token *list);
 
 	/* utils_heredoc.c */
-void	check_sig(int sig);
 void	boucle_line_heredoc(t_hdoc *heredoc, t_pipex *multi, t_data *data);
 
 #endif

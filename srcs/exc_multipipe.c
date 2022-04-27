@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 13:34:07 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 16:21:41 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ int	make_exec_pipe(t_token *list, t_data *data)
 		our_path = init_path2(data->our_env, &tmp_list);
 		if (our_path == NULL)
 			return (FAILURE);
-		if (check_path(our_path) == FAILURE)
-			path_not_found(our_path);
-		check_redirections(multi, data);
+		if (check_path(our_path) == FAILURE && is_builtin(tmp_list) == FAILURE)
+			return (path_not_found(our_path, multi));
+		reduce_vrreuumant(multi, data);
 		child_cmd = fork();
 		secure_child(child_cmd);
-		make_child(child_cmd, multi, our_path, data);
+		if (make_child(child_cmd, multi, our_path, data) == FAILURE)
+			return (FAILURE);
 		multi->list = increase_tmp_list(&multi->list);
 		free_our_path(our_path);
 		multi->i++;
 	}
-	close_fd(multi->i, multi->count, multi->fd);
 	wait_exec_pipe(multi, child_cmd);
 	return (0);
 }
@@ -72,10 +72,11 @@ void	close_fd(int i, int count, int **fd)
 	}
 }
 
-void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data)
+int	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data)
 {
 	if (child == 0)
 	{
+		check_sig(CHILD);
 		if (multi->i == 0)
 			reduce_make_child_one(multi);
 		else if (multi->i == multi->count)
@@ -89,9 +90,10 @@ void	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data)
 			free_our_path(our_path);
 			free_exit(NULL, data, 0, NULL);
 		}
-		else
-			cmd_execute(our_path);
+		if (cmd_execute(our_path) == FAILURE)
+			return (FAILURE);
 	}
+	return (SUCCESS);
 }
 
 t_token	*increase_tmp_list(t_token **tmp_list)

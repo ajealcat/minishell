@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 20:02:40 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 20:23:05 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,22 @@ t_path	*init_path(t_env *our_env, t_token *list)
 	if (list && list->value && list->value[0] == '/')
 	{
 		our_path->my_path = malloc(sizeof(char *) * 2);
+		if (our_path->my_path == NULL)
+			return (NULL);
 		our_path->my_path[0] = ft_strdup(list->value);
+		our_path->my_path[1] = NULL;
+	}
+	else if (list && list->value && list->value[0] == '.')
+	{
+		tmp = getcwd(NULL, 0);
+		our_path->my_path = malloc(sizeof(char *) * 2);
+		if (our_path->my_path == NULL)
+			return (NULL);
+		our_path->my_path[0] = ft_strjoin(tmp, "/");
+		free(tmp);
+		tmp = our_path->my_path[0];
+		our_path->my_path[0] = ft_strjoin(tmp, list->value);
+		free(tmp);
 		our_path->my_path[1] = NULL;
 	}
 	else
@@ -69,6 +84,7 @@ t_path	*init_path(t_env *our_env, t_token *list)
 t_path	*init_path2(t_env *our_env, t_token **tmp_list)
 {
 	t_path	*our_path;
+	char	*tmp;
 
 	our_path = malloc(sizeof(t_path));
 	if (!our_path)
@@ -82,7 +98,22 @@ t_path	*init_path2(t_env *our_env, t_token **tmp_list)
 	if ((*tmp_list) && (*tmp_list)->value && (*tmp_list)->value[0] == '/')
 	{
 		our_path->my_path = malloc(sizeof(char *) * 2);
+		if (our_path->my_path == NULL)
+			return (NULL);
 		our_path->my_path[0] = ft_strdup((*tmp_list)->value);
+		our_path->my_path[1] = NULL;
+	}
+	else if ((*tmp_list) && (*tmp_list)->value && (*tmp_list)->value[0] == '.')
+	{
+		tmp = getcwd(NULL, 0);
+		our_path->my_path = malloc(sizeof(char *) * 2);
+		if (our_path->my_path == NULL)
+			return (NULL);
+		our_path->my_path[0] = ft_strjoin(tmp, "/");
+		free(tmp);
+		tmp = our_path->my_path[0];
+		our_path->my_path[0] = ft_strjoin(tmp, (*tmp_list)->value);
+		free(tmp);
 		our_path->my_path[1] = NULL;
 	}
 	else

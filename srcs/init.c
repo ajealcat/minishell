@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 20:23:05 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 20:43:53 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ t_path	*init_path(t_env *our_env, t_token *list)
 	our_path->envp = our_env->envp;
 	our_path->find_path = gojo_expand("PATH", our_env);
 	our_path->option_cmd = get_option_cmd(list);
+	our_path->my_path = NULL;
+	if (list && list->value && list->value[0] == '\0')
+		return (our_path);
 	if (list && list->value && list->value[0] == '/')
 	{
 		our_path->my_path = malloc(sizeof(char *) * 2);
@@ -95,6 +98,9 @@ t_path	*init_path2(t_env *our_env, t_token **tmp_list)
 	our_path->envp = our_env->envp;
 	our_path->find_path = gojo_expand("PATH", our_env);
 	our_path->option_cmd = get_option_cmd2(*tmp_list);
+	our_path->my_path = NULL;
+	if ((*tmp_list) && (*tmp_list)->value && (*tmp_list)->value[0] == '\0')
+		return (our_path);
 	if ((*tmp_list) && (*tmp_list)->value && (*tmp_list)->value[0] == '/')
 	{
 		our_path->my_path = malloc(sizeof(char *) * 2);

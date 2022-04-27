@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/27 19:28:35 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 20:37:35 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,19 @@ int	cmd_execute(t_path *our_path)
 	{
 		if (access(our_path->my_path[i], X_OK) == 0)
 		{
-			if (execve(our_path->my_path[i], our_path->option_cmd, \
-				our_path->envp) == -1)
-			{
-				free_our_path(our_path);
-				g_status = 127;
-				perror("Execve");
-				return (FAILURE);
-			}
+			execve(our_path->my_path[i],
+				our_path->option_cmd, our_path->envp);
+			free_our_path(our_path);
+			g_status = 127;
+			perror("Execve");
+			return (FAILURE);
 		}
 		++i;
 	}
-	return (SUCCESS);
+	free_our_path(our_path);
+	g_status = 127;
+	perror("Minishell");
+	return (FAILURE);
 }
 
 int	set_up_fd(t_pipex *multi, t_data *data)

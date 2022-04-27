@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:44:10 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 11:55:45 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 12:01:56 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,13 @@ void	reduce_setupfd(t_pipex *multi)
 		dup2(multi->fd_file_in, 0);
 		close(multi->fd_file_in);
 	}
+}
+
+int	check_path_failed(t_path *our_path, t_pipex *multi)
+{
+	free_our_path(our_path);
+	if (multi)
+		free_multi(multi);
+	g_status = 127;
+	return (FAILURE);
 }

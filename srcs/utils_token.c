@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:08:21 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/26 16:55:37 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:11:51 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_token	*reduce_reparse_dquote(char *tmp, t_data *data, t_token *list)
 	if (env)
 		list = create_node(list, env, VAR_WORD);
 	else
-		list = create_node(list, "", VAR_WORD);
+		list = create_node(list, ft_strdup(""), VAR_WORD);
 	return (list);
 }
 
@@ -92,7 +92,7 @@ t_token	*reduce_token_dollar(char *tmp, t_data *data, t_token *list)
 	}
 	else
 	{
-		list = create_node(list, "", VAR_WORD);
+		list = create_node(list, ft_strdup(""), VAR_WORD);
 		free(tmp);
 		return (list);
 	}

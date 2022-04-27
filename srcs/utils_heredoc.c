@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 16:59:38 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/27 11:48:19 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 12:46:00 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ void	check_sig(int sig)
 		signal(SIGSEGV, heredoc_signaux);
 		signal(SIGINT, heredoc_signaux);
 		signal(SIGQUIT, heredoc_signaux);
+	}
+	if (sig == CHILD)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 	}
 }
 

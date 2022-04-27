@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:00:34 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/25 17:23:15 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:02:19 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_list(t_token **list)
 		while (tmp != NULL)
 		{
 			del = tmp;
-			if (tmp->type == WORD)
+			if (tmp->value && (tmp->type == WORD || tmp->type == VAR_WORD))
 				free(tmp->value);
 			tmp = tmp->next;
 			free(del);

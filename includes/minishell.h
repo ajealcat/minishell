@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/26 23:37:10 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 11:57:14 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ t_token	*increase_tmp_list(t_token **tmp_list);
 	/* exc_onecmd.c */
 int		make_exec_word(t_token *list, t_data *data);
 int		check_path(t_path *our_path);
-void	cmd_execute(t_path *our_path);
+int		cmd_execute(t_path *our_path);
 int		set_up_fd(t_pipex *multi, t_data *data);
 
 	/* builtin_cdpwd.c */
@@ -238,7 +238,7 @@ void	reduce_make_child_two(t_pipex *multi);
 void	reduce_make_child_three(t_pipex *multi);
 
 	/* utils_exec.c */
-void	reduce_make_child_onecmd(t_pipex *multi, t_path *our_path);
+int		reduce_make_child_onecmd(t_pipex *multi, t_path *our_path);
 void	wait_onecmd(pid_t child_cmd, t_pipex *multi, t_path *our_path);
 void	reduce_setupfd(t_pipex *multi);
 

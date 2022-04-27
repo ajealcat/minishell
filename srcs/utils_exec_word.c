@@ -6,13 +6,13 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:44:10 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 17:27:01 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 11:55:45 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	reduce_make_child_onecmd(t_pipex *multi, t_path *our_path)
+int	reduce_make_child_onecmd(t_pipex *multi, t_path *our_path)
 {
 	if (multi->fd_file_out != 0)
 	{
@@ -24,7 +24,9 @@ void	reduce_make_child_onecmd(t_pipex *multi, t_path *our_path)
 		dup2(multi->fd_file_in, 0);
 		close(multi->fd_file_in);
 	}
-	cmd_execute(our_path);
+	if (cmd_execute(our_path) == FAILURE)
+		return (FAILURE);
+	return (SUCCESS);
 }
 
 void	wait_onecmd(pid_t child_cmd, t_pipex *multi, t_path *our_path)

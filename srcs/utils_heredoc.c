@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 16:59:38 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/26 23:53:29 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 11:48:19 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	boucle_line_heredoc(t_hdoc *heredoc, t_pipex *multi, t_data *data)
 {
 	char	*tmp;
 
-	// (void)data;
-	// (void)multi;
 	check_sig(HEREDOC);
 	heredoc->line = readline(">");
 	while (heredoc->line)
@@ -50,11 +48,6 @@ void	boucle_line_heredoc(t_hdoc *heredoc, t_pipex *multi, t_data *data)
 		heredoc->line = readline(">");
 	}
 	ft_putstr_fd(heredoc->buffer, heredoc->fd[1]);
-	// heredoc->fd_heredoc_in = make_here_doc(heredoc->buffer, \
-	// heredoc->fd_heredoc_in, heredoc->fd_heredoc_out);
-	// free(buffer);
-	// free(line);
 	free_heredoc(heredoc);
 	free_exit(multi->list, data, 0, multi);
-
 }

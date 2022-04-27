@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/25 17:30:27 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 11:58:17 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,13 @@ int	make_exec_word(t_token *list, t_data *data)
 	child_cmd = fork();
 	secure_child(child_cmd);
 	if (child_cmd == 0)
-		reduce_make_child_onecmd(multi, our_path);
+	{
+		if (reduce_make_child_onecmd(multi, our_path) == FAILURE)
+		{	
+			free_exit(list, data, 0, multi);
+			return (FAILURE);
+		}
+	}
 	wait_onecmd(child_cmd, multi, our_path);
 	return (SUCCESS);
 }
@@ -54,7 +60,7 @@ int	check_path(t_path *our_path)
 	return (FAILURE);
 }
 
-void	cmd_execute(t_path *our_path)
+int	cmd_execute(t_path *our_path)
 {
 	int	i;
 
@@ -69,10 +75,12 @@ void	cmd_execute(t_path *our_path)
 				free_our_path(our_path);
 				g_status = 127;
 				perror("Execve");
+				return (FAILURE);
 			}
 		}
 		++i;
 	}
+	return (SUCCESS);
 }
 
 int	set_up_fd(t_pipex *multi, t_data *data)

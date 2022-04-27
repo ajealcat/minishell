@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:40 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/26 13:43:28 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/27 11:52:57 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,8 @@ void	free_data(t_data *data)
 
 int	print_prompt(t_data *data)
 {
-	char	*cmd;
 	t_token	*list;
 
-	cmd = "exit";
 	while (1)
 	{
 		list = NULL;

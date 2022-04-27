@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:40:58 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/26 16:44:33 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/27 17:13:34 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_token	*token_between_dquote(t_token *list, t_data *data)
 	tmp = NULL;
 	if (ft_strncmp(data->str_trimed + data->i, "\"\"", 3) == 0)
 	{
-		list = create_node(list, " ", VAR_WORD);
+		list = create_node(list, ft_strdup(" "), WORD);
 		data->i++;
 	}
 	else
@@ -87,7 +87,7 @@ t_token	*token_between_squote(t_token *list, t_data *data)
 
 	tmp = NULL;
 	if (ft_strncmp(data->str_trimed + data->i, "''", 3) == 0)
-		list = create_node(list, " ", VAR_WORD);
+		list = create_node(list, ft_strdup(" "), WORD);
 	else
 	{
 		count = count_quote(data->str_trimed + data->i, '\'');

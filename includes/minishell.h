@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 15:59:10 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 18:36:12 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,6 +245,7 @@ int		reduce_make_child_onecmd(t_pipex *multi, t_path *our_path);
 int		check_path_failed(t_path *our_path, t_pipex *multi);
 void	wait_onecmd(pid_t child_cmd, t_pipex *multi, t_path *our_path);
 void	reduce_setupfd(t_pipex *multi);
+int		exec_failed(t_pipex *multi, t_data *data, t_path *our_path);
 
 	/* utils_init.c */
 char	**reduce_init_path2(t_token **tmp_list, t_path *our_path);

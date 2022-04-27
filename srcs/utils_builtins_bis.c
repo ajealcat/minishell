@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 17:00:23 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/25 17:09:01 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 18:02:56 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	reduce_builtexport(char **tmp, t_env *our_env, char *av)
 
 int	is_builtin(t_token *list)
 {
-	if (ft_strncmp(list->value, "exit", 5) == 0)
+	if (!list)
+		return (FAILURE);
+	else if (ft_strncmp(list->value, "exit", 5) == 0)
 		return (SUCCESS);
 	else if (ft_strncmp(list->value, "echo", 5) == 0)
 		return (SUCCESS);

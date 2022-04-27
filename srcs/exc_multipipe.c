@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:11:12 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 16:21:41 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 18:37:51 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	make_exec_pipe(t_token *list, t_data *data)
 		our_path = init_path2(data->our_env, &tmp_list);
 		if (our_path == NULL)
 			return (FAILURE);
-		if (check_path(our_path) == FAILURE && is_builtin(tmp_list) == FAILURE)
+		if (check_path(our_path) == -1 && is_builtin(multi->list) == -1)
 			return (path_not_found(our_path, multi));
 		reduce_vrreuumant(multi, data);
 		child_cmd = fork();
@@ -91,7 +91,7 @@ int	make_child(pid_t child, t_pipex *multi, t_path *our_path, t_data *data)
 			free_exit(NULL, data, 0, NULL);
 		}
 		if (cmd_execute(our_path) == FAILURE)
-			return (FAILURE);
+			return (exec_failed(multi, data, our_path));
 	}
 	return (SUCCESS);
 }

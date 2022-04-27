@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:00:34 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/27 13:02:19 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 18:32:35 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	free_list(t_token **list)
 
 	if (list != NULL && *list != NULL)
 	{
+		while ((*list) && (*list)->prev)
+			(*list) = (*list)->prev;
 		tmp = (*list);
 		while (tmp != NULL)
 		{

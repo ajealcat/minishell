@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 16:42:12 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 18:22:03 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_path	*init_path(t_env *our_env, t_token *list)
 	our_path = malloc(sizeof(t_path));
 	if (!our_path)
 		return (NULL);
-	if (list && list->type == L_RED)
+	if (list && list->next && (list->type == L_RED || list->type == R_RED))
 		list = list->next->next;
 	our_path->envp = our_env->envp;
 	our_path->find_path = getenv("PATH");
@@ -63,7 +63,8 @@ t_path	*init_path2(t_env *our_env, t_token **tmp_list)
 	our_path = malloc(sizeof(t_path));
 	if (!our_path)
 		return (NULL);
-	if (*tmp_list && (*tmp_list)->type == L_RED)
+	if (*tmp_list && (*tmp_list)->next
+		&& ((*tmp_list)->type == L_RED || (*tmp_list)->type == R_RED))
 		(*tmp_list) = (*tmp_list)->next->next;
 	our_path->envp = our_env->envp;
 	our_path->find_path = getenv("PATH");

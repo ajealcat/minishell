@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 15:54:57 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 16:26:34 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 18:05:27 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,21 @@
 
 void	wait_exec_pipe(t_pipex *multi, pid_t child_cmd)
 {
+	int	status;
+
+	status = 0;
 	(void) child_cmd;
 	close_fd(multi->i, multi->count, multi->fd);
 	while (multi->j <= multi->count)
 	{
-		waitpid(-1, 0, 0);
+		waitpid(-1, &status, 0);
 		multi->j++;
 	}
 	free_multi(multi);
-	g_status = 0;
+	if (WIFEXITED(status))
+		g_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		g_status = 128 + WTERMSIG(status);
 }
 
 void	reduce_make_child_one(t_pipex *multi)

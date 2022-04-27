@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 15:54:57 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 17:27:22 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:59:46 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	wait_exec_pipe(t_pipex *multi, pid_t child_cmd)
 
 void	reduce_make_child_one(t_pipex *multi)
 {
+	// dup2(0, multi->fd[multi->i][0]);
 	close_fd(multi->i, multi->count, multi->fd);
 	dup2(multi->fd[multi->i + 1][1], 1);
 	close(multi->fd[multi->i + 1][1]);
@@ -42,6 +43,7 @@ void	reduce_make_child_one(t_pipex *multi)
 
 void	reduce_make_child_two(t_pipex *multi)
 {
+	// dup2(1, multi->fd[multi->i + 1][1]);
 	close_fd(multi->i, multi->count, multi->fd);
 	dup2(multi->fd[multi->i][0], 0);
 	close(multi->fd[multi->i][0]);

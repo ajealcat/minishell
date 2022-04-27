@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 13:56:47 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 11:48:43 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:38:46 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ t_hdoc	*init_heredoc(char *eof)
 	t_hdoc	*heredoc;
 
 	heredoc = malloc(sizeof(t_hdoc));
+	if (heredoc == NULL)
+		return (NULL);
 	heredoc->fd_heredoc_out = 1;
 	heredoc->fd_heredoc_in = 0;
 	heredoc->buffer = ft_strdup("");

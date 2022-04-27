@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:14:46 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/26 13:30:39 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:50:50 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	**reduce_init_pipex(t_pipex *multi)
 	multi->i = 0;
 	while (multi->i < (multi->count + 2))
 	{
-		pipe(multi->fd[multi->i]);
 		if (pipe(multi->fd[multi->i]) == -1)
 			perror("Pipe");
 		++multi->i;

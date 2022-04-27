@@ -6,11 +6,13 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:17:14 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 12:35:25 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:39:34 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+//verifier que les mallocs sont bien securises
 
 int	g_status = 0;
 

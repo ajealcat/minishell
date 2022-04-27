@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 11:54:02 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/27 15:56:50 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 18:44:55 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ void	check_sig(int sig)
 
 void	gestion_signaux(int sig)
 {
-	char	*str_null;
-
-	str_null = NULL;
 	if (sig == SIGINT)
 	{
 		printf("\n");
@@ -57,15 +54,16 @@ void	heredoc_signaux(int sig)
 {
 	if (sig == SIGINT)
 	{
+		g_status = 130;
+		write(1, "\n", 1);
 		rl_replace_line("", 0);
 		close(STDIN_FILENO);
-		g_status = 130;
 	}
 	else if (sig == SIGQUIT)
 		write(1, "\b\b  \b\b", 6);
 	else if (sig == SIGSEGV)
 	{
-		printf("\n");
+		write(1, "\n", 1);
 		exit(0);
 	}
 }

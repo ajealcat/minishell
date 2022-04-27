@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:44:10 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 18:35:38 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 18:42:30 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	reduce_setupfd(t_pipex *multi)
 int	check_path_failed(t_path *our_path, t_pipex *multi)
 {
 	free_our_path(our_path);
-	ft_putstr_fd("Error : Command not found\n", 2);
 	if (multi)
 		free_multi(multi);
 	g_status = 127;

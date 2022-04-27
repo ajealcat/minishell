@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 12:02:31 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 12:34:46 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ int		set_up_fd(t_pipex *multi, t_data *data);
 
 	/* builtin_cdpwd.c */
 int		builtin_pwd(void);
+void	back_home(char *pwd);
 int		builtin_cd(t_token *list);
 void	reduce_builtcd(char *oldpwd, char *pwd, char *pwd_ptr);
 char	*move_pwd(char **av, char *pwd);

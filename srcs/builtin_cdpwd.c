@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 18:02:33 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 12:23:45 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 12:34:25 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ void	reduce_builtcd(char *oldpwd, char *pwd, char *pwd_ptr)
 	}
 }
 
+void	back_home(char *pwd)
+{
+	pwd = getenv("HOME");
+	chdir(pwd);
+}
+
 int	builtin_cd(t_token *list)
 {
 	char	*oldpwd;
@@ -59,14 +65,17 @@ int	builtin_cd(t_token *list)
 	pwd = NULL;
 	pwd_ptr = NULL;
 	av = create_arg(list);
-	// if (ft_strncmp(av[0], "cd", 3) == 0 && !av[1])
-		
-	if (chdir(av[1]) == 0)
-		reduce_builtcd(oldpwd, pwd, pwd_ptr);
+	if (ft_strncmp(av[0], "cd", 3) == 0 && !av[1])
+		back_home(pwd);
 	else
 	{
-		perror("chdir");
-		g_status = 1;
+		if (chdir(av[1]) == 0)
+			reduce_builtcd(oldpwd, pwd, pwd_ptr);
+		else
+		{
+			perror("chdir");
+			g_status = 1;
+		}
 	}
 	free_split(av);
 	g_status = 0;

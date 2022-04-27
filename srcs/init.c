@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 18:22:03 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 20:02:40 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,28 @@ t_path	*init_path(t_env *our_env, t_token *list)
 	if (list && list->next && (list->type == L_RED || list->type == R_RED))
 		list = list->next->next;
 	our_path->envp = our_env->envp;
-	our_path->find_path = getenv("PATH");
+	our_path->find_path = gojo_expand("PATH", our_env);
 	our_path->option_cmd = get_option_cmd(list);
-	our_path->my_path = ft_split((const char *)our_path->find_path, ':');
-	while (our_path->my_path[i])
+	if (list && list->value && list->value[0] == '/')
 	{
-		tmp = our_path->my_path[i];
-		our_path->my_path[i] = ft_strjoin(our_path->my_path[i], "/");
-		free(tmp);
-		tmp = our_path->my_path[i];
-		our_path->my_path[i] = ft_strjoin(our_path->my_path[i], list->value);
-		free(tmp);
-		i++;
+		our_path->my_path = malloc(sizeof(char *) * 2);
+		our_path->my_path[0] = ft_strdup(list->value);
+		our_path->my_path[1] = NULL;
+	}
+	else
+	{
+		our_path->my_path = ft_split((const char *)our_path->find_path, ':');
+		while (our_path->my_path && our_path->my_path[i] && list && list->value)
+		{
+			tmp = our_path->my_path[i];
+			our_path->my_path[i] = ft_strjoin(our_path->my_path[i], "/");
+			free(tmp);
+			tmp = our_path->my_path[i];
+			our_path->my_path[i] = ft_strjoin(our_path->my_path[i], \
+				list->value);
+			free(tmp);
+			i++;
+		}
 	}
 	return (our_path);
 }
@@ -67,10 +77,19 @@ t_path	*init_path2(t_env *our_env, t_token **tmp_list)
 		&& ((*tmp_list)->type == L_RED || (*tmp_list)->type == R_RED))
 		(*tmp_list) = (*tmp_list)->next->next;
 	our_path->envp = our_env->envp;
-	our_path->find_path = getenv("PATH");
+	our_path->find_path = gojo_expand("PATH", our_env);
 	our_path->option_cmd = get_option_cmd2(*tmp_list);
-	our_path->my_path = ft_split((const char *)our_path->find_path, ':');
-	our_path->my_path = reduce_init_path2(tmp_list, our_path);
+	if ((*tmp_list) && (*tmp_list)->value && (*tmp_list)->value[0] == '/')
+	{
+		our_path->my_path = malloc(sizeof(char *) * 2);
+		our_path->my_path[0] = ft_strdup((*tmp_list)->value);
+		our_path->my_path[1] = NULL;
+	}
+	else
+	{
+		our_path->my_path = ft_split((const char *)our_path->find_path, ':');
+		our_path->my_path = reduce_init_path2(tmp_list, our_path);
+	}
 	increase_tmp_list(tmp_list);
 	return (our_path);
 }

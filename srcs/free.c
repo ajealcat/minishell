@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:00:34 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/27 18:32:35 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 19:19:39 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	free_our_path(t_path *our_path)
 	{
 		free_split(our_path->option_cmd);
 		free_split(our_path->my_path);
+		free(our_path->find_path);
 	}
 	free(our_path);
 }

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/27 17:54:20 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/27 19:28:35 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,16 @@ int	check_path(t_path *our_path)
 {
 	int	i;
 
+	if (our_path == NULL)
+		return (FAILURE);
 	i = 0;
-	while (our_path->my_path[i])
+	while (our_path->my_path && our_path->my_path[i])
 	{
 		if (access(our_path->my_path[i], X_OK) == 0)
 			return (SUCCESS);
 		++i;
 	}
+	ft_putstr_fd("Minishell: command not found\n", 2);
 	g_status = 127;
 	return (FAILURE);
 }

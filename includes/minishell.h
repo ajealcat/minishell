@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/28 16:51:18 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 22:08:54 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_pipex
 
 typedef struct s_hdoc
 {
+	t_data	*data;
 	int		fd_heredoc_out;
 	int		fd_heredoc_in;
 	int		fd[2];
@@ -89,7 +90,7 @@ void	init_token(t_token *token);
 void	init_data(t_data *data);
 t_pipex	*init_pipex(t_token *list);
 t_path	*init_path(t_env *our_env, t_token *list);
-t_path	*init_path2(t_env *our_env, t_token **tmp_list);
+t_path	*init_path2(t_env *our_env, t_token **tmp);
 
 	/* parse.c */
 t_token	*parse(t_token *list, t_data *data);
@@ -267,5 +268,8 @@ t_token	*reduce_token_dollar(char *tmp, t_data *data, t_token *list);
 	/* utils_heredoc.c */
 void	boucle_line_heredoc(t_hdoc *heredoc, t_pipex *multi, t_data *data);
 void	buffer_expand(t_hdoc *heredoc, t_data *data);
+
+	/* utils_ter.c */
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

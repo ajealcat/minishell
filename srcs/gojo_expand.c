@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:32:36 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/28 18:02:54 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 22:07:30 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ char	*find_var(t_env *our_env, char *tmp)
 	{
 		while (our_env->envp[i][j] != '=')
 			j++;
-		if (ft_strncmp(our_env->envp[i], tmp, j) == 0)
+		if ((j == (int)ft_strlen(tmp))
+			&& ft_strncmp(our_env->envp[i], tmp, j) == 0)
 		{
 			env = ft_strdup(our_env->envp[i] + (ft_strlen(tmp) + 1));
 			return (env);

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 17:00:23 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/27 18:02:56 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 12:09:26 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,42 @@ int	is_builtin(t_token *list)
 	else if (ft_strncmp(list->value, "env", 4) == 0)
 		return (SUCCESS);
 	return (FAILURE);
+}
+
+char	**create_arg2(t_token *list)
+{
+	t_token	*tmp;
+	char	**av;
+	int		count;
+	char	*dent;
+	int		i;
+
+	tmp = list;
+	count = 0;
+	while (tmp)
+	{
+		if (tmp->type == WORD || tmp->type == VAR_WORD)
+		{
+			if (tmp->type == WORD && tmp->next && (tmp->next->type == D_QUOTE || tmp->next->type == S_QUOTE))
+			{
+				dent = tmp->value;
+				tmp->value = ft_strjoin(tmp->value, tmp->next->value);
+				free(dent);
+			}	
+			count++;
+		}
+		tmp = tmp->next;
+	}
+	i = 0;
+	av = malloc(sizeof(char *) * (count + 1));
+	if (!av)
+		return (NULL);
+	tmp = list;
+	while (tmp && (tmp->type == WORD || tmp->type == VAR_WORD))
+	{
+		av[i++] = ft_strdup(tmp->value);
+		tmp = tmp->next;
+	}
+	av[i] = NULL;
+	return (av);
 }

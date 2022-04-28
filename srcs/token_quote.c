@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:40:58 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 20:44:21 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 12:08:08 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ t_token	*token_between_squote(t_token *list, t_data *data)
 		size = ft_strlen_between_quotes(data->str_trimed + data->i, \
 			count, '\'');
 		tmp = reduce_token_btw_squote(data, size, count, tmp);
-		list = create_node(list, tmp, WORD);
+		list = create_node(list, tmp, S_QUOTE);
 	}
 	return (list);
 }

@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 18:36:12 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 11:58:26 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,7 @@ int		ft_tablen(char **tab);
 	/* utils_builtins_bis.c */
 void	reduce_builtexport(char **tmp, t_env *our_env, char *av);
 int		is_builtin(t_token *list);
+char	**create_arg2(t_token *list);
 
 	/* builtin_exit.c */
 int		only_digit(char *av);
@@ -250,6 +251,9 @@ int		exec_failed(t_pipex *multi, t_data *data, t_path *our_path);
 	/* utils_init.c */
 char	**reduce_init_path2(t_token **tmp_list, t_path *our_path);
 int		**reduce_init_pipex(t_pipex *multi);
+char	**my_path_slash(char **my_path, t_token *list);
+char	**my_path_dot(char **my_path, t_token *list);
+char	**my_path_current(t_path *our_path, t_token *list);
 
 	/* utils_token.c */
 t_token	*reduce_reparse_dquote(char *tmp, t_data *data, t_token *list);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 10:28:13 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/20 17:16:08 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/28 11:59:08 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	builtin_export(t_token *list, t_env *our_env)
 	int		i;
 
 	i = 1;
-	av = create_arg(list);
+	av = create_arg2(list);
 	tmp = NULL;
 	if (count_av(av) > 1)
 	{

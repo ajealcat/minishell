@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:14:46 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/27 19:22:24 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 11:38:53 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,51 @@ int	**reduce_init_pipex(t_pipex *multi)
 		++multi->i;
 	}
 	return (multi->fd);
+}
+
+char	**my_path_slash(char **my_path, t_token *list)
+{
+	my_path = malloc(sizeof(char *) * 2);
+	if (my_path == NULL)
+		return (NULL);
+	my_path[0] = ft_strdup(list->value);
+	my_path[1] = NULL;
+	return (my_path);
+}
+
+char	**my_path_dot(char **my_path, t_token *list)
+{
+	char	*tmp;
+
+	tmp = getcwd(NULL, 0);
+	my_path = malloc(sizeof(char *) * 2);
+	if (my_path == NULL)
+		return (NULL);
+	my_path[0] = ft_strjoin(tmp, "/");
+	free(tmp);
+	tmp = my_path[0];
+	my_path[0] = ft_strjoin(tmp, list->value);
+	free(tmp);
+	my_path[1] = NULL;
+	return (my_path);
+}
+
+char	**my_path_current(t_path *our_path, t_token *list)
+{
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	while (our_path->my_path && our_path->my_path[i] && list && list->value)
+	{
+		tmp = our_path->my_path[i];
+		our_path->my_path[i] = ft_strjoin(our_path->my_path[i], "/");
+		free(tmp);
+		tmp = our_path->my_path[i];
+		our_path->my_path[i] = ft_strjoin(our_path->my_path[i], \
+			list->value);
+		free(tmp);
+		i++;
+	}
+	return (our_path->my_path);
 }

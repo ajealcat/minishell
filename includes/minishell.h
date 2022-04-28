@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/28 11:58:26 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 12:33:37 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,11 +192,14 @@ int		count_av(char **av);
 char	**create_arg(t_token *list);
 char	**create_ourenv(char **tab);
 int		ft_tablen(char **tab);
+void	print_env(t_env *our_env);
 
 	/* utils_builtins_bis.c */
 void	reduce_builtexport(char **tmp, t_env *our_env, char *av);
 int		is_builtin(t_token *list);
 char	**create_arg2(t_token *list);
+char	*glue_value(t_token *tmp);
+char	**reduce_create_arg2(t_token *tmp, char **av);
 
 	/* builtin_exit.c */
 int		only_digit(char *av);
@@ -213,7 +216,6 @@ int		other_cmd(void);
 int		is_var(t_env *our_env, char *tmp);
 void	replace_value(t_env *our_env, char **tmp);
 char	**create_value(t_env *our_env, char *av);
-void	print_env(t_env *our_env);
 int		builtin_export(t_token *list, t_env *our_env);
 void	norm_export(char **tmp, t_env *our_env, int i);
 

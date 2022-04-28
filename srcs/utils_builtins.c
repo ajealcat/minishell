@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:08:36 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/28 12:12:22 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 12:21:39 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +24,28 @@ int	count_av(char **av)
 
 char	**create_arg(t_token *list)
 {
-	t_token	*tmp;
+	t_token	*t;
 	char	**av;
 	int		count;
 	int		i;
 
-	tmp = list;
+	t = list;
 	count = 0;
-	while (tmp)
+	while (t)
 	{
-		if (tmp->type == WORD || tmp->type == VAR_WORD
-				|| tmp->type == D_QUOTE || tmp->type == S_QUOTE)
+		if (t->type == 7 || t->type == 9 || t->type == 5 || t->type == 6)
 			count++;
-		tmp = tmp->next;
+		t = t->next;
 	}
 	i = 0;
 	av = malloc(sizeof(char *) * (count + 1));
 	if (!av)
 		return (NULL);
-	tmp = list;
-	while (tmp && (tmp->type == WORD || tmp->type == VAR_WORD
-			|| tmp->type == D_QUOTE || tmp->type == S_QUOTE))
+	t = list;
+	while (t && (t->type == 7 || t->type == 9 || t->type == 5 || t->type == 6))
 	{
-		av[i++] = ft_strdup(tmp->value);
-		tmp = tmp->next;
+		av[i++] = ft_strdup(t->value);
+		t = t->next;
 	}
 	av[i] = NULL;
 	return (av);

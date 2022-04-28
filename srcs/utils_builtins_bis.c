@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 17:00:23 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/28 12:09:26 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 12:33:30 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ char	**create_arg2(t_token *list)
 	t_token	*tmp;
 	char	**av;
 	int		count;
-	char	*dent;
-	int		i;
 
 	tmp = list;
 	count = 0;
@@ -55,21 +53,36 @@ char	**create_arg2(t_token *list)
 	{
 		if (tmp->type == WORD || tmp->type == VAR_WORD)
 		{
-			if (tmp->type == WORD && tmp->next && (tmp->next->type == D_QUOTE || tmp->next->type == S_QUOTE))
-			{
-				dent = tmp->value;
-				tmp->value = ft_strjoin(tmp->value, tmp->next->value);
-				free(dent);
-			}	
+			if (tmp->type == WORD && tmp->next && (tmp->next->type == D_QUOTE
+					|| tmp->next->type == S_QUOTE))
+				tmp->value = glue_value(tmp);
 			count++;
 		}
 		tmp = tmp->next;
 	}
-	i = 0;
 	av = malloc(sizeof(char *) * (count + 1));
 	if (!av)
 		return (NULL);
 	tmp = list;
+	av = reduce_create_arg2(tmp, av);
+	return (av);
+}
+
+char	*glue_value(t_token *tmp)
+{
+	char	*dent;
+
+	dent = tmp->value;
+	tmp->value = ft_strjoin(tmp->value, tmp->next->value);
+	free(dent);
+	return (tmp->value);
+}
+
+char	**reduce_create_arg2(t_token *tmp, char **av)
+{
+	int	i;
+
+	i = 0;
 	while (tmp && (tmp->type == WORD || tmp->type == VAR_WORD))
 	{
 		av[i++] = ft_strdup(tmp->value);

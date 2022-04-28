@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:36:04 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/27 16:03:50 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:32:17 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,16 @@ int	printf_echo(char **av, int n)
 	int	i;
 
 	i = 0;
-	if (ft_strncmp(av[i], "$?", 3) == 0)
+	while (av[i])
 	{
-		ft_putnbr_fd(g_status, 1);
-		g_status = 0;
-	}
-	else
-	{
-		while (av[i])
-		{
-			ft_putstr_fd(av[i], 1);
-			if (*av[i] && av[i + 1] && *av[i + 1])
-				ft_putstr_fd(" ", 1);
-			i++;
-		}
+		ft_putstr_fd(av[i], 1);
+		if (*av[i] && av[i + 1] && *av[i + 1])
+			ft_putstr_fd(" ", 1);
+		i++;
 	}
 	if (n == 0)
 		ft_putstr_fd("\n", 1);
+	g_status = 0;
 	return (SUCCESS);
 }
 

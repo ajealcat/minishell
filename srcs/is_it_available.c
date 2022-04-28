@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 18:07:03 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 17:29:09 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:27:56 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,18 @@ int	is_valid_left(t_token *list)
 {
 	if (list->type == L_RED || list->type == DL_RED)
 	{
-		if (list->prev != NULL && list->prev->type != WORD)
+		if (list->prev != NULL && list->prev->type != WORD
+			&& list->prev->type != T_PIPE
+			&& list->prev->type != S_QUOTE && list->prev->type != D_QUOTE)
 		{
-			ft_putstr_fd("Syntax error red_l\n", 2);
+			ft_putstr_fd("Syntax error red_l3\n", 2);
 			return (FAILURE);
 		}
-		if (list->next == NULL || list->next->type != WORD)
+		if (list->next == NULL || (list->next->type != WORD
+				&& list->next->type != S_QUOTE && list->next->type != T_PIPE
+				&& list->next->type != D_QUOTE))
 		{
-			ft_putstr_fd("Syntax error red_l\n", 2);
+			ft_putstr_fd("Syntax error red_l4\n", 2);
 			return (FAILURE);
 		}
 		return (SUCCESS);
@@ -62,12 +66,14 @@ int	is_valid_right(t_token *list)
 {
 	if (list->type == R_RED || list->type == DR_RED)
 	{
-		if (list->prev != NULL && list->prev->type != WORD)
+		if (list->prev != NULL && list->prev->type != WORD
+			&& list->prev->type != S_QUOTE && list->prev->type != D_QUOTE)
 		{
 			ft_putstr_fd("Syntax error red_r\n", 2);
 			return (FAILURE);
 		}
-		if (list->next == NULL || list->next->type != WORD)
+		if (list->next == NULL || (list->next->type != WORD
+				&& list->next->type != S_QUOTE && list->next->type != D_QUOTE))
 		{
 			ft_putstr_fd("Syntax error red_r\n", 2);
 			return (FAILURE);
@@ -81,14 +87,16 @@ int	is_valid_t_pipe(t_token *list)
 {
 	if (list->type == T_PIPE)
 	{
-		if (list->prev == NULL || (list->prev->type != WORD
-				&& list->prev->type != VAR_WORD))
+		if (list->prev == NULL || (list->prev->type != S_QUOTE
+				&& list->prev->type != D_QUOTE
+				&& (list->prev->type != WORD && list->prev->type != VAR_WORD)))
 		{
 			ft_putstr_fd("Syntax error pipe\n", 2);
 			return (FAILURE);
 		}
-		if (list->next == NULL || (list->next->type != WORD
-				&& list->next->type != VAR_WORD))
+		if (list->next == NULL || (list->next->type != S_QUOTE
+				&& list->next->type != D_QUOTE && list->next->type != DL_RED
+				&& (list->next->type != WORD && list->next->type != VAR_WORD)))
 		{
 			ft_putstr_fd("Syntax error pipe\n", 2);
 			return (FAILURE);

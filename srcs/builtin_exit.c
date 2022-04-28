@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:48:27 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/25 17:31:33 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:42:57 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	free_exit(t_token *list, t_data *data, int code, t_pipex *multi)
 	if (multi)
 		free_multi(multi);
 	rl_clear_history();
-	g_status = 0;
 	exit(code);
 }
 
@@ -67,7 +66,14 @@ int	builtin_exit(t_token *list, t_data *data, t_pipex *multi)
 		ft_putstr_fd("exit\n", 1);
 		free_exit(list, data, SUCCESS, multi);
 	}
-	else if (count_av(data->our_env->av) == 2)
+	else if (count_av(data->our_env->av) > 2 && \
+	only_digit(data->our_env->av[1]) == 1)
+	{
+		ft_putstr_fd("exit : too many arguments\n", 2);
+		g_status = 1;
+		return (SUCCESS);
+	}
+	else
 	{
 		ft_putstr_fd("exit\n", 1);
 		if (only_digit(data->our_env->av[1]) == 1)
@@ -75,15 +81,8 @@ int	builtin_exit(t_token *list, t_data *data, t_pipex *multi)
 		else
 		{
 			printf("exit: %s : numeric arg required\n", data->our_env->av[1]);
-			free_exit(list, data, ft_atoi(data->our_env->av[1]), multi);
-			g_status = 2;
+			free_exit(list, data, 2, multi);
 		}
 	}
-	else
-	{
-		ft_putstr_fd("exit : too many arguments\n", 2);
-		g_status = 1;
-	}
-	g_status = 0;
 	return (SUCCESS);
 }

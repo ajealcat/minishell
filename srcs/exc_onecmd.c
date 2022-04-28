@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/27 20:37:35 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:48:14 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ int	check_path(t_path *our_path)
 
 	if (our_path == NULL)
 		return (FAILURE);
+	if (our_path->my_path == NULL)
+	{
+		g_status = 0;
+		return (FAILURE);
+	}
 	i = 0;
 	while (our_path->my_path && our_path->my_path[i])
 	{

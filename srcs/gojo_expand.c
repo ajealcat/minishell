@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:32:36 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 12:59:19 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 18:02:54 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,21 @@ char	*gojo_expand(char *tmp, t_env *our_env)
 char	*find_var(t_env *our_env, char *tmp)
 {
 	int		i;
+	int		j;
 	char	*env;
 
 	i = 0;
+	j = 0;
 	while (our_env && our_env->envp && our_env->envp[i])
 	{
-		if (ft_strncmp(our_env->envp[i], tmp, ft_strlen(tmp)) == 0)
+		while (our_env->envp[i][j] != '=')
+			j++;
+		if (ft_strncmp(our_env->envp[i], tmp, j) == 0)
 		{
 			env = ft_strdup(our_env->envp[i] + (ft_strlen(tmp) + 1));
 			return (env);
 		}
+		j = 0;
 		i++;
 	}
 	return (NULL);

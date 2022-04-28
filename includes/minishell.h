@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:19:05 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/28 12:33:37 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 16:51:18 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,5 +266,6 @@ t_token	*reduce_token_dollar(char *tmp, t_data *data, t_token *list);
 
 	/* utils_heredoc.c */
 void	boucle_line_heredoc(t_hdoc *heredoc, t_pipex *multi, t_data *data);
+void	buffer_expand(t_hdoc *heredoc, t_data *data);
 
 #endif

@@ -6,21 +6,11 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 13:56:47 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/27 13:38:46 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:50:43 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-// int	make_here_doc(char *buffer, int fd_heredoc_in, int fd_heredoc_out)
-// {
-// 	write(fd_heredoc_out, buffer, ft_strlen(buffer));
-// 	close(fd_heredoc_out);
-// 	fd_heredoc_in = open("objs/.heredoc", O_RDONLY);
-// 	if (fd_heredoc_in < 0)
-// 		return (FAILURE);
-// 	return (fd_heredoc_in);
-// }
 
 t_hdoc	*init_heredoc(char *eof)
 {

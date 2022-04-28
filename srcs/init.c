@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:33:50 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/28 13:00:44 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 18:57:00 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ t_path	*init_path(t_env *our_env, t_token *list)
 	our_path = malloc(sizeof(t_path));
 	if (!our_path)
 		return (NULL);
+	our_path->envp = our_env->envp;
 	if (list && list->next && (list->type == L_RED || list->type == R_RED
 			|| list->type == DL_RED || list->type == DR_RED))
 		list = list->next->next;
-	our_path->envp = our_env->envp;
 	our_path->find_path = gojo_expand("PATH", our_env);
 	our_path->option_cmd = get_option_cmd(list);
 	our_path->my_path = NULL;
@@ -63,7 +63,8 @@ t_path	*init_path2(t_env *our_env, t_token **tmp_list)
 	if (!our_path)
 		return (NULL);
 	if (*tmp_list && (*tmp_list)->next
-		&& ((*tmp_list)->type == L_RED || (*tmp_list)->type == R_RED))
+		&& ((*tmp_list)->type == L_RED || (*tmp_list)->type == R_RED
+			|| (*tmp_list)->type == DL_RED || (*tmp_list)->type == DR_RED))
 		(*tmp_list) = (*tmp_list)->next->next;
 	our_path->envp = our_env->envp;
 	our_path->find_path = gojo_expand("PATH", our_env);
@@ -75,7 +76,7 @@ t_path	*init_path2(t_env *our_env, t_token **tmp_list)
 		our_path->my_path = my_path_slash(our_path->my_path, (*tmp_list));
 	else if ((*tmp_list) && (*tmp_list)->value && (*tmp_list)->value[0] == '.')
 		our_path->my_path = my_path_dot(our_path->my_path, (*tmp_list));
-	else
+	else if ((*tmp_list) != NULL)
 	{
 		our_path->my_path = ft_split((const char *)our_path->find_path, ':');
 		our_path->my_path = reduce_init_path2(tmp_list, our_path);

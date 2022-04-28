@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:44:10 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/28 14:06:38 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:48:32 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	check_path_failed(t_path *our_path, t_pipex *multi)
 	free_our_path(our_path);
 	if (multi)
 		free_multi(multi);
-	g_status = 127;
 	return (FAILURE);
 }
 

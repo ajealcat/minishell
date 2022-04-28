@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 18:07:03 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/28 15:27:56 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/28 17:43:50 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	is_valid_left(t_token *list)
 			return (FAILURE);
 		}
 		if (list->next == NULL || (list->next->type != WORD
+				&& list->next->type != VAR_WORD
 				&& list->next->type != S_QUOTE && list->next->type != T_PIPE
 				&& list->next->type != D_QUOTE))
 		{

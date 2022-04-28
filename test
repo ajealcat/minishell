@@ -1,0 +1,8 @@
+ignorereadline
+includes
+libs
+Makefile
+minishell
+objs
+srcs
+test

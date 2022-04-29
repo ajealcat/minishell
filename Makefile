@@ -6,7 +6,7 @@
 #    By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 14:18:00 by ajearuth          #+#    #+#              #
-#    Updated: 2022/04/28 21:57:24 by ajearuth         ###   ########.fr        #
+#    Updated: 2022/04/29 14:14:39 by ajearuth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,20 @@ fclean:	clean
 
 re: fclean all 
 
-leak:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=ignorereadline ./${NAME}
+# leak:
+#	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=ignorereadline ./${NAME}
+#
+#{
+#   leak readline
+#    Memcheck:Leak 
+#    ...
+#    fun:readline
+#}
+#{
+#    leak add_history
+#    Memcheck:Leak
+#    ...
+#    fun:add_history
+#}
 
 .PHONY: all bonus clean fclean re

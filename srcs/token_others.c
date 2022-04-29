@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_others.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fboumell <fboumell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:57:17 by Fahima42          #+#    #+#             */
-/*   Updated: 2022/04/26 16:57:32 by fboumell         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:10:37 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_token	*token_dollar(t_token *list, t_data *data)
 	char	*tmp;
 
 	if (ft_strncmp(data->str_trimed + data->i, "$", 2) == 0)
-		list = create_node(list, "$", VAR_WORD);
+		list = create_node(list, ft_strdup("$"), VAR_WORD);
 	size = ft_strlen_dollar(data->str_trimed + data->i);
 	tmp = malloc(sizeof(char) * (size + 1));
 	if (!tmp)

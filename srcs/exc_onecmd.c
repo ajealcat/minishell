@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:30:26 by fboumell          #+#    #+#             */
-/*   Updated: 2022/04/28 15:48:14 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/29 13:45:57 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	check_path(t_path *our_path)
 		return (FAILURE);
 	if (our_path->my_path == NULL)
 	{
-		g_status = 0;
+		ft_putstr_fd("No such file or directory\n", 2);
+		g_status = 127;
 		return (FAILURE);
 	}
 	i = 0;

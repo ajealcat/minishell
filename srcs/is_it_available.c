@@ -6,7 +6,7 @@
 /*   By: ajearuth <ajearuth@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 18:07:03 by ajearuth          #+#    #+#             */
-/*   Updated: 2022/04/28 17:43:50 by ajearuth         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:04:03 by ajearuth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	is_valid_t_pipe(t_token *list)
 			return (FAILURE);
 		}
 		if (list->next == NULL || (list->next->type != S_QUOTE
-				&& list->next->type != D_QUOTE && list->next->type != DL_RED
+				&& list->next->type != D_QUOTE
 				&& (list->next->type != WORD && list->next->type != VAR_WORD)))
 		{
 			ft_putstr_fd("Syntax error pipe\n", 2);
